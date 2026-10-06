@@ -1,0 +1,2521 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>শিশু শ্রেণি — আল হামরা নূরানী মাদ্রাসা</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        :root {
+            --deep: #0f3d2e;
+            --green: #1b5e42;
+            --gold: #c9a227;
+            --cream: #fbf7ee;
+            --soft: #e7efe8;
+            --paper: #fff;
+            --ink: #202820;
+            --muted: #657067;
+            --line: #ded8c8;
+            --red: #a6402f;
+            --shadow: 0 12px 35px rgba(15, 61, 46, 0.10);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--cream);
+            color: var(--ink);
+            font-family: "Hind Siliguri", sans-serif;
+            overflow-x: hidden;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 24px));
+            margin: auto;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .top {
+            background: linear-gradient(135deg, var(--deep), var(--green));
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px #0002;
+        }
+
+        .nav {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #ffffff15;
+            border: 1px solid #ffffff35;
+            color: #fff;
+            font-size: 21px;
+            cursor: pointer;
+            flex: 0 0 auto;
+        }
+
+        .brand {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .brand h1 {
+            font-family: "Noto Serif Bengali";
+            font-size: 1.05rem;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .brand p {
+            margin: 0;
+            color: #f4e9c8;
+            font-size: 0.75rem;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            padding: 35px 0 25px;
+            background: linear-gradient(
+                180deg,
+                #eaf3ed 0%,
+                var(--cream) 100%
+            );
+        }
+
+        .heroBox {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 22px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #f4e9c8;
+            color: var(--deep);
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-family: "Noto Serif Bengali";
+            color: var(--deep);
+            margin: 12px 0 5px;
+            font-size: clamp(1.55rem, 4vw, 2.2rem);
+        }
+
+        .heroBox p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        /* =========================
+           STATISTICS
+        ========================== */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .stat {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 13px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stat b {
+            display: block;
+            font-size: 1.4rem;
+            color: var(--deep);
+        }
+
+        .stat span {
+            font-size: 0.76rem;
+            color: var(--muted);
+        }
+
+        /* =========================
+           SECTION
+        ========================== */
+
+        section {
+            padding: 25px 0;
+        }
+
+        /* =========================
+           SEARCH
+        ========================== */
+
+        .searchBox {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .searchRow {
+            display: flex;
+            gap: 9px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            outline: 0;
+            min-width: 0;
+        }
+
+        input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px #1b5e4212;
+        }
+
+        /* =========================
+           STUDENT CARDS
+        ========================== */
+
+        .studentGrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .student {
+            background: linear-gradient(
+                180deg,
+                #fff,
+                #f7fbf8
+            );
+            border: 1px solid #d7e5da;
+            border-radius: 18px;
+            padding: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 5px 16px #0f3d2e0a;
+            min-width: 0;
+        }
+
+        .student:hover {
+            transform: translateY(-3px);
+            border-color: var(--gold);
+        }
+
+        .studentTop {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            min-width: 0;
+        }
+
+        .studentPhoto,
+        .studentAvatar {
+            width: 68px;
+            height: 68px;
+            border-radius: 16px;
+            flex: 0 0 auto;
+        }
+
+        .studentPhoto {
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 3px 10px #0f3d2e18;
+        }
+
+        .studentAvatar {
+            background: var(--deep);
+            color: #f4e9c8;
+            display: grid;
+            place-items: center;
+            font-size: 1.65rem;
+            font-weight: 800;
+        }
+
+        .roll {
+            display: inline-block;
+            background: #f4e9c8;
+            color: var(--deep);
+            padding: 2px 8px;
+            border-radius: 99px;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        .student h4 {
+            margin: 6px 0 1px;
+            color: var(--deep);
+            font-size: 1.03rem;
+            overflow-wrap: anywhere;
+        }
+
+        .student p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+        .studentHint {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--line);
+            font-size: 0.76rem;
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* =========================
+           LOADING / ERROR
+        ========================== */
+
+        .loading {
+            text-align: center;
+            padding: 25px;
+            color: var(--muted);
+        }
+
+        .error {
+            background: #fff2ef;
+            border: 1px solid #e9c9c2;
+            color: var(--red);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        /* =========================
+           MODAL
+        ========================== */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #0b211a99;
+            z-index: 3000;
+            padding: 14px;
+            overflow: auto;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modalBox {
+            width: min(900px, 100%);
+            max-height: 94vh;
+            overflow: auto;
+            background: var(--cream);
+            border-radius: 20px;
+            border: 1px solid var(--line);
+            box-shadow: 0 25px 70px #0005;
+        }
+
+        .modalHead {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: linear-gradient(
+                135deg,
+                var(--deep),
+                var(--green)
+            );
+            color: #fff;
+            padding: 13px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modalHead h3 {
+            margin: 0;
+            font-family: "Noto Serif Bengali";
+            font-size: 1.1rem;
+            flex: 1;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .close {
+            width: 40px;
+            height: 40px;
+            border-radius: 9px;
+            border: 1px solid #ffffff35;
+            background: #ffffff14;
+            color: #fff;
+            font-size: 1.25rem;
+            cursor: pointer;
+            flex: 0 0 auto;
+        }
+
+        /* =========================
+           PROFILE
+        ========================== */
+
+        .profile {
+            display: grid;
+            grid-template-columns: 95px 1fr;
+            gap: 15px;
+            padding: 18px;
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .profilePhoto,
+        .profileAvatar {
+            width: 95px;
+            height: 95px;
+            border-radius: 17px;
+        }
+
+        .profilePhoto {
+            object-fit: cover;
+        }
+
+        .profileAvatar {
+            background: var(--deep);
+            color: var(--gold);
+            display: grid;
+            place-items: center;
+            font-size: 2.6rem;
+            font-weight: 800;
+        }
+
+        .profile h4 {
+            margin: 0;
+            color: var(--deep);
+            font-size: 1.3rem;
+            overflow-wrap: anywhere;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 7px;
+        }
+
+        .tag {
+            background: var(--soft);
+            color: var(--deep);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* =========================
+           VERIFICATION
+        ========================== */
+
+        .verify {
+            padding: 16px;
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .verifyTitle {
+            font-weight: 800;
+            color: var(--deep);
+            margin-bottom: 9px;
+        }
+
+        .verifyGrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 8px;
+        }
+
+        .verifyGrid input {
+            min-width: 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 9px;
+            padding: 10px 16px;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--deep);
+            color: #fff;
+        }
+
+        .verified {
+            margin-top: 10px;
+            background: #e8f5eb;
+            border: 1px solid #b9d9c0;
+            color: #195934;
+            border-radius: 10px;
+            padding: 9px;
+            font-size: 0.83rem;
+        }
+
+        .verifyError {
+            background: #fff0ec;
+            color: var(--red);
+            border: 1px solid #edc9c1;
+            border-radius: 10px;
+            padding: 9px;
+            font-size: 0.83rem;
+            margin-top: 10px;
+        }
+
+        /* =========================
+           LEDGER
+        ========================== */
+
+        .ledgerWrap {
+            padding: 16px;
+        }
+
+        .summaryGrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 9px;
+            margin-bottom: 13px;
+        }
+
+        .sumCard {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            min-width: 0;
+        }
+
+        .sumCard b {
+            display: block;
+            font-size: 1.15rem;
+            color: var(--deep);
+            overflow-wrap: anywhere;
+        }
+
+        .sumCard span {
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        /*
+          IMPORTANT:
+          মোবাইলে horizontal scroll বন্ধ রাখা হয়েছে।
+        */
+
+        .ledgerScroll {
+            overflow: hidden;
+            width: 100%;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+        }
+
+        .ledger {
+            width: 100%;
+            min-width: 0;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        .ledger th {
+            background: var(--deep);
+            color: #fff;
+            padding: 8px 5px;
+            font-size: 0.76rem;
+            white-space: normal;
+            line-height: 1.25;
+        }
+
+        .ledger td {
+            padding: 8px 5px;
+            border-bottom: 1px solid var(--line);
+            text-align: center;
+            font-size: 0.76rem;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+            word-break: normal;
+        }
+
+        /* Column width */
+
+        .ledger th:nth-child(1),
+        .ledger td:nth-child(1) {
+            width: 25%;
+        }
+
+        .ledger th:nth-child(2),
+        .ledger td:nth-child(2) {
+            width: 18%;
+        }
+
+        .ledger th:nth-child(3),
+        .ledger td:nth-child(3) {
+            width: 18%;
+        }
+
+        .ledger th:nth-child(4),
+        .ledger td:nth-child(4) {
+            width: 18%;
+        }
+
+        .ledger th:nth-child(5),
+        .ledger td:nth-child(5) {
+            width: 21%;
+        }
+
+        .ledger .month {
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .paid {
+            color: var(--green);
+            font-weight: 800;
+        }
+
+        .due {
+            color: var(--red);
+            font-weight: 800;
+        }
+
+        .statusPaid,
+        .statusDue {
+            display: inline-block;
+            padding: 3px 6px;
+            border-radius: 7px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .statusPaid {
+            background: #e7efe8;
+            color: var(--green);
+        }
+
+        .statusDue {
+            background: #fff0ec;
+            color: var(--red);
+        }
+
+        .securityNote {
+            padding: 11px 16px;
+            background: #fff7dd;
+            border-top: 1px solid #eadba7;
+            color: #66531d;
+            font-size: 0.72rem;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: var(--deep);
+            color: #dce9e0;
+            padding: 25px 0;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.78rem;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .studentGrid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .verifyGrid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .verifyGrid .btn {
+                grid-column: 1 / -1;
+            }
+
+            .ledgerWrap {
+                padding: 12px;
+            }
+
+            .ledger th,
+            .ledger td {
+                padding: 7px 4px;
+                font-size: 0.70rem;
+            }
+
+            .statusPaid,
+            .statusDue {
+                padding: 3px 4px;
+                font-size: 0.66rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .container {
+                width: min(100% - 16px, 1100px);
+            }
+
+            .nav {
+                min-height: 62px;
+                gap: 8px;
+            }
+
+            .back {
+                width: 38px;
+                height: 38px;
+                font-size: 19px;
+            }
+
+            .brand h1 {
+                font-size: 0.92rem;
+            }
+
+            .brand p {
+                font-size: 0.68rem;
+            }
+
+            .hero {
+                padding: 20px 0 18px;
+            }
+
+            .heroBox {
+                padding: 17px 12px;
+                border-radius: 16px;
+            }
+
+            .heroBox p {
+                font-size: 0.78rem;
+                line-height: 1.5;
+            }
+
+            .studentGrid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile {
+                grid-template-columns: 75px 1fr;
+                gap: 10px;
+                padding: 13px;
+            }
+
+            .profilePhoto,
+            .profileAvatar {
+                width: 75px;
+                height: 75px;
+            }
+
+            .profile h4 {
+                font-size: 1.08rem;
+            }
+
+            .tag {
+                font-size: 0.68rem;
+                padding: 3px 6px;
+            }
+
+            .verify {
+                padding: 13px;
+            }
+
+            .verifyGrid {
+                grid-template-columns: 1fr;
+            }
+
+            .verifyGrid .btn {
+                grid-column: auto;
+                width: 100%;
+            }
+
+            .summaryGrid {
+                grid-template-columns: 1fr 1fr;
+                gap: 7px;
+            }
+
+            .summaryGrid .sumCard:last-child {
+                grid-column: 1 / -1;
+            }
+
+            .sumCard {
+                padding: 9px 5px;
+            }
+
+            .sumCard b {
+                font-size: 0.95rem;
+            }
+
+            .sumCard span {
+                font-size: 0.63rem;
+            }
+
+            /*
+              মোবাইলের জন্য table আরও ছোট করা হয়েছে।
+              কোনো horizontal scroll হবে না।
+            */
+
+            .ledgerScroll {
+                overflow: hidden;
+                border-radius: 10px;
+            }
+
+            .ledger th,
+            .ledger td {
+                padding: 6px 2px;
+                font-size: 0.63rem;
+                line-height: 1.25;
+            }
+
+            .ledger th {
+                font-size: 0.64rem;
+            }
+
+            .ledger .month {
+                font-size: 0.64rem;
+            }
+
+            .statusPaid,
+            .statusDue {
+                padding: 2px 3px;
+                font-size: 0.58rem;
+                border-radius: 5px;
+            }
+
+            .securityNote {
+                padding: 9px 12px;
+                font-size: 0.65rem;
+            }
+
+            .ledgerWrap {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="top">
+        <div class="container nav">
+
+            <button
+                class="back"
+                onclick="goBack()"
+                aria-label="ফিরে যান"
+            >
+                ←
+            </button>
+
+            <div class="brand">
+                <h1>আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী</h1>
+                <p>শিশু শ্রেণি — শিক্ষার্থী তালিকা</p>
+            </div>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =========================
+             HERO
+        ========================== -->
+
+        <section class="hero">
+
+            <div class="container">
+
+                <div class="heroBox">
+
+                    <span class="badge">
+                        📚 শ্রেণিভিত্তিক শিক্ষার্থী তালিকা
+                    </span>
+
+                    <h2>শিশু শ্রেণি</h2>
+
+                    <p>
+                        শিক্ষার্থীর কার্ডে ক্লিক করে পরিচিতি ও বেতন খাতা দেখুন
+                    </p>
+
+                </div>
+
+                <!-- Statistics -->
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <span>
+                            এই শ্রেণির মোট শিক্ষার্থী
+                        </span>
+
+                        <b id="studentCount">—</b>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <b>শিশু শ্রেণি</b>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             SEARCH + STUDENT LIST
+        ========================== -->
+
+        <section>
+
+            <div class="container">
+
+                <div class="searchBox">
+
+                    <div class="searchRow">
+
+                        <input
+                            id="studentSearch"
+                            type="text"
+                            placeholder="নাম বা রোল দিয়ে খুঁজুন..."
+                        >
+
+                    </div>
+
+                    <div
+                        id="studentList"
+                        class="studentGrid"
+                    >
+
+                        <div class="loading">
+                            তথ্য লোড হচ্ছে...
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        © <span id="year"></span>
+        আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী
+
+    </footer>
+
+
+    <!-- =========================
+         STUDENT MODAL
+    ========================== -->
+
+    <div
+        class="modal"
+        id="studentModal"
+        aria-hidden="true"
+    >
+
+        <div class="modalBox">
+
+            <div class="modalHead">
+
+                <h3 id="modalTitle">
+                    শিক্ষার্থীর তথ্য
+                </h3>
+
+                <button
+                    class="close"
+                    type="button"
+                    onclick="closeStudentModal()"
+                    aria-label="বন্ধ করুন"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- Student Profile -->
+
+            <div id="profileArea"></div>
+
+
+            <!-- Verification -->
+
+            <div class="verify">
+
+                <div class="verifyTitle">
+                    🔐 বেতন খাতা দেখতে পরিচয় যাচাই করুন
+                </div>
+
+                <div class="verifyGrid">
+
+                    <input
+                        id="verifyName"
+                        type="text"
+                        placeholder="ছাত্রের নাম"
+                    >
+
+                    <input
+                        id="verifyMobile"
+                        type="text"
+                        placeholder="মোবাইল নম্বর"
+                    >
+
+                    <button
+                        class="btn"
+                        type="button"
+                        onclick="verifyStudent()"
+                    >
+                        যাচাই করুন
+                    </button>
+
+                </div>
+
+                <div id="verifyMessage"></div>
+
+            </div>
+
+
+            <!-- Ledger -->
+
+            <div
+                class="ledgerWrap"
+                id="ledgerArea"
+            >
+
+                <div class="loading">
+
+                    নাম ও নিবন্ধিত মোবাইল নম্বর দিয়ে যাচাই করলে
+                    বেতন খাতা খুলবে।
+
+                </div>
+
+            </div>
+
+
+            <!-- Security Note -->
+
+            <div class="securityNote">
+
+                বেতন খাতা দেখানোর আগে ছাত্রের নাম ও নিবন্ধিত
+                মোবাইল নম্বর মিলিয়ে দেখা হয়।
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FIREBASE + JAVASCRIPT
+    ========================== -->
+
+    <script type="module">
+
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+
+        import {
+            getDatabase,
+            ref,
+            get,
+            query,
+            orderByKey,
+            startAt,
+            endAt
+        } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+
+        /* =========================
+           FIREBASE CONFIG
+        ========================== */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyCIoSIq3Ci9wODl_OMk5XDMrAK7mVLQvzs",
+
+            authDomain:
+                "madrasa-admission-system.firebaseapp.com",
+
+            databaseURL:
+                "https://madrasa-admission-system-default-rtdb.firebaseio.com",
+
+            projectId:
+                "madrasa-admission-system",
+
+            storageBucket:
+                "madrasa-admission-system.firebasestorage.app",
+
+            messagingSenderId:
+                "722552487890",
+
+            appId:
+                "1:722552487890:web:7a8f6d8deb5da44c11520b"
+        };
+
+
+        const app = initializeApp(firebaseConfig);
+
+        const db = getDatabase(app);
+
+
+        /* =========================
+           CLASS SETTINGS
+        ========================== */
+
+        const CLASS_NAME = "শিশু শ্রেণি";
+
+        const CLASS_CODE = "c0";
+
+
+        /* =========================
+           MONTHS
+        ========================== */
+
+        const months = [
+
+            "জানুয়ারি",
+            "ফেব্রুয়ারি",
+            "মার্চ",
+            "এপ্রিল",
+            "মে",
+            "জুন",
+            "জুলাই",
+            "আগস্ট",
+            "সেপ্টেম্বর",
+            "অক্টোবর",
+            "নভেম্বর",
+            "ডিসেম্বর"
+
+        ];
+
+
+        /* =========================
+           GLOBAL DATA
+        ========================== */
+
+        let students = [];
+
+        window.__selectedStudent = null;
+
+
+        /* =========================
+           BANGLA NUMBER
+        ========================== */
+
+        const bn = (n) => {
+
+            return String(n ?? "").replace(
+                /[0-9]/g,
+                d => "০১২৩৪৫৬৭৮৯"[d]
+            );
+
+        };
+
+
+        /* =========================
+           HTML ESCAPE
+        ========================== */
+
+        const esc = (s) => {
+
+            return String(s ?? "").replace(
+                /[&<>"']/g,
+
+                c => ({
+
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+
+                }[c])
+
+            );
+
+        };
+
+
+        /* =========================
+           MOBILE NUMBER NORMALIZE
+        ========================== */
+
+        const norm = (s) => {
+
+            return String(s ?? "")
+
+                .replace(
+                    /[০-৯]/g,
+
+                    d =>
+                        "0123456789"[
+                            "০১২৩৪৫৬৭৮৯".indexOf(d)
+                        ]
+
+                )
+
+                .replace(/[\s\-.\(\)]/g, "")
+
+                .replace(/^\+?880/, "0");
+
+        };
+
+
+        /* =========================
+           NAME NORMALIZE
+        ========================== */
+
+        const normName = (s) => {
+
+            return String(s ?? "")
+
+                .trim()
+
+                .replace(/\s+/g, " ")
+
+                .toLowerCase();
+
+        };
+
+
+        /* =========================
+           MONEY FORMAT
+        ========================== */
+
+        const money = (n) => {
+
+            return "৳" +
+                bn(
+                    Number(n || 0)
+                        .toLocaleString("en-US")
+                );
+
+        };
+
+
+        /* =========================
+           GET STUDENT PHOTO
+        ========================== */
+
+        function getPhoto(student) {
+
+            return (
+
+                student.photo ||
+                student.image ||
+                student.photoUrl ||
+                student.imageUrl ||
+                student.profileImage ||
+                student.studentImage ||
+                ""
+
+            );
+
+        }
+
+
+        /* =========================
+           STUDENT INITIAL
+        ========================== */
+
+        function initials(name) {
+
+            const text =
+                String(name || "ছ").trim();
+
+            return (
+                text[0] || "ছ"
+            ).toUpperCase();
+
+        }
+
+
+        /* =========================
+           PHOTO HTML
+        ========================== */
+
+        function photoHtml(
+            student,
+            className = "studentPhoto"
+        ) {
+
+            const photo = getPhoto(student);
+
+            const avatarClass =
+                className === "studentPhoto"
+                    ? "studentAvatar"
+                    : "profileAvatar";
+
+
+            if (photo) {
+
+                return `
+
+                    <img
+                        class="${className}"
+                        src="${esc(photo)}"
+                        alt="${esc(student.name)}"
+                        onerror="
+                            this.style.display='none';
+                            this.nextElementSibling.style.display='grid';
+                        "
+                    >
+
+                    <span
+                        class="${avatarClass}"
+                        style="display:none"
+                    >
+                        ${esc(initials(student.name))}
+                    </span>
+
+                `;
+
+            }
+
+
+            return `
+
+                <span class="${avatarClass}">
+                    ${esc(initials(student.name))}
+                </span>
+
+            `;
+
+        }
+
+
+        /* =========================
+           LOAD STUDENTS FROM FIREBASE
+           
+           আগে:
+           পুরো madrasaData ডাউনলোড হতো।
+
+           এখন:
+           শুধু student: দিয়ে শুরু হওয়া
+           records Firebase থেকে নেওয়া হচ্ছে।
+        ========================== */
+
+        async function load() {
+
+            const studentList =
+                document.getElementById("studentList");
+
+
+            studentList.innerHTML = `
+
+                <div class="loading">
+                    Firebase থেকে শিক্ষার্থীর তথ্য লোড হচ্ছে...
+                </div>
+
+            `;
+
+
+            try {
+
+                /*
+                  শুধুমাত্র student: keys নেওয়া হচ্ছে।
+                  fee: records এখানে আসবে না।
+                */
+
+                const studentsQuery = query(
+
+                    ref(db, "madrasaData"),
+
+                    orderByKey(),
+
+                    startAt("student:"),
+
+                    endAt("student:\uf8ff")
+
+                );
+
+
+                const snapshot =
+                    await get(studentsQuery);
+
+
+                students = [];
+
+
+                if (snapshot.exists()) {
+
+                    const data =
+                        snapshot.val();
+
+
+                    for (const key of Object.keys(data)) {
+
+                        if (!key.startsWith("student:")) {
+                            continue;
+                        }
+
+
+                        try {
+
+                            const value =
+                                data[key];
+
+
+                            /*
+                              Student data সাধারণত
+                              JSON string হিসেবে থাকে।
+                            */
+
+                            const student =
+                                typeof value === "string"
+                                    ? JSON.parse(value)
+                                    : value;
+
+
+                            if (
+
+                                student &&
+
+                                student.name &&
+
+                                String(
+                                    student.className || ""
+                                ) === CLASS_NAME
+
+                            ) {
+
+                                students.push(student);
+
+                            }
+
+                        } catch {
+
+                            /*
+                              ভুল JSON হলে
+                              ওই record বাদ যাবে।
+                            */
+
+                        }
+
+                    }
+
+                }
+
+
+                /* Sort by roll */
+
+                students.sort(
+
+                    (a, b) =>
+
+                        (parseInt(a.roll) || 0) -
+                        (parseInt(b.roll) || 0)
+
+                );
+
+
+                /* Student count */
+
+                document.getElementById(
+                    "studentCount"
+                ).textContent =
+                    bn(students.length);
+
+
+                renderStudents();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Firebase loading error:",
+                    error
+                );
+
+
+                studentList.innerHTML = `
+
+                    <div class="error">
+
+                        Firebase থেকে তথ্য পড়া যাচ্ছে না।
+
+                        <br><br>
+
+                        Realtime Database Rules অথবা
+                        Internet connection পরীক্ষা করুন।
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =========================
+           RENDER STUDENT LIST
+        ========================== */
+
+        function renderStudents() {
+
+            const queryText =
+                document
+                    .getElementById("studentSearch")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            const list =
+                students.filter(student => {
+
+                    return (
+
+                        !queryText ||
+
+                        String(
+                            student.roll || ""
+                        )
+                            .toLowerCase()
+                            .includes(queryText) ||
+
+                        String(
+                            student.name || ""
+                        )
+                            .toLowerCase()
+                            .includes(queryText)
+
+                    );
+
+                });
+
+
+            const box =
+                document.getElementById(
+                    "studentList"
+                );
+
+
+            if (!list.length) {
+
+                box.innerHTML = `
+
+                    <div class="loading">
+
+                        কোনো শিক্ষার্থী পাওয়া যায়নি।
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            box.innerHTML =
+
+                list
+
+                    .map(student => {
+
+                        return `
+
+                            <article
+
+                                class="student"
+
+                                tabindex="0"
+
+                                role="button"
+
+                                data-roll="${esc(
+                                    String(
+                                        student.roll || ""
+                                    )
+                                )}"
+
+                            >
+
+                                <div class="studentTop">
+
+                                    ${photoHtml(student)}
+
+                                    <div>
+
+                                        <span class="roll">
+
+                                            রোল ${esc(
+                                                bn(student.roll)
+                                            )}
+
+                                        </span>
+
+                                        <h4>
+
+                                            ${esc(student.name)}
+
+                                        </h4>
+
+                                        <p>
+
+                                            ${esc(
+                                                student.className ||
+                                                CLASS_NAME
+                                            )}
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="studentHint">
+
+                                    👆 ক্লিক করে পরিচিতি ও
+                                    বেতন খাতা দেখুন
+
+                                </div>
+
+                            </article>
+
+                        `;
+
+                    })
+
+                    .join("");
+
+
+            /* Add click event */
+
+            box
+                .querySelectorAll(".student")
+                .forEach(card => {
+
+                    const roll =
+                        card.dataset.roll;
+
+
+                    const openStudent = () => {
+
+                        openStudentByRoll(roll);
+
+                    };
+
+
+                    card.addEventListener(
+                        "click",
+                        openStudent
+                    );
+
+
+                    card.addEventListener(
+                        "keydown",
+
+                        event => {
+
+                            if (
+
+                                event.key === "Enter" ||
+                                event.key === " "
+
+                            ) {
+
+                                event.preventDefault();
+
+                                openStudent();
+
+                            }
+
+                        }
+
+                    );
+
+                });
+
+        }
+
+
+        /* =========================
+           OPEN STUDENT MODAL
+        ========================== */
+
+        function openStudentByRoll(roll) {
+
+            const student =
+                students.find(
+
+                    item =>
+
+                        String(item.roll || "") ===
+                        String(roll || "")
+
+                );
+
+
+            if (!student) {
+                return;
+            }
+
+
+            const modal =
+                document.getElementById(
+                    "studentModal"
+                );
+
+
+            modal.classList.add("show");
+
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.getElementById(
+                "modalTitle"
+            ).textContent =
+
+                student.name +
+                " — শিক্ষার্থী তথ্য";
+
+
+            /* Profile */
+
+            document.getElementById(
+                "profileArea"
+            ).innerHTML = `
+
+                <div class="profile">
+
+                    ${photoHtml(
+                        student,
+                        "profilePhoto"
+                    )}
+
+
+                    <div>
+
+                        <h4>
+                            ${esc(student.name)}
+                        </h4>
+
+
+                        <div class="meta">
+
+                            <span class="tag">
+
+                                রোল:
+                                ${esc(
+                                    bn(student.roll)
+                                )}
+
+                            </span>
+
+
+                            <span class="tag">
+
+                                ${esc(
+                                    student.className ||
+                                    CLASS_NAME
+                                )}
+
+                            </span>
+
+
+                            <span class="tag">
+
+                                মাসিক বেতন:
+                                ${money(student.monthlyFee)}
+
+                            </span>
+
+                        </div>
+
+
+                        ${
+                            student.father
+                                ? `
+
+                                    <p
+                                        style="
+                                            margin:8px 0 0;
+                                            color:var(--muted);
+                                            font-size:.82rem;
+                                        "
+                                    >
+
+                                        পিতা:
+                                        ${esc(student.father)}
+
+                                    </p>
+
+                                `
+                                : ""
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            /* Reset verification */
+
+            document.getElementById(
+                "verifyName"
+            ).value =
+                student.name || "";
+
+
+            document.getElementById(
+                "verifyMobile"
+            ).value = "";
+
+
+            document.getElementById(
+                "verifyMessage"
+            ).innerHTML = "";
+
+
+            document.getElementById(
+                "ledgerArea"
+            ).innerHTML = `
+
+                <div class="loading">
+
+                    নাম ও নিবন্ধিত মোবাইল নম্বর দিয়ে
+                    যাচাই করলে বেতন খাতা খুলবে।
+
+                </div>
+
+            `;
+
+
+            window.__selectedStudent =
+                student;
+
+
+            setTimeout(() => {
+
+                document.getElementById(
+                    "verifyMobile"
+                ).focus();
+
+            }, 100);
+
+        }
+
+
+        /* =========================
+           CLOSE MODAL
+        ========================== */
+
+        window.closeStudentModal = () => {
+
+            const modal =
+                document.getElementById(
+                    "studentModal"
+                );
+
+
+            modal.classList.remove("show");
+
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+        };
+
+
+        /* Close by clicking outside */
+
+        document
+            .getElementById("studentModal")
+            .addEventListener(
+
+                "click",
+
+                event => {
+
+                    if (
+                        event.target.id ===
+                        "studentModal"
+                    ) {
+
+                        window.closeStudentModal();
+
+                    }
+
+                }
+
+            );
+
+
+        /* =========================
+           GET FEES FROM FIREBASE
+           
+           এখন পুরো madrasaData নয়।
+           
+           শুধু প্রয়োজনীয় ছাত্রের
+           fee record আনা হচ্ছে।
+        ========================== */
+
+        async function getFees(student) {
+
+            try {
+
+                const key =
+                    `fee:${CLASS_CODE}:${student.roll}`;
+
+
+                const feeSnapshot =
+                    await get(
+                        ref(
+                            db,
+                            `madrasaData/${key}`
+                        )
+                    );
+
+
+                if (!feeSnapshot.exists()) {
+
+                    return [];
+
+                }
+
+
+                const value =
+                    feeSnapshot.val();
+
+
+                /* JSON string */
+
+                if (typeof value === "string") {
+
+                    const parsed =
+                        JSON.parse(value);
+
+                    return Array.isArray(parsed)
+                        ? parsed
+                        : [];
+
+                }
+
+
+                /* Direct array */
+
+                if (Array.isArray(value)) {
+
+                    return value;
+
+                }
+
+
+                /* Object হলে values নেওয়া */
+
+                if (
+                    value &&
+                    typeof value === "object"
+                ) {
+
+                    return Object.values(value);
+
+                }
+
+
+                return [];
+
+
+            } catch (error) {
+
+                console.error(
+                    "Fee loading error:",
+                    error
+                );
+
+                return [];
+
+            }
+
+        }
+
+
+        /* =========================
+           CALCULATE PAID AMOUNT
+        ========================== */
+
+        function paidFor(
+            fees,
+            month,
+            year
+        ) {
+
+            return fees
+
+                .filter(
+
+                    fee =>
+
+                        String(fee.month) ===
+                            month &&
+
+                        Number(fee.year) ===
+                            Number(year)
+
+                )
+
+                .reduce(
+
+                    (sum, fee) =>
+
+                        sum +
+                        (Number(fee.amount) || 0),
+
+                    0
+
+                );
+
+        }
+
+
+        /* =========================
+           RENDER LEDGER
+        ========================== */
+
+        async function renderLedger(student) {
+
+            const ledgerArea =
+                document.getElementById(
+                    "ledgerArea"
+                );
+
+
+            /*
+              Fee data আলাদাভাবে Firebase
+              থেকে আনা হচ্ছে।
+            */
+
+            ledgerArea.innerHTML = `
+
+                <div class="loading">
+
+                    বেতন খাতার তথ্য লোড হচ্ছে...
+
+                </div>
+
+            `;
+
+
+            const fees =
+                await getFees(student);
+
+
+            const now =
+                new Date();
+
+
+            const year =
+                now.getFullYear();
+
+
+            const endMonth =
+                now.getMonth();
+
+
+            const monthlyFee =
+                Number(student.monthlyFee) || 0;
+
+
+            let totalPaid = 0;
+
+            let totalDue = 0;
+
+            let rows = "";
+
+
+            /* January → Current month */
+
+            for (
+
+                let monthIndex = 0;
+
+                monthIndex <= endMonth;
+
+                monthIndex++
+
+            ) {
+
+                const paid =
+                    paidFor(
+                        fees,
+                        months[monthIndex],
+                        year
+                    );
+
+
+                const due =
+                    Math.max(
+                        0,
+                        monthlyFee - paid
+                    );
+
+
+                totalPaid += paid;
+
+                totalDue += due;
+
+
+                rows += `
+
+                    <tr>
+
+                        <td class="month">
+
+                            ${months[monthIndex]}
+                            ${bn(year)}
+
+                        </td>
+
+
+                        <td>
+
+                            ${money(monthlyFee)}
+
+                        </td>
+
+
+                        <td class="paid">
+
+                            ${money(paid)}
+
+                        </td>
+
+
+                        <td class="due">
+
+                            ${money(due)}
+
+                        </td>
+
+
+                        <td>
+
+                            ${
+                                due <= 0
+
+                                    ? `
+
+                                        <span class="statusPaid">
+
+                                            পরিশোধিত
+
+                                        </span>
+
+                                    `
+
+                                    : `
+
+                                        <span class="statusDue">
+
+                                            বকেয়া
+
+                                        </span>
+
+                                    `
+                            }
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+
+
+            const monthCount =
+                endMonth + 1;
+
+
+            const totalExpected =
+                monthlyFee * monthCount;
+
+
+            /* Ledger HTML */
+
+            ledgerArea.innerHTML = `
+
+                <div class="summaryGrid">
+
+                    <div class="sumCard">
+
+                        <b>
+
+                            ${money(totalExpected)}
+
+                        </b>
+
+                        <span>
+
+                            জানুয়ারি–বর্তমান মোট ধার্য
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="sumCard">
+
+                        <b>
+
+                            ${money(totalPaid)}
+
+                        </b>
+
+                        <span>
+
+                            মোট পরিশোধ
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="sumCard">
+
+                        <b
+                            style="
+                                color:${
+                                    totalDue
+                                        ? "var(--red)"
+                                        : "var(--green)"
+                                };
+                            "
+                        >
+
+                            ${money(totalDue)}
+
+                        </b>
+
+                        <span>
+
+                            মোট বকেয়া
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ledgerScroll">
+
+                    <table class="ledger">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>মাস</th>
+
+                                <th>ধার্য</th>
+
+                                <th>পরিশোধ</th>
+
+                                <th>বাকি</th>
+
+                                <th>অবস্থা</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            ${rows}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <p
+                    style="
+                        font-size:.74rem;
+                        color:var(--muted);
+                        margin:9px 2px 0;
+                    "
+                >
+
+                    হিসাব:
+                    জানুয়ারি থেকে
+                    ${months[endMonth]}
+                    ${bn(year)}
+                    পর্যন্ত।
+
+                </p>
+
+            `;
+
+        }
+
+
+        /* =========================
+           VERIFY STUDENT
+        ========================== */
+
+        window.verifyStudent = () => {
+
+            const student =
+                window.__selectedStudent;
+
+
+            if (!student) {
+                return;
+            }
+
+
+            const name =
+                normName(
+                    document.getElementById(
+                        "verifyName"
+                    ).value
+                );
+
+
+            const mobile =
+                norm(
+                    document.getElementById(
+                        "verifyMobile"
+                    ).value
+                );
+
+
+            const message =
+                document.getElementById(
+                    "verifyMessage"
+                );
+
+
+            /* Empty check */
+
+            if (!name || !mobile) {
+
+                message.innerHTML = `
+
+                    <div class="verifyError">
+
+                        ছাত্রের নাম ও মোবাইল নম্বর
+                        দুটিই দিন।
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            /* Match check */
+
+            if (
+
+                name !==
+                    normName(student.name) ||
+
+                mobile !==
+                    norm(student.mobile)
+
+            ) {
+
+                message.innerHTML = `
+
+                    <div class="verifyError">
+
+                        ❌ তথ্য মিলেনি।
+
+                        নিবন্ধিত নাম ও মোবাইল নম্বর
+                        সঠিকভাবে দিন।
+
+                    </div>
+
+                `;
+
+
+                document.getElementById(
+                    "ledgerArea"
+                ).innerHTML = `
+
+                    <div class="loading">
+
+                        সঠিক তথ্য যাচাই না হওয়া পর্যন্ত
+                        বেতন খাতা দেখানো হবে না।
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            /* Success */
+
+            message.innerHTML = `
+
+                <div class="verified">
+
+                    ✅ পরিচয় যাচাই সফল।
+
+                    জানুয়ারি থেকে বর্তমান মাস পর্যন্ত
+                    বেতন খাতা দেখানো হচ্ছে।
+
+                </div>
+
+            `;
+
+
+            renderLedger(student);
+
+        };
+
+
+        /* =========================
+           GO BACK
+        ========================== */
+
+        window.goBack = () => {
+
+            if (document.referrer) {
+
+                history.back();
+
+            } else {
+
+                location.href = "index.html";
+
+            }
+
+        };
+
+
+        /* =========================
+           SEARCH
+        ========================== */
+
+        document
+            .getElementById("studentSearch")
+            .addEventListener(
+                "input",
+                renderStudents
+            );
+
+
+        /* =========================
+           CURRENT YEAR
+        ========================== */
+
+        document.getElementById(
+            "year"
+        ).textContent =
+            new Date().getFullYear();
+
+
+        /* =========================
+           START
+        ========================== */
+
+        load();
+
+    </script>
+
+</body>
+
+</html>
