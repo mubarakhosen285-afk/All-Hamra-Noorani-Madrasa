@@ -21,6 +21,8 @@
         rel="stylesheet"
     >
 
+    <link rel="stylesheet" href="style.css">
+
     <style>
 
         /* =========================================================
@@ -369,6 +371,181 @@
         }
 
         /* =========================================================
+           BEAUTIFUL CONTACT DESIGN
+        ========================================================= */
+
+        #contact {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 10% 15%,
+                    rgba(201, 162, 39, 0.08),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(27, 94, 66, 0.08),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    180deg,
+                    #f8fbf8 0%,
+                    #fbf7ee 100%
+                );
+        }
+
+        #contact .sectionTitle {
+            margin-bottom: 32px;
+        }
+
+        #contact .sectionTitle h2 {
+            font-size: clamp(1.8rem, 4vw, 2.15rem);
+            position: relative;
+            display: inline-block;
+        }
+
+        #contact .sectionTitle h2::after {
+            content: "";
+            display: block;
+            width: 55px;
+            height: 3px;
+            margin: 8px auto 0;
+            border-radius: 99px;
+            background: linear-gradient(
+                90deg,
+                var(--green),
+                var(--gold)
+            );
+        }
+
+        #contact .cards {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        #contact .card {
+            position: relative;
+            overflow: hidden;
+            min-height: 190px;
+            padding: 25px 22px;
+            border: 1px solid #dce7df;
+            border-radius: 22px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffffff 0%,
+                    #f5faf6 100%
+                );
+            box-shadow:
+                0 10px 28px rgba(15, 61, 46, 0.08);
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                border-color .25s ease;
+        }
+
+        #contact .card::before {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            right: -45px;
+            top: -45px;
+            border-radius: 50%;
+            background: rgba(201, 162, 39, 0.09);
+        }
+
+        #contact .card::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(
+                90deg,
+                var(--deep),
+                var(--gold)
+            );
+            transform: scaleX(.25);
+            transform-origin: left;
+            transition: transform .25s ease;
+        }
+
+        #contact .card:hover {
+            transform: translateY(-6px);
+            border-color: #c9dccc;
+            box-shadow:
+                0 18px 38px rgba(15, 61, 46, 0.13);
+        }
+
+        #contact .card:hover::after {
+            transform: scaleX(1);
+        }
+
+        #contact .icon {
+            position: relative;
+            z-index: 1;
+            width: 58px;
+            height: 58px;
+            margin-bottom: 17px;
+            border-radius: 17px;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--deep),
+                    var(--green)
+                );
+            color: #fff;
+            font-size: 25px;
+            box-shadow:
+                0 8px 18px rgba(15, 61, 46, 0.18);
+        }
+
+        #contact .card:nth-child(2) .icon {
+            background:
+                linear-gradient(
+                    135deg,
+                    #2463a6,
+                    #3283c5
+                );
+        }
+
+        #contact .card:nth-child(3) .icon {
+            background:
+                linear-gradient(
+                    135deg,
+                    #9a7415,
+                    var(--gold)
+                );
+        }
+
+        #contact .card h3 {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 8px;
+            font-size: 1.12rem;
+            font-weight: 800;
+        }
+
+        #contact .card h3 a {
+            color: var(--deep);
+            transition: color .2s ease;
+        }
+
+        #contact .card h3 a:hover {
+            color: var(--gold);
+        }
+
+        #contact .card p {
+            position: relative;
+            z-index: 1;
+            font-size: .91rem;
+            line-height: 1.85;
+        }
+
+        /* =========================================================
            CLASS CARDS
         ========================================================= */
 
@@ -574,6 +751,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 14px;
+            text-align: center;
         }
 
         .linkCard {
@@ -673,7 +851,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: #0b211a99;
+            background: #0ee4a099;
             z-index: 3000;
             padding: 18px;
             overflow: auto;
@@ -854,6 +1032,7 @@
             background: #fff;
             border: 1px solid var(--line);
             border-radius: 14px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .ledger {
@@ -943,6 +1122,126 @@
         }
 
         /* =========================================================
+           PUBLIC NOTICE
+        ========================================================= */
+
+        .scrollingNoticeWrap {
+            width: 100%;
+            margin: -30px 0 14px -10px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            box-shadow: 0 5px 18px rgba(15, 61, 46, 0.08);
+            display: flex;
+            align-items: center;
+            position: fixed;
+            z-index: 1000;
+            top: 92px;
+        }
+
+        .scrollingNoticeLabel {
+            flex: 0 0 auto;
+            background: var(--deep);
+            color: #fff;
+            padding: 8px 12px;
+            font-weight: 700;
+            font-size: .78rem;
+            z-index: 2;
+        }
+
+        .scrollingNoticeViewport {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .scrollingNoticeTrack {
+            display: inline-block;
+            min-width: 100%;
+            padding-left: 100%;
+            animation: ahnmNoticeScroll 20s linear infinite;
+            color: var(--deep);
+            font-weight: 600;
+            font-size: .86rem;
+        }
+
+        @keyframes ahnmNoticeScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+
+        .publicNoticeBox {
+            width: min(1180px, calc(100% - 28px));
+            margin: -22px auto 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .publicNoticeInner {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--gold);
+            border-radius: 15px;
+            padding: 14px 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .publicNoticeTitle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--deep);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .publicNoticeList {
+            display: grid;
+            gap: 7px;
+        }
+
+        .publicNoticeItem {
+            padding: 8px 10px;
+            background: #f7fbf8;
+            border-radius: 9px;
+            border: 1px solid #e1ebe3;
+            color: var(--ink);
+            font-size: .84rem;
+            line-height: 1.55;
+        }
+
+        .publicNoticeEmpty {
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        @media (max-width: 560px) {
+
+            .scrollingNoticeWrap {
+                border-radius: 10px;
+            }
+
+            .scrollingNoticeLabel {
+                padding: 7px 9px;
+                font-size: .72rem;
+            }
+
+            .scrollingNoticeTrack {
+                font-size: .78rem;
+            }
+
+            .publicNoticeBox {
+                width: calc(100% - 18px);
+            }
+
+            .publicNoticeInner {
+                padding: 12px;
+            }
+        }
+
+        /* =========================================================
            TABLET
         ========================================================= */
 
@@ -998,6 +1297,7 @@
             .verifyGrid .btn {
                 grid-column: 1 / -1;
             }
+
         }
 
         /* =========================================================
@@ -1055,13 +1355,225 @@
                 height: 80px;
             }
 
+            /* =====================================================
+               MOBILE LEDGER — COMPACT DESIGN
+            ===================================================== */
+
+            .modal {
+                padding: 7px;
+                align-items: center;
+            }
+
+            .modal.show {
+                align-items: center;
+            }
+
+            .modalBox {
+                width: 100%;
+                max-height: 96vh;
+                border-radius: 15px;
+            }
+
+            .modalHead {
+                padding: 10px 12px;
+                gap: 8px;
+            }
+
+            .modalHead h3 {
+                font-size: .98rem;
+            }
+
+            .close {
+                width: 34px;
+                height: 34px;
+                border-radius: 9px;
+                font-size: 1.1rem;
+            }
+
+            .profile {
+                padding: 11px;
+                gap: 10px;
+            }
+
+            .profilePhoto,
+            .profileAvatar {
+                width: 72px;
+                height: 72px;
+                border-radius: 14px;
+            }
+
+            .profileAvatar {
+                font-size: 2rem;
+            }
+
+            .profile h4 {
+                font-size: 1.05rem;
+            }
+
+            .meta {
+                gap: 5px;
+                margin-top: 5px;
+            }
+
+            .tag {
+                padding: 3px 6px;
+                border-radius: 7px;
+                font-size: .65rem;
+            }
+
+            .profile p {
+                font-size: .72rem !important;
+                margin-top: 6px !important;
+            }
+
+            .verify {
+                padding: 11px;
+            }
+
+            .verifyTitle {
+                font-size: .82rem;
+                margin-bottom: 7px;
+            }
+
+            .verifyGrid {
+                gap: 7px;
+            }
+
+            .verifyGrid input {
+                padding: 9px 10px;
+                font-size: .82rem;
+            }
+
+            .verifyGrid .btn {
+                padding: 9px 12px;
+                font-size: .82rem;
+            }
+
+            .verified,
+            .verifyError {
+                padding: 7px;
+                font-size: .72rem;
+                line-height: 1.5;
+            }
+
+            .ledgerWrap {
+                padding: 9px;
+            }
+
             .summaryGrid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 5px;
+                margin-bottom: 8px;
             }
 
             .summaryGrid .sumCard:last-child {
-                grid-column: 1 / -1;
+                grid-column: auto;
             }
+
+            .sumCard {
+                padding: 7px 4px;
+                border-radius: 9px;
+            }
+
+            .sumCard b {
+                font-size: .82rem;
+                line-height: 1.3;
+            }
+
+            .sumCard span {
+                display: block;
+                font-size: .57rem;
+                line-height: 1.25;
+                margin-top: 2px;
+            }
+
+            .ledgerScroll {
+                border-radius: 9px;
+                max-width: 100%;
+            }
+
+            .ledger {
+                min-width: 500px;
+            }
+
+            .ledger th {
+                padding: 6px 5px;
+                font-size: .66rem;
+            }
+
+            .ledger td {
+                padding: 6px 5px;
+                font-size: .66rem;
+            }
+
+            .statusPaid,
+            .statusDue,
+            .statusNone {
+                padding: 2px 5px;
+                border-radius: 5px;
+                font-size: .61rem;
+                white-space: nowrap;
+            }
+
+            .ledgerWrap > p {
+                font-size: .64rem !important;
+                margin-top: 7px !important;
+            }
+
+            .securityNote {
+                padding: 8px 11px;
+                font-size: .65rem;
+                line-height: 1.5;
+            }
+
+            /* =====================================================
+               MOBILE CONTACT
+            ===================================================== */
+
+            #contact {
+                padding: 44px 0;
+            }
+
+            #contact .sectionTitle {
+                margin-bottom: 23px;
+            }
+
+            #contact .sectionTitle h2 {
+                font-size: 1.75rem;
+            }
+
+            #contact .sectionTitle p {
+                font-size: .78rem;
+            }
+
+            #contact .cards {
+                gap: 11px;
+            }
+
+            #contact .card {
+                min-height: auto;
+                padding: 18px 17px;
+                border-radius: 17px;
+            }
+
+            #contact .icon {
+                width: 48px;
+                height: 48px;
+                border-radius: 14px;
+                font-size: 21px;
+                margin-bottom: 12px;
+            }
+
+            #contact .card h3 {
+                font-size: 1rem;
+                margin-bottom: 5px;
+            }
+
+            #contact .card p {
+                font-size: .8rem;
+                line-height: 1.7;
+            }
+
         }
 
     </style>
@@ -1095,7 +1607,7 @@
                 </h1>
 
                 <p>
-                    ছাত্র-ছাত্রী তথ্য ও মাসিক বেতন খাতা
+                    জামালগঞ্জ, সুনামগঞ্জ, সিলেট।
                 </p>
 
             </div>
@@ -1142,6 +1654,27 @@
 
                 <div>
 
+                    <div
+                        class="scrollingNoticeWrap"
+                        id="publicScrollingNotice"
+                        style="display:none;"
+                    >
+
+                        <div class="scrollingNoticeLabel">
+                            📢 নোটিস
+                        </div>
+
+                        <div class="scrollingNoticeViewport">
+
+                            <div
+                                class="scrollingNoticeTrack"
+                                id="scrollingNoticeTrack"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
                     <span class="badge">
                         🌿 আল হামরা নূরানী মাদ্রাসা
                     </span>
@@ -1157,32 +1690,24 @@
         </section>
 
 
-        <!-- STATISTICS -->
+        <!-- PUBLIC NOTICE BOX -->
 
-        <div class="container stats">
+        <div
+            class="publicNoticeBox"
+            id="publicNoticeBox"
+            style="display:none;"
+        >
 
-            <div class="stat">
+            <div class="publicNoticeInner">
 
-                <b id="statStudents">
-                    —
-                </b>
+                <div class="publicNoticeTitle">
+                    📢 গুরুত্বপূর্ণ নোটিস
+                </div>
 
-                <span>
-                    মোট শিক্ষার্থী
-                </span>
-
-            </div>
-
-
-            <div class="stat">
-
-                <b id="statClasses">
-                    —
-                </b>
-
-                <span>
-                    বর্তমান শ্রেণি
-                </span>
+                <div
+                    class="publicNoticeList"
+                    id="publicNoticeList"
+                ></div>
 
             </div>
 
@@ -1253,17 +1778,17 @@
 
                     <a
                         class="linkCard"
-                        href="https://mubarakhosen285-afk.github.io/-AHNM-RESULTS-/"
+                        href="#"
                         target="_blank"
                         rel="noopener"
                     >
 
                         <h3>
-                            📝 ফলাফল
+                           🧾 সিলেবাস
                         </h3>
 
                         <p>
-                            ফলাফল তৈরি/দেখার সিস্টেম খুলুন
+                           প্রতিটা বিষয়ের সিলেবাস!
                         </p>
 
                     </a>
@@ -1273,17 +1798,17 @@
 
                     <a
                         class="linkCard"
-                        href="https://mubarakhosen285-afk.github.io/Al-hamra-Nurani-madrasa-calculate/public.html"
+                        href="#"
                         target="_blank"
                         rel="noopener"
                     >
 
                         <h3>
-                            💰 আয়-ব্যয়
+                          🧾নমুনা প্রশ্ন
                         </h3>
 
                         <p>
-                            পাবলিক আয়-ব্যয় হিসাব দেখুন
+                            সাময়িক ভিত্তিক নমুনা প্রশ্ন।
                         </p>
 
                     </a>
@@ -1293,17 +1818,17 @@
 
                     <a
                         class="linkCard"
-                        href="https://mubarakhosen285-afk.github.io/Al-hamra-Nurani-madrasa-calculate/"
+                        href="#"
                         target="_blank"
                         rel="noopener"
                     >
 
                         <h3>
-                            📊 হিসাব তৈরি
+                            📊 ফলাফল
                         </h3>
 
                         <p>
-                            আয়-ব্যয় হিসাব ব্যবস্থাপনা
+                            সাময়িক ভিতিক পরিক্ষার ফলাফল সবার আগে প্রকাশ।
                         </p>
 
                     </a>
@@ -1575,7 +2100,7 @@
         const firebaseConfig = {
 
             apiKey:
-                "AIzaSyCIoSIq3Ci9wODl_OMk5XDMrAK7mVLQvzs",
+                "AIzaSyCIqSIq3Ci9wODl_OMk5XDMrAK7mVLQvzs",
 
             authDomain:
                 "madrasa-admission-system.firebaseapp.com",
@@ -1673,7 +2198,6 @@
         let students = [];
 
         let raw = {};
-
 
 
         /* =====================================================
@@ -1926,29 +2450,7 @@
             );
 
 
-            /* UPDATE STATS */
-
-            document.getElementById(
-                "statStudents"
-            ).textContent =
-                bn(students.length);
-
-
-            document.getElementById(
-                "statClasses"
-            ).textContent =
-                bn(
-
-                    new Set(
-
-                        students.map(
-                            s => s.className
-                        )
-
-                    ).size
-
-                );
-
+            /* UPDATE CLASS CARDS */
 
             renderClasses();
 
@@ -2072,11 +2574,179 @@
 
 
         /* =====================================================
+           LOAD PUBLIC NOTICES
+        ===================================================== */
+
+        async function loadPublicNotices() {
+
+            try {
+
+                const [scrollSnap, boxSnap] =
+                    await Promise.all([
+
+                        firebaseWithTimeout(
+                            get(
+                                ref(
+                                    db,
+                                    "publicNotices/scrolling"
+                                )
+                            ),
+                            10000
+                        ),
+
+                        firebaseWithTimeout(
+                            get(
+                                ref(
+                                    db,
+                                    "publicNotices/box"
+                                )
+                            ),
+                            10000
+                        )
+
+                    ]);
+
+
+                /* SCROLLING NOTICE */
+
+                const scrollingData =
+                    scrollSnap.exists()
+                        ? scrollSnap.val()
+                        : {};
+
+                const scrollingItems =
+                    Object.values(
+                        scrollingData || {}
+                    )
+                    .filter(
+                        n =>
+                            n &&
+                            String(n.text || "").trim()
+                    )
+                    .sort(
+                        (a, b) =>
+                            Number(b.createdAt || 0) -
+                            Number(a.createdAt || 0)
+                    );
+
+
+                const scrollingWrap =
+                    document.getElementById(
+                        "publicScrollingNotice"
+                    );
+
+                const scrollingTrack =
+                    document.getElementById(
+                        "scrollingNoticeTrack"
+                    );
+
+
+                if (scrollingItems.length) {
+
+                    const texts =
+                        scrollingItems
+                            .map(
+                                n =>
+                                    String(n.text || "").trim()
+                            )
+                            .join("   •   ");
+
+                    scrollingTrack.textContent =
+                        texts;
+
+                    scrollingWrap.style.display =
+                        "flex";
+
+                } else {
+
+                    scrollingWrap.style.display =
+                        "none";
+
+                }
+
+
+                /* NOTICE BOX */
+
+                const boxData =
+                    boxSnap.exists()
+                        ? boxSnap.val()
+                        : {};
+
+                const boxItems =
+                    Object.values(
+                        boxData || {}
+                    )
+                    .filter(
+                        n =>
+                            n &&
+                            String(n.text || "").trim()
+                    )
+                    .sort(
+                        (a, b) =>
+                            Number(b.createdAt || 0) -
+                            Number(a.createdAt || 0)
+                    );
+
+
+                const noticeBox =
+                    document.getElementById(
+                        "publicNoticeBox"
+                    );
+
+                const noticeList =
+                    document.getElementById(
+                        "publicNoticeList"
+                    );
+
+
+                if (boxItems.length) {
+
+                    noticeList.innerHTML =
+                        boxItems
+                            .map(
+                                (n, i) => `
+                                    <div class="publicNoticeItem">
+                                        <strong>
+                                            ${bn(i + 1)}.
+                                        </strong>
+                                        ${esc(n.text)}
+                                    </div>
+                                `
+                            )
+                            .join("");
+
+                    noticeBox.style.display =
+                        "block";
+
+                } else {
+
+                    noticeBox.style.display =
+                        "none";
+
+                }
+
+            } catch (e) {
+
+                console.warn(
+                    "Public notices loading failed:",
+                    e
+                );
+
+                document.getElementById(
+                    "publicScrollingNotice"
+                ).style.display = "none";
+
+                document.getElementById(
+                    "publicNoticeBox"
+                ).style.display = "none";
+
+            }
+
+        }
+
+
+        /* =====================================================
            LOAD FIREBASE DATA
-           
-           IMPORTANT:
-           এখানে Firebase loading problem কমানোর
-           মূল পরিবর্তন করা হয়েছে।
         ===================================================== */
 
         async function load() {
@@ -2085,10 +2755,7 @@
                 loadCache();
 
 
-            /* -------------------------------------------------
-               STEP 1
-               আগে Cache থাকলে সাথে সাথে দেখানো হবে
-            ------------------------------------------------- */
+            /* STEP 1 */
 
             if (
                 cached &&
@@ -2117,10 +2784,7 @@
             }
 
 
-            /* -------------------------------------------------
-               STEP 2
-               তারপর Firebase থেকে নতুন data আনা হবে
-            ------------------------------------------------- */
+            /* STEP 2 */
 
             try {
 
@@ -2145,14 +2809,10 @@
                         : {};
 
 
-                /* নতুন data process */
-
                 processData(
                     freshData
                 );
 
-
-                /* নতুন data cache */
 
                 saveCache(
                     freshData
@@ -2171,11 +2831,6 @@
                     e
                 );
 
-
-                /* -------------------------------------------------
-                   Firebase ব্যর্থ হলেও cache থাকলে
-                   cached data-ই থাকবে
-                ------------------------------------------------- */
 
                 if (
                     cached &&
@@ -2208,15 +2863,6 @@
 
                     `;
 
-                    document.getElementById(
-                        "statStudents"
-                    ).textContent = "—";
-
-
-                    document.getElementById(
-                        "statClasses"
-                    ).textContent = "—";
-
                 }
 
             }
@@ -2246,7 +2892,7 @@
                             >
 
                                 <div class="num">
-                                    ${bn(i + 1)}
+                                    ${bn(i + 0)}
                                 </div>
 
                                 <h3>
@@ -3070,6 +3716,8 @@
         ===================================================== */
 
         load();
+
+        loadPublicNotices();
 
     </script>
 
