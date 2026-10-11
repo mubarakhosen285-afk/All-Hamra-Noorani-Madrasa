@@ -1578,6 +1578,28 @@
 
         }
 
+
+        /* QUICK SERVICE POPUP */
+        .servicePopupOverlay {
+            display:none; position:fixed; inset:0; z-index:5000;
+            background:rgba(0,0,0,.58); padding:18px;
+            align-items:center; justify-content:center;
+        }
+        .servicePopupOverlay.show { display:flex; }
+        .servicePopupBox {
+            width:min(420px,100%); background:#fff; border-radius:20px;
+            padding:28px 22px; text-align:center; box-shadow:0 20px 60px #0004;
+            border-top:5px solid var(--gold); animation:popupIn .2s ease-out;
+        }
+        .servicePopupIcon { font-size:42px; margin-bottom:10px; }
+        .servicePopupBox h3 { color:var(--deep); margin:0 0 10px; font-family:"Noto Serif Bengali"; }
+        .servicePopupBox p { color:var(--muted); line-height:1.8; margin:0 0 20px; }
+        .servicePopupBox button {
+            border:0; border-radius:10px; padding:10px 24px; cursor:pointer;
+            background:var(--deep); color:#fff; font:700 1rem "Hind Siliguri",sans-serif;
+        }
+        @keyframes popupIn { from { transform:translateY(8px) scale(.97); opacity:0; } to { transform:translateY(0) scale(1); opacity:1; } }
+
     </style>
 
 </head>
@@ -1975,6 +1997,17 @@
     </footer>
 
 
+
+    <!-- QUICK SERVICE POPUP -->
+    <div class="servicePopupOverlay" id="servicePopup" role="dialog" aria-modal="true" aria-labelledby="servicePopupTitle">
+        <div class="servicePopupBox">
+            <div class="servicePopupIcon">🚧</div>
+            <h3 id="servicePopupTitle">ওয়েবসাইটের কাজ চলছে</h3>
+            <p>ওয়েবসাইটের কাজ চলতেছে। খুব তাড়াতাড়ি এই বিষয়ে তথ্য দেওয়া হবে।<br>সাথে থাকার জন্য ধন্যবাদ।</p>
+            <button type="button" onclick="closeServicePopup()">ঠিক আছে</button>
+        </div>
+    </div>
+
     <!-- =========================================================
          STUDENT MODAL
     ========================================================= -->
@@ -2096,7 +2129,8 @@
         import {
             getDatabase,
             ref,
-            get
+            get,
+            runTransaction
         } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 
@@ -2586,6 +2620,22 @@
 
         async function loadPublicNotices() {
 
+            const scrollingCacheKey = "ahnm_public_scrolling_notice_v1";
+            const scrollingWrap = document.getElementById("publicScrollingNotice");
+            const scrollingTrack = document.getElementById("scrollingNoticeTrack");
+
+            // আগের শিরোনাম ব্রাউজারে সংরক্ষিত থাকলে Firebase লোড হওয়ার আগেই দেখাও।
+            // এতে Refresh দিলেও শিরোনাম খালি হয়ে থাকার অপেক্ষা তৈরি হবে না।
+            try {
+                const cachedText = localStorage.getItem(scrollingCacheKey);
+                if (cachedText && cachedText.trim()) {
+                    scrollingTrack.textContent = cachedText;
+                    scrollingWrap.style.display = "flex";
+                }
+            } catch (cacheError) {
+                console.warn("Scrolling notice cache unavailable:", cacheError);
+            }
+
             try {
 
                 const [scrollSnap, boxSnap] =
@@ -2637,17 +2687,6 @@
                     );
 
 
-                const scrollingWrap =
-                    document.getElementById(
-                        "publicScrollingNotice"
-                    );
-
-                const scrollingTrack =
-                    document.getElementById(
-                        "scrollingNoticeTrack"
-                    );
-
-
                 if (scrollingItems.length) {
 
                     const texts =
@@ -2658,16 +2697,28 @@
                             )
                             .join("   •   ");
 
-                    scrollingTrack.textContent =
-                        texts;
+                    // টেক্সট বদলালেই কেবল animation track আপডেট হবে।
+                    if (scrollingTrack.textContent !== texts) {
+                        scrollingTrack.textContent = texts;
+                    }
 
-                    scrollingWrap.style.display =
-                        "flex";
+                    scrollingWrap.style.display = "flex";
+
+                    try {
+                        localStorage.setItem(scrollingCacheKey, texts);
+                    } catch (cacheError) {
+                        console.warn("Scrolling notice cache save failed:", cacheError);
+                    }
 
                 } else {
 
-                    scrollingWrap.style.display =
-                        "none";
+                    scrollingWrap.style.display = "none";
+
+                    try {
+                        localStorage.removeItem(scrollingCacheKey);
+                    } catch (cacheError) {
+                        console.warn("Scrolling notice cache clear failed:", cacheError);
+                    }
 
                 }
 
@@ -2739,9 +2790,11 @@
                     e
                 );
 
-                document.getElementById(
-                    "publicScrollingNotice"
-                ).style.display = "none";
+                // Firebase সাময়িকভাবে কাজ না করলেও cache-এ থাকা শিরোনাম লুকাবে না।
+                // শিরোনামের cache না থাকলে আগের মতোই এটি লুকানো থাকবে।
+                if (!scrollingTrack.textContent.trim()) {
+                    scrollingWrap.style.display = "none";
+                }
 
                 document.getElementById(
                     "publicNoticeBox"
@@ -2750,7 +2803,6 @@
             }
 
         }
-
 
         /* =====================================================
            LOAD FIREBASE DATA
@@ -3718,6 +3770,41 @@
             new Date().getFullYear();
 
 
+
+        /* =====================================================
+           QUICK SERVICE POPUP + VISIT COUNTER
+        ===================================================== */
+
+        window.closeServicePopup = function () {
+            document.getElementById("servicePopup").classList.remove("show");
+        };
+
+        document.getElementById("servicePopup").addEventListener("click", function (e) {
+            if (e.target.id === "servicePopup") window.closeServicePopup();
+        });
+
+        // দ্রুত সেবা কার্ডে ক্লিক করলে অন্য পেজে না গিয়ে পপআপ দেখাবে
+        document.querySelectorAll("#links .linkCard").forEach(function (card) {
+            card.addEventListener("click", function (e) {
+                e.preventDefault();
+                document.getElementById("servicePopup").classList.add("show");
+            });
+        });
+
+        // একই ব্রাউজার সেশনে একবার ভিজিট গণনা
+        // Firebase-এ siteStats/totalVisits নামে মোট সংখ্যা রাখা হবে
+        async function recordSiteVisit() {
+            try {
+                if (sessionStorage.getItem("ahnm_visit_counted") === "yes") return;
+                sessionStorage.setItem("ahnm_visit_counted", "yes");
+                await runTransaction(ref(db, "siteStats/totalVisits"), function (current) {
+                    return (Number(current) || 0) + 1;
+                });
+            } catch (e) {
+                console.warn("Visit count update failed. Check Firebase Database Rules.", e);
+            }
+        }
+
         /* =====================================================
            START APP
         ===================================================== */
@@ -3725,6 +3812,7 @@
         load();
 
         loadPublicNotices();
+        recordSiteVisit();
 
     </script>
 
