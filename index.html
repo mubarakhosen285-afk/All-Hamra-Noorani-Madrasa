@@ -75,7 +75,7 @@
         }
 
         /* =========================================================
-           HEADER / NAVBAR
+           HEADER / NAVBAR  (নতুন সুন্দর ডিজাইন)
         ========================================================= */
 
         .top {
@@ -83,8 +83,9 @@
             color: #fff;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 1100;
             box-shadow: 0 4px 20px #0002;
+            border-bottom: 3px solid var(--gold);
         }
 
         .nav {
@@ -97,13 +98,15 @@
         .logo {
             width: 50px;
             height: 50px;
-            border-radius: 12px;
+            border-radius: 14px;
             background: #fff2;
             display: grid;
             place-items: center;
             font-size: 26px;
-            border: 1px solid #ffffff35;
+            border: 2px solid rgba(201, 162, 39, 0.65);
             overflow: hidden;
+            flex: 0 0 auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
         }
 
         .logo img {
@@ -132,30 +135,127 @@
             font-size: 0.76rem;
         }
 
+        /* ---------- Desktop menu ---------- */
+
         .menu {
             display: flex;
+            align-items: center;
             gap: 6px;
-            flex-wrap: wrap;
         }
 
         .menu a {
-            padding: 8px 11px;
-            border-radius: 9px;
-            font-size: 0.82rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            font-size: 0.88rem;
+            font-weight: 600;
             color: #fff;
+            transition: background .25s ease, color .25s ease;
+        }
+
+        .menu a .mi {
+            display: none;
+        }
+
+        .menu a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 4px;
+            width: 0;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--gold);
+            transform: translateX(-50%);
+            transition: width .25s ease;
         }
 
         .menu a:hover {
             background: #ffffff18;
         }
 
+        .menu a:hover::after,
+        .menu a.active::after {
+            width: 40%;
+        }
+
+        .menu a.active {
+            background: #ffffff1f;
+            color: #f4e9c8;
+        }
+
+        /* ---------- Hamburger button ---------- */
+
         .menuBtn {
             display: none;
-            background: #ffffff15;
-            border: 1px solid #ffffff35;
-            color: #fff;
-            border-radius: 9px;
-            padding: 9px;
+            position: relative;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            flex: 0 0 auto;
+            cursor: pointer;
+            border-radius: 12px;
+            background: #ffffff18;
+            border: 1px solid #ffffff38;
+            -webkit-tap-highlight-color: transparent;
+            transition: background .25s ease;
+        }
+
+        .menuBtn:hover,
+        .menuBtn.open {
+            background: #ffffff2a;
+        }
+
+        .menuBtn span {
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            height: 2px;
+            border-radius: 2px;
+            background: #fff;
+            transition: transform .3s ease, opacity .2s ease, top .3s ease, background .3s ease;
+        }
+
+        .menuBtn span:nth-child(1) { top: 14px; }
+        .menuBtn span:nth-child(2) { top: 21px; }
+        .menuBtn span:nth-child(3) { top: 28px; }
+
+        .menuBtn.open span { background: var(--gold); }
+
+        .menuBtn.open span:nth-child(1) {
+            top: 21px;
+            transform: rotate(45deg);
+        }
+
+        .menuBtn.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menuBtn.open span:nth-child(3) {
+            top: 21px;
+            transform: rotate(-45deg);
+        }
+
+        /* ---------- Backdrop (যেকোনো জায়গায় ক্লিক করলে মেনু বন্ধ) ---------- */
+
+        .menuBackdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1050;
+            background: rgba(10, 30, 22, 0.45);
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s ease, visibility .3s ease;
+        }
+
+        .menuBackdrop.show {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* =========================================================
@@ -1243,29 +1343,104 @@
         }
 
         /* =========================================================
-           TABLET
+           TABLET + MOBILE NAVBAR (সুন্দর ড্রপডাউন মেনু)
         ========================================================= */
 
         @media (max-width: 850px) {
-
-            .menu {
-                display: none;
-            }
 
             .menuBtn {
                 display: block;
             }
 
-            .menu.open {
-                display: flex;
-                
+            .menu {
                 position: absolute;
-                top: 35px;
-                left: 100;
-                right: 20px;
-                background: none;
-                padding: 2px 5px;
-                
+                top: calc(100% + 12px);
+                right: 14px;
+                width: min(290px, calc(100vw - 28px));
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                padding: 10px;
+                background: #fff;
+                border: 1px solid var(--line);
+                border-radius: 20px;
+                box-shadow: 0 22px 50px rgba(8, 30, 22, 0.28);
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-12px) scale(.96);
+                transform-origin: top right;
+                transition:
+                    opacity .28s ease,
+                    transform .28s ease,
+                    visibility .28s ease;
+            }
+
+            .menu::before {
+                content: "";
+                position: absolute;
+                top: -7px;
+                right: 17px;
+                width: 14px;
+                height: 14px;
+                background: #fff;
+                border-left: 1px solid var(--line);
+                border-top: 1px solid var(--line);
+                transform: rotate(45deg);
+                border-radius: 3px 0 0 0;
+            }
+
+            .menu.open {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0) scale(1);
+            }
+
+            .menu a {
+                position: relative;
+                z-index: 1;
+                gap: 13px;
+                padding: 13px 14px;
+                border-radius: 14px;
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--deep);
+                background: transparent;
+            }
+
+            .menu a::after {
+                display: none;
+            }
+
+            .menu a .mi {
+                display: grid;
+                place-items: center;
+                width: 38px;
+                height: 38px;
+                border-radius: 11px;
+                font-size: 18px;
+                background: var(--soft);
+                flex: 0 0 auto;
+                transition: background .25s ease;
+            }
+
+            .menu a:hover,
+            .menu a:active {
+                background: #f1f6f2;
+            }
+
+            .menu a.active {
+                background: linear-gradient(135deg, var(--deep), var(--green));
+                color: #fff;
+            }
+
+            .menu a.active .mi {
+                background: #ffffff26;
+            }
+
+            .menu a + a {
+                margin-top: 2px;
             }
 
             .heroGrid {
@@ -1331,11 +1506,46 @@
 
             .nav {
                 min-height: 65px;
+                gap: 11px;
             }
 
             .logo {
                 width: 43px;
                 height: 43px;
+                border-radius: 12px;
+            }
+
+            .brand h1 {
+                font-size: 1rem;
+            }
+
+            .brand p {
+                font-size: .7rem;
+            }
+
+            .menuBtn {
+                width: 42px;
+                height: 42px;
+            }
+
+            .menuBtn span {
+                left: 11px;
+                right: 11px;
+            }
+
+            .menuBtn span:nth-child(1) { top: 13px; }
+            .menuBtn span:nth-child(2) { top: 20px; }
+            .menuBtn span:nth-child(3) { top: 27px; }
+
+            .menuBtn.open span:nth-child(1),
+            .menuBtn.open span:nth-child(3) {
+                top: 20px;
+            }
+
+            .menu {
+                top: calc(100% + 10px);
+                right: 9px;
+                width: min(280px, calc(100vw - 18px));
             }
 
             .searchRow,
@@ -1639,30 +1849,42 @@
 
             <nav class="menu" id="menu">
 
-                <a href="#home">
-                    হোম
+                <a href="#home" class="active">
+                    <span class="mi">🏠</span>
+                    <span>হোম</span>
                 </a>
 
                 <a href="#classes">
-                    শ্রেণি
+                    <span class="mi">📚</span>
+                    <span>শ্রেণি</span>
                 </a>
 
                 <a href="#contact">
-                    যোগাযোগ
+                    <span class="mi">📞</span>
+                    <span>যোগাযোগ</span>
                 </a>
 
             </nav>
 
             <button
                 class="menuBtn"
-                onclick="document.getElementById('menu').classList.toggle('open')"
+                id="menuBtn"
+                type="button"
+                aria-label="মেনু"
+                aria-expanded="false"
+                aria-controls="menu"
             >
-                ☰
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
 
         </div>
 
     </header>
+
+    <!-- মেনু খোলা অবস্থায় যেকোনো জায়গায় ক্লিক করলে মেনু বন্ধ হবে -->
+    <div class="menuBackdrop" id="menuBackdrop"></div>
 
 
     <!-- =========================================================
@@ -1705,7 +1927,7 @@
                     </span>
 
                     <h2>
-                        শিক্ষা, আদব ও কুরআনের আলোয় সুন্দর ভবিষ্যৎ
+                        শিক্ষা, আদব ও কুরআনের আলোয় সুন্দর ভবিষ্যৎ
                     </h2>
 
                 </div>
@@ -1813,7 +2035,7 @@
                         </h3>
 
                         <p>
-                           প্রতিটা বিষয়ের সিলেবাস!
+                           প্রতিটা বিষয়ের সিলেবাস!
                         </p>
 
                     </a>
@@ -1833,7 +2055,7 @@
                         </h3>
 
                         <p>
-                            সাময়িক ভিত্তিক নমুনা প্রশ্ন।
+                            সাময়িক ভিত্তিক নমুনা প্রশ্ন।
                         </p>
 
                     </a>
@@ -1853,7 +2075,7 @@
                         </h3>
 
                         <p>
-                            সাময়িক ভিতিক পরিক্ষার ফলাফল সবার আগে প্রকাশ।
+                            সাময়িক ভিতিক পরিক্ষার ফলাফল সবার আগে প্রকাশ।
                         </p>
 
                     </a>
@@ -2003,8 +2225,8 @@
     <div class="servicePopupOverlay" id="servicePopup" role="dialog" aria-modal="true" aria-labelledby="servicePopupTitle">
         <div class="servicePopupBox">
             <div class="servicePopupIcon">🚧</div>
-            <h3 id="servicePopupTitle">ওয়েবসাইটের কাজ চলছে</h3>
-            <p>খুব তাড়াতাড়ি এই বিষয়ে তথ্য দেওয়া হবে।<br>সাথে থাকার জন্য ধন্যবাদ।</p>
+            <h3 id="servicePopupTitle">ওয়েবসাইটের কাজ চলছে</h3>
+            <p>খুব তাড়াতাড়ি এই বিষয়ে তথ্য দেওয়া হবে।<br>সাথে থাকার জন্য ধন্যবাদ।</p>
             <button type="button" onclick="closeServicePopup()">ঠিক আছে</button>
         </div>
     </div>
@@ -2050,7 +2272,7 @@
             <div class="verify">
 
                 <div class="verifyTitle">
-                    🔐 বেতন খাতা দেখতে পরিচয় যাচাই করুন
+                    🔐 বেতন খাতা দেখতে পরিচয় যাচাই করুন
                 </div>
 
                 <div class="verifyGrid">
@@ -2103,13 +2325,106 @@
 
                 এই পোর্টালে বেতন খাতা দেখানোর আগে
                 ছাত্রের নাম ও নিবন্ধিত মোবাইল নম্বর
-                মিলিয়ে দেখা হয়।
+                মিলিয়ে দেখা হয়।
 
             </div>
 
         </div>
 
     </div>
+
+
+    <!-- =========================================================
+         NAVBAR SCRIPT (মেনু খোলা/বন্ধ)
+    ========================================================= -->
+
+    <script>
+
+        (function () {
+
+            var menu = document.getElementById("menu");
+            var btn = document.getElementById("menuBtn");
+            var backdrop = document.getElementById("menuBackdrop");
+
+            function setMenu(open) {
+                menu.classList.toggle("open", open);
+                btn.classList.toggle("open", open);
+                backdrop.classList.toggle("show", open);
+                btn.setAttribute("aria-expanded", open ? "true" : "false");
+            }
+
+            // হ্যামবার্গার আইকনে ক্লিক
+            btn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                setMenu(!menu.classList.contains("open"));
+            });
+
+            // যেকোনো জায়গায় ক্লিক করলে মেনু বন্ধ
+            backdrop.addEventListener("click", function () {
+                setMenu(false);
+            });
+
+            document.addEventListener("click", function (e) {
+                if (
+                    menu.classList.contains("open") &&
+                    !menu.contains(e.target) &&
+                    !btn.contains(e.target)
+                ) {
+                    setMenu(false);
+                }
+            });
+
+            // মেনুর লিংকে ক্লিক করলে মেনু বন্ধ
+            menu.querySelectorAll("a").forEach(function (a) {
+                a.addEventListener("click", function () {
+                    setMenu(false);
+                });
+            });
+
+            // Esc চাপলে বন্ধ
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") setMenu(false);
+            });
+
+            // বড় স্ক্রিনে গেলে বন্ধ
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 850) setMenu(false);
+            });
+
+            // স্ক্রল করার সময় বর্তমান সেকশনের লিংক হাইলাইট
+            var links = Array.prototype.slice.call(menu.querySelectorAll("a"));
+            var sections = links
+                .map(function (a) {
+                    return document.querySelector(a.getAttribute("href"));
+                });
+
+            function spy() {
+                var pos = window.scrollY + 140;
+                var current = 0;
+
+                sections.forEach(function (sec, i) {
+                    if (sec && sec.offsetTop <= pos) current = i;
+                });
+
+                // একদম নিচে পৌঁছালে শেষ লিংক
+                if (
+                    window.innerHeight + window.scrollY >=
+                    document.body.offsetHeight - 4
+                ) {
+                    current = links.length - 1;
+                }
+
+                links.forEach(function (a, i) {
+                    a.classList.toggle("active", i === current);
+                });
+            }
+
+            window.addEventListener("scroll", spy, { passive: true });
+            spy();
+
+        })();
+
+    </script>
 
 
     <!-- =========================================================
@@ -2625,8 +2940,8 @@
             const scrollingWrap = document.getElementById("publicScrollingNotice");
             const scrollingTrack = document.getElementById("scrollingNoticeTrack");
 
-            // আগের শিরোনাম ব্রাউজারে সংরক্ষিত থাকলে Firebase লোড হওয়ার আগেই দেখাও।
-            // এতে Refresh দিলেও শিরোনাম খালি হয়ে থাকার অপেক্ষা তৈরি হবে না।
+            // আগের শিরোনাম ব্রাউজারে সংরক্ষিত থাকলে Firebase লোড হওয়ার আগেই দেখাও।
+            // এতে Refresh দিলেও শিরোনাম খালি হয়ে থাকার অপেক্ষা তৈরি হবে না।
             try {
                 const cachedText = localStorage.getItem(scrollingCacheKey);
                 if (cachedText && cachedText.trim()) {
@@ -2791,7 +3106,7 @@
                     e
                 );
 
-                // Firebase সাময়িকভাবে কাজ না করলেও cache-এ থাকা শিরোনাম লুকাবে না।
+                // Firebase সাময়িকভাবে কাজ না করলেও cache-এ থাকা শিরোনাম লুকাবে না।
                 // শিরোনামের cache না থাকলে আগের মতোই এটি লুকানো থাকবে।
                 if (!scrollingTrack.textContent.trim()) {
                     scrollingWrap.style.display = "none";
@@ -3162,7 +3477,7 @@
 
                 <div class="loading">
 
-                    নাম ও নিবন্ধিত মোবাইল নম্বর দিয়ে
+                    নাম ও নিবন্ধিত মোবাইল নম্বর দিয়ে
                     যাচাই করলে বেতন খাতা খুলবে।
 
                 </div>
@@ -3446,7 +3761,7 @@
                                     ? `
 
                                         <span class="statusNone">
-                                            প্রযোজ্য নয়
+                                            প্রযোজ্য নয়
                                         </span>
 
                                       `
@@ -3464,7 +3779,7 @@
                                         : `
 
                                             <span class="statusDue">
-                                                বকেয়া
+                                                বকেয়া
                                             </span>
 
                                           `
@@ -3512,7 +3827,7 @@
                         </b>
 
                         <span>
-                            জানুয়ারি–বর্তমান মোট ধার্য
+                            জানুয়ারি–বর্তমান মোট ধার্য
                         </span>
 
                     </div>
@@ -3553,7 +3868,7 @@
                         </b>
 
                         <span>
-                            মোট বকেয়া
+                            মোট বকেয়া
                         </span>
 
                     </div>
@@ -3728,7 +4043,7 @@
 
                     <div class="loading">
 
-                        সঠিক তথ্য যাচাই না হওয়া পর্যন্ত
+                        সঠিক তথ্য যাচাই না হওয়া পর্যন্ত
                         বেতন খাতা দেখানো হবে না।
 
                     </div>
@@ -3746,9 +4061,9 @@
 
                 <div class="verified">
 
-                    ✅ পরিচয় যাচাই সফল।
+                    ✅ পরিচয় যাচাই সফল।
 
-                    নিচে জানুয়ারি থেকে বর্তমান
+                    নিচে জানুয়ারি থেকে বর্তমান
                     মাস পর্যন্ত বেতন খাতা দেখানো হচ্ছে।
 
                 </div>
@@ -3784,7 +4099,7 @@
             if (e.target.id === "servicePopup") window.closeServicePopup();
         });
 
-        // দ্রুত সেবা কার্ডে ক্লিক করলে অন্য পেজে না গিয়ে পপআপ দেখাবে
+        // দ্রুত সেবা কার্ডে ক্লিক করলে অন্য পেজে না গিয়ে পপআপ দেখাবে
         document.querySelectorAll("#links .linkCard").forEach(function (card) {
             card.addEventListener("click", function (e) {
                 e.preventDefault();
