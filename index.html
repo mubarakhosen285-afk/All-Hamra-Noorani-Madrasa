@@ -1493,7 +1493,7 @@
             .links,
             .studentGrid,
             .footerGrid {
-                grid-template-columns:  1fr;
+                grid-template-columns: 1fr;
             }
 
             .hero {
@@ -4311,12 +4311,23 @@
             let selectedClass = "";
             let selectedStudent = null;
 
-            // একই ব্রাউজার সেশনে একবার সম্পন্ন হলে রিফ্রেশে আবার ফরম দেখাবে না।
+            // এই ডিভাইসের একই ব্রাউজারে একবার তথ্য দিলে পরেরবার আর ফরম দেখাবে না।
+            // পুরোনো sessionStorage-এ তথ্য থাকলে সেটিও localStorage-এ স্থানান্তর করা হবে।
             try {
-                if (sessionStorage.getItem("ahnm_visitor_entry_done") === "yes") {
+                const savedEntry = localStorage.getItem("ahnm_visitor_entry_data");
+                const savedDone = localStorage.getItem("ahnm_visitor_entry_done");
+                if (!savedEntry && sessionStorage.getItem("ahnm_visitor_entry_data")) {
+                    localStorage.setItem("ahnm_visitor_entry_data", sessionStorage.getItem("ahnm_visitor_entry_data"));
+                }
+                if (savedDone !== "yes" && sessionStorage.getItem("ahnm_visitor_entry_done") === "yes") {
+                    localStorage.setItem("ahnm_visitor_entry_done", "yes");
+                }
+                if (localStorage.getItem("ahnm_visitor_entry_done") === "yes" && localStorage.getItem("ahnm_visitor_entry_data")) {
                     gate.classList.add("hidden");
                 }
-            } catch (_) {}
+            } catch (storageError) {
+                console.warn("Visitor information storage is unavailable:", storageError);
+            }
 
             function clearError() { error.textContent = ""; }
             function selectButton(container, selector, selected) {
@@ -4479,9 +4490,15 @@
                         error.textContent = "তথ্য সংরক্ষণ করা যায়নি। তবুও পেইজে প্রবেশ করতে পারবেন।";
                     }
                     try {
+                        // তথ্য এই ব্রাউজারে স্থায়ীভাবে রাখা হবে, যাতে পরেরবার আর ফরম না আসে।
+                        localStorage.setItem("ahnm_visitor_entry_data", JSON.stringify(visit));
+                        localStorage.setItem("ahnm_visitor_entry_done", "yes");
+                        // চলতি সেশনের পুরোনো কোডের সাথেও সামঞ্জস্য রাখা হলো।
                         sessionStorage.setItem("ahnm_visitor_entry_data", JSON.stringify(visit));
                         sessionStorage.setItem("ahnm_visitor_entry_done", "yes");
-                    } catch (_) {}
+                    } catch (storageError) {
+                        console.warn("Could not save visitor identity on this browser:", storageError);
+                    }
                     gate.classList.add("hidden");
                     document.body.style.overflow = "";
                 }
@@ -4521,11 +4538,11 @@
             function openIdentity() {
                 content.replaceChildren();
                 let record = null;
-                try { record = JSON.parse(sessionStorage.getItem("ahnm_visitor_entry_data") || "null"); } catch (_) {}
+                try { record = JSON.parse(localStorage.getItem("ahnm_visitor_entry_data") || sessionStorage.getItem("ahnm_visitor_entry_data") || "null"); } catch (_) {}
                 if (!record) {
                     const empty = document.createElement("div");
                     empty.className = "identity-empty";
-                    empty.textContent = "এই ব্রাউজার সেশনে আপনার পরিচয়ের তথ্য পাওয়া যায়নি। নতুন করে প্রবেশ করলে তথ্য দেখা যাবে।";
+                    empty.textContent = "এই ব্রাউজারে আপনার পরিচয়ের তথ্য পাওয়া যায়নি। প্রথমবার প্রবেশের সময় তথ্য দিলে এখানে দেখা যাবে।";
                     content.appendChild(empty);
                 } else {
                     addRow("আপনার নাম", safeValue(record.visitorName));
