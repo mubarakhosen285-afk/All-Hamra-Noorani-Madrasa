@@ -2649,7 +2649,8 @@
             ref,
             get,
             runTransaction,
-            push
+            push,
+            set
         } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 
@@ -2660,7 +2661,7 @@
         const firebaseConfig = {
 
             apiKey:
-                "AIzaSyCIqSIq3Ci9wODl_OMk5XDMrAK7mVLQvzs",
+                "AIzaSyCIoSIq3Ci9wODl_OMk5XDMrAK7mVLQvzs",
 
             authDomain:
                 "madrasa-admission-system.firebaseapp.com",
@@ -4480,20 +4481,32 @@
                         studentName: selectedStudent.name || "",
                         studentRoll: selectedStudent.roll || "",
                         createdAt: Date.now(),
-                        date: new Date().toISOString()
+                        date: new Date().toISOString(),
+                        // প্রতিটি অভিভাবকের রেকর্ড সম্পাদনার জন্য গোপন টোকেন
+                        editToken: (crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2)))
                     };
                     try {
-                        // এই তথ্য অ্যাডমিন প্যানেল থেকে দেখার জন্য Firebase-এ রাখা হবে।
-                        await firebaseWithTimeout(push(ref(db, "visitorEntries"), visit), 8000);
+                        // Firebase-এ সফলভাবে জমা না হওয়া পর্যন্ত প্রবেশ সম্পন্ন দেখানো হবে না।
+                        const savedRef = await firebaseWithTimeout(
+                            push(ref(db, "visitorEntries"), visit),
+                            12000
+                        );
+                        if (!savedRef || !savedRef.key) {
+                            throw new Error("Firebase did not return a visitor record key.");
+                        }
+                        // Firebase record key-ও ডিভাইসে রাখা হচ্ছে, যাতে একই তথ্য বারবার পাঠানো না হয়।
+                        visit.firebaseKey = savedRef.key;
                     } catch (e) {
-                        console.warn("Visitor entry could not be saved. Check Firebase Database Rules.", e);
-                        error.textContent = "তথ্য সংরক্ষণ করা যায়নি। তবুও পেইজে প্রবেশ করতে পারবেন।";
+                        console.error("Visitor entry Firebase save failed:", e);
+                        error.textContent = "আপনার তথ্য Firebase-এ জমা হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
+                        next.disabled = false;
+                        next.textContent = "প্রবেশ করুন";
+                        return;
                     }
                     try {
-                        // তথ্য এই ব্রাউজারে স্থায়ীভাবে রাখা হবে, যাতে পরেরবার আর ফরম না আসে।
+                        // Firebase-এ সফল জমার পরই এই ব্রাউজারে স্থায়ীভাবে সংরক্ষণ হবে।
                         localStorage.setItem("ahnm_visitor_entry_data", JSON.stringify(visit));
                         localStorage.setItem("ahnm_visitor_entry_done", "yes");
-                        // চলতি সেশনের পুরোনো কোডের সাথেও সামঞ্জস্য রাখা হলো।
                         sessionStorage.setItem("ahnm_visitor_entry_data", JSON.stringify(visit));
                         sessionStorage.setItem("ahnm_visitor_entry_done", "yes");
                     } catch (storageError) {
@@ -4524,48 +4537,55 @@
             const content = document.getElementById("visitorIdentityContent");
             if (!link || !modal || !content) return;
 
-            const safeValue = (value, fallback = "তথ্য দেওয়া হয়নি") => {
-                const text = value === undefined || value === null ? "" : String(value).trim();
-                return text || fallback;
+            const getRecord = () => {
+                try { return JSON.parse(localStorage.getItem("ahnm_visitor_entry_data") || sessionStorage.getItem("ahnm_visitor_entry_data") || "null"); }
+                catch (_) { return null; }
             };
+            const safeValue = (v, fallback = "তথ্য দেওয়া হয়নি") => String(v ?? "").trim() || fallback;
             const addRow = (label, value) => {
-                const row = document.createElement("div");
-                row.className = "identity-row";
+                const row = document.createElement("div"); row.className = "identity-row";
                 const key = document.createElement("span"); key.textContent = label;
                 const val = document.createElement("strong"); val.textContent = value;
                 row.append(key, val); content.appendChild(row);
             };
             function openIdentity() {
                 content.replaceChildren();
-                let record = null;
-                try { record = JSON.parse(localStorage.getItem("ahnm_visitor_entry_data") || sessionStorage.getItem("ahnm_visitor_entry_data") || "null"); } catch (_) {}
+                const record = getRecord();
                 if (!record) {
-                    const empty = document.createElement("div");
-                    empty.className = "identity-empty";
-                    empty.textContent = "এই ব্রাউজারে আপনার পরিচয়ের তথ্য পাওয়া যায়নি। প্রথমবার প্রবেশের সময় তথ্য দিলে এখানে দেখা যাবে।";
-                    content.appendChild(empty);
+                    const empty = document.createElement("div"); empty.className = "identity-empty";
+                    empty.textContent = "এই ব্রাউজারে আপনার পরিচয়ের তথ্য পাওয়া যায়নি।"; content.appendChild(empty);
                 } else {
                     addRow("আপনার নাম", safeValue(record.visitorName));
-                    const relation = safeValue(record.relation);
-                    addRow("শিক্ষার্থীর সঙ্গে সম্পর্ক", relation === "অন্যান্য" ? relation + " — " + safeValue(record.relationDetail) : relation);
+                    addRow("শিক্ষার্থীর সঙ্গে সম্পর্ক", record.relation === "অন্যান্য" ? "অন্যান্য — " + safeValue(record.relationDetail) : safeValue(record.relation));
                     addRow("শিক্ষার্থীর শ্রেণি", safeValue(record.className));
                     addRow("শিক্ষার্থীর নাম", safeValue(record.studentName));
                     addRow("শিক্ষার্থীর রোল", safeValue(record.studentRoll));
-                    const when = record.createdAt ? new Date(Number(record.createdAt)).toLocaleString("bn-BD", {year:"numeric",month:"long",day:"numeric",hour:"numeric",minute:"2-digit"}) : "-";
-                    addRow("প্রবেশের সময়", when);
+                    const logoutBtn = document.createElement("button");
+                    logoutBtn.type = "button";
+                    logoutBtn.textContent = "↪ লগআউট করে নতুন পরিচয়ে প্রবেশ করুন";
+                    logoutBtn.style.cssText = "margin-top:8px;width:100%;padding:12px;border:0;border-radius:11px;background:#0f3d2e;color:#fff;font:700 15px 'Hind Siliguri',sans-serif;cursor:pointer";
+                    logoutBtn.addEventListener("click", () => {
+                        const ok = confirm("বর্তমান পরিচয় থেকে বের হয়ে নতুন তথ্য দিয়ে প্রবেশ করতে চান?");
+                        if (!ok) return;
+                        try {
+                            localStorage.removeItem("ahnm_visitor_entry_data");
+                            localStorage.removeItem("ahnm_visitor_entry_done");
+                            sessionStorage.removeItem("ahnm_visitor_entry_data");
+                            sessionStorage.removeItem("ahnm_visitor_entry_done");
+                        } catch (storageError) {
+                            console.warn("Could not clear saved visitor identity:", storageError);
+                        }
+                        // পৃষ্ঠা নতুন করে চালু হলে প্রবেশ ফরম আবার দেখা যাবে।
+                        window.location.reload();
+                    });
+                    content.appendChild(logoutBtn);
                 }
-                modal.classList.add("show");
-                modal.setAttribute("aria-hidden", "false");
-                document.body.style.overflow = "hidden";
+                modal.classList.add("show"); modal.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden";
             }
-            function closeIdentity() {
-                modal.classList.remove("show");
-                modal.setAttribute("aria-hidden", "true");
-                document.body.style.overflow = "";
-            }
-            link.addEventListener("click", event => { event.preventDefault(); openIdentity(); });
+            function closeIdentity() { modal.classList.remove("show"); modal.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; }
+            link.addEventListener("click", e => { e.preventDefault(); openIdentity(); });
             modal.querySelectorAll("[data-identity-close]").forEach(el => el.addEventListener("click", closeIdentity));
-            document.addEventListener("keydown", event => { if (event.key === "Escape") closeIdentity(); });
+            document.addEventListener("keydown", e => { if (e.key === "Escape") closeIdentity(); });
         })();
 
 
