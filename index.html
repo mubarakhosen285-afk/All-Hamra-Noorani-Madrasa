@@ -2159,6 +2159,100 @@
 
         @media(max-width:480px) { .identity-modal { padding:10px; } .identity-box { border-radius:17px; } .identity-content { padding:13px; } }
 
+        /* =====================================================
+           MOBILE STUDENT IDENTITY — compact, comfortable layout
+        ===================================================== */
+        .identity-modal {
+            padding: 12px;
+            padding-top: max(12px, env(safe-area-inset-top));
+            padding-bottom: max(12px, env(safe-area-inset-bottom));
+        }
+        .identity-box {
+            width: min(460px, 100%);
+            max-height: calc(100vh - 24px);
+            max-height: calc(100dvh - 24px);
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        .identity-head {
+            flex: 0 0 auto;
+            padding: 12px 15px;
+            gap: 10px;
+        }
+        .identity-mark {
+            width: 38px;
+            height: 38px;
+            flex-basis: 38px;
+            border-radius: 11px;
+            font-size: 1.2rem;
+        }
+        .identity-head h3 { font-size: 1rem; }
+        .identity-head p { font-size: .72rem; }
+        .identity-content {
+            padding: 13px 15px 15px;
+            gap: 7px;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+        .identity-row {
+            align-items: center;
+            gap: 10px;
+            padding: 8px 11px;
+            border-radius: 10px;
+        }
+        .identity-row span { font-size: .78rem; line-height: 1.4; }
+        .identity-row strong {
+            max-width: 60%;
+            font-size: .84rem;
+            line-height: 1.4;
+        }
+        .identity-action {
+            margin-top: 5px;
+            min-height: 48px;
+            padding: 10px 12px;
+            border-radius: 11px;
+            font-size: .94rem;
+            line-height: 1.45;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .identity-help {
+            margin-top: 5px;
+            padding: 10px 12px;
+            border-radius: 11px;
+            font-size: .82rem;
+            line-height: 1.58;
+        }
+        .identity-help strong {
+            display: inline-block;
+            margin-bottom: 3px;
+            font-size: .94rem;
+        }
+        @media (max-width: 560px) {
+            .identity-modal { padding: 8px; }
+            .identity-box {
+                width: 100%;
+                max-height: calc(100vh - 16px);
+                max-height: calc(100dvh - 16px);
+                border-radius: 15px;
+            }
+            .identity-head { padding: 10px 12px; }
+            .identity-content { padding: 10px 11px 12px; gap: 6px; }
+            .identity-row { padding: 7px 9px; gap: 8px; }
+            .identity-row span { font-size: .74rem; }
+            .identity-row strong { font-size: .81rem; max-width: 58%; }
+            .identity-action { min-height: 46px; padding: 9px 10px; font-size: .88rem; }
+            .identity-help { padding: 9px 10px; font-size: .78rem; line-height: 1.52; }
+        }
+        @media (max-width: 360px) {
+            .identity-row { align-items: flex-start; flex-direction: column; gap: 2px; }
+            .identity-row strong { max-width: 100%; text-align: left; }
+            .identity-action { font-size: .82rem; }
+        }
+
     </style>
 
 </head>
@@ -4748,7 +4842,7 @@
                         visit.firebaseKey = savedRef.key;
                     } catch (e) {
                         console.error("Visitor entry Firebase save failed:", e);
-                        error.textContent = "আপনার তথ্য  জমা হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
+                        error.textContent = "আপনার তথ্য Firebase-এ জমা হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
                         next.disabled = false;
                         next.textContent = "প্রবেশ করুন";
                         return;
@@ -4818,7 +4912,7 @@
                     empty.textContent = "এই ব্রাউজারে আপনার পরিচয়ের তথ্য পাওয়া যায়নি।"; content.appendChild(empty);
                 } else {
                     addRow("আপনার নাম", safeValue(record.visitorName));
-                    addRow("শিক্ষার্থীর সঙ্গে সম্পর্ক", record.relation === "অন্যান্য" ? " " + safeValue(record.relationDetail) : safeValue(record.relation));
+                    addRow("শিক্ষার্থীর সঙ্গে সম্পর্ক", record.relation === "অন্যান্য" ? "অন্যান্য — " + safeValue(record.relationDetail) : safeValue(record.relation));
                     addRow("শিক্ষার্থীর শ্রেণি", safeValue(record.className));
                     addRow("শিক্ষার্থীর নাম", safeValue(record.studentName));
                     addRow("শিক্ষার্থীর রোল", safeValue(record.studentRoll));
