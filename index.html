@@ -1408,42 +1408,43 @@
         }
 
         .publicNoticeInner {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-left: 4px solid var(--gold);
-            border-radius: 15px;
-            padding: 14px 16px;
-            box-shadow: var(--shadow);
+            background: linear-gradient(135deg,#fffefa,#fff8e8);
+            border: 1px solid #e5d6aa;
+            border-left: 6px solid var(--gold);
+            border-radius: 17px;
+            padding: 19px 21px;
+            box-shadow: 0 12px 30px rgba(50,42,20,.10);
         }
 
         .publicNoticeTitle {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: var(--deep);
-            font-weight: 800;
-            margin-bottom: 8px;
+            gap: 10px;
+            color: #8a271e;
+            font-size: 1.22rem;
+            font-weight: 900;
+            margin-bottom: 13px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #d9c27b;
         }
 
-        .publicNoticeList {
-            display: grid;
-            gap: 7px;
-        }
+        .publicNoticeList { display:grid; gap:10px; }
 
         .publicNoticeItem {
-            padding: 8px 10px;
-            background: #f7fbf8;
-            border-radius: 9px;
-            border: 1px solid #e1ebe3;
-            color: var(--ink);
-            font-size: .84rem;
-            line-height: 1.55;
+            position:relative;
+            padding:12px 15px 12px 17px;
+            background:#fff;
+            border-radius:12px;
+            border:1px solid #eee2c5;
+            border-left:4px solid #c9a227;
+            color:var(--ink);
+            font-size:1.02rem;
+            font-weight:600;
+            line-height:1.8;
+            box-shadow:0 3px 10px rgba(40,35,20,.045);
         }
-
-        .publicNoticeEmpty {
-            color: var(--muted);
-            font-size: .82rem;
-        }
+        .publicNoticeItem strong { color:#a12d22; font-size:1.02rem; margin-right:5px; }
+        .publicNoticeEmpty { color:var(--muted); font-size:.95rem; }
 
         @media (max-width: 560px) {
 
@@ -1464,9 +1465,9 @@
                 width: calc(100% - 18px);
             }
 
-            .publicNoticeInner {
-                padding: 12px;
-            }
+            .publicNoticeInner { padding:14px 12px; }
+            .publicNoticeTitle { font-size:1.08rem; }
+            .publicNoticeItem { padding:10px 11px; font-size:.94rem; line-height:1.75; }
         }
 
         /* =========================================================
@@ -2112,6 +2113,30 @@
             .gateChoices { gap:8px; }
             .gateChoice { padding:12px 8px; }
         }
+        /* শিরোনামের নিচে প্রবেশকারী অভিভাবক/শিক্ষার্থীর পরিচয় কার্ড */
+        .visitor-student-card {
+            display:none; width:min(520px,100%); margin:20px 0 0;
+            padding:15px 18px; border:1px solid #d9c27b; border-radius:16px;
+            background:linear-gradient(135deg,#fffdf5,#f3f8f2);
+            box-shadow:0 10px 28px rgba(15,61,46,.12); color:var(--deep);
+            text-align:left; cursor:pointer; font-family:"Hind Siliguri",sans-serif;
+            transition:transform .18s ease,box-shadow .18s ease;
+        }
+        .visitor-student-card:hover { transform:translateY(-2px); box-shadow:0 14px 32px rgba(15,61,46,.17); }
+        .visitor-student-card:focus-visible { outline:3px solid #c9a227; outline-offset:3px; }
+        .visitor-student-card .vsc-top { display:flex; align-items:center; gap:12px; }
+        .visitor-student-card .vsc-icon { flex:0 0 44px; width:44px; height:44px; display:grid; place-items:center; border-radius:13px; background:#0f3d2e; color:#fff; font-size:1.35rem; }
+        .visitor-student-card .vsc-copy { min-width:0; flex:1; }
+        .visitor-student-card .vsc-label { display:block; color:#8a6711; font-size:.78rem; font-weight:700; }
+        .visitor-student-card .vsc-name { display:block; margin-top:2px; color:#0f3d2e; font-size:1.08rem; font-weight:800; }
+        .visitor-student-card .vsc-meta { display:block; margin-top:3px; color:#5c665e; font-size:.83rem; }
+        .visitor-student-card .vsc-action { color:#0f6848; font-weight:800; white-space:nowrap; }
+        @media(max-width:560px) {
+            .visitor-student-card { margin-top:15px; padding:12px; }
+            .visitor-student-card .vsc-action { font-size:.78rem; }
+            .visitor-student-card .vsc-name { font-size:1rem; }
+        }
+
         .identity-modal { display:none; position:fixed; inset:0; z-index:11000; align-items:center; justify-content:center; padding:16px; }
         .identity-modal.show { display:flex; }
         .identity-backdrop { position:absolute; inset:0; background:rgba(8,25,18,.68); backdrop-filter:blur(4px); }
@@ -2127,6 +2152,11 @@
         .identity-row span { color:#77715f; font-size:.82rem; }
         .identity-row strong { color:#0f3d2e; font-size:.88rem; text-align:right; overflow-wrap:anywhere; }
         .identity-empty { padding:20px 10px; text-align:center; color:#746d5c; background:#f8f5eb; border-radius:12px; font-size:.88rem; }
+
+        .identity-action { display:block; width:100%; margin-top:8px; padding:12px 14px; border:0; border-radius:12px; background:#0f3d2e; color:#fff; font:700 15px 'Hind Siliguri',sans-serif; text-align:center; text-decoration:none; cursor:pointer; }
+        .identity-action.secondary { background:#c9a227; color:#173d2d; }
+        .identity-help { margin-top:8px; padding:13px 14px; border-radius:12px; background:#f3f8f2; border:1px solid #d9e8d8; color:#31543b; line-height:1.75; font-size:.9rem; }
+
         @media(max-width:480px) { .identity-modal { padding:10px; } .identity-box { border-radius:17px; } .identity-content { padding:13px; } }
 
     </style>
@@ -2157,7 +2187,7 @@
                 <input id="gateVisitorName" type="text" maxlength="80" autocomplete="name" placeholder="যেমন: মোঃ আব্দুল করিম">
             </div>
             <div class="gateOtherWrap" id="gateOtherWrap">
-                <label for="gateOtherRelation">তিনি শিক্ষার্থীর কী হন? নিচে লিখুন:</label>
+                <label for="gateOtherRelation">আপনি শিক্ষার্থীর কী হন? নিচে লিখুন:</label>
                 <input id="gateOtherRelation" type="text" maxlength="60" placeholder="যেমন: চাচা, মামা, দাদা, নানি...">
             </div>
             <div class="gateStudentList" id="gateStudentList" style="display:none"></div>
@@ -2210,6 +2240,11 @@
                 <a href="#classes">
                     <span class="mi">📚</span>
                     <span>শ্রেণি</span>
+                </a>
+
+                <a href="results.html" id="mainResultsLink">
+                    <span class="mi">📊</span>
+                    <span>ফলাফল</span>
                 </a>
 
                 <a href="#contact">
@@ -2306,6 +2341,18 @@
                         শিক্ষা, আদব ও কুরআনের আলোয় সুন্দর ভবিষ্যৎ
                     </h2>
 
+                    <button type="button" class="visitor-student-card" id="visitorStudentCard" aria-label="আপনার নির্বাচিত শিক্ষার্থীর পরিচয় ও বিস্তারিত দেখুন">
+                        <span class="vsc-top">
+                            <span class="vsc-icon">🎓</span>
+                            <span class="vsc-copy">
+                                <span class="vsc-label">আপনি যে শিক্ষার্থীর পরিচয়ে প্রবেশ করেছেন</span>
+                                <strong class="vsc-name" id="visitorStudentCardName">শিক্ষার্থীর নাম</strong>
+                                <span class="vsc-meta" id="visitorStudentCardMeta">শ্রেণি ও রোল</span>
+                            </span>
+                            <span class="vsc-action">বিস্তারিত দেখুন ›</span>
+                        </span>
+                    </button>
+
                 </div>
 
             </div>
@@ -2398,6 +2445,22 @@
                 <div class="links">
 
                     <!-- RESULT -->
+                      <a
+                        class="linkCard"
+                        href="results.html"
+                       
+                        rel="noopener"
+                    >
+
+                        <h3>
+                            📊 ফলাফল
+                        </h3>
+
+                        <p>
+                            সকল পরিক্ষার ফলাফল প্রকাশ।
+                        </p>
+
+                    </a>
 
                     <a
                         class="linkCard"
@@ -2419,42 +2482,11 @@
 
                     <!-- PUBLIC INCOME EXPENSE -->
 
-                    <a
-                        class="linkCard"
-                        href="Nomuna.html"
-                        
-                        rel="noopener"
-                    >
-
-                        <h3>
-                          🧾নমুনা প্রশ্ন
-                        </h3>
-
-                        <p>
-                            সাময়িক ভিত্তিক নমুনা প্রশ্ন।
-                        </p>
-
-                    </a>
-
+                  
 
                     <!-- MANAGEMENT -->
 
-                    <a
-                        class="linkCard"
-                        href="Result.html"
-                       
-                        rel="noopener"
-                    >
-
-                        <h3>
-                            📊 ফলাফল
-                        </h3>
-
-                        <p>
-                            সাময়িক ভিতিক পরিক্ষার ফলাফল সবার আগে প্রকাশ।
-                        </p>
-
-                    </a>
+                   
 
                 </div>
 
@@ -4716,7 +4748,7 @@
                         visit.firebaseKey = savedRef.key;
                     } catch (e) {
                         console.error("Visitor entry Firebase save failed:", e);
-                        error.textContent = "আপনার তথ্য Firebase-এ জমা হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
+                        error.textContent = "আপনার তথ্য  জমা হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
                         next.disabled = false;
                         next.textContent = "প্রবেশ করুন";
                         return;
@@ -4753,6 +4785,7 @@
             const link = document.getElementById("visitorIdentityLink");
             const modal = document.getElementById("visitorIdentityModal");
             const content = document.getElementById("visitorIdentityContent");
+            const studentCard = document.getElementById("visitorStudentCard");
             if (!link || !modal || !content) return;
 
             const getRecord = () => {
@@ -4766,6 +4799,17 @@
                 const val = document.createElement("strong"); val.textContent = value;
                 row.append(key, val); content.appendChild(row);
             };
+            function updateStudentCard() {
+                if (!studentCard) return;
+                const record = getRecord();
+                if (!record || !record.studentName) {
+                    studentCard.style.display = "none";
+                    return;
+                }
+                document.getElementById("visitorStudentCardName").textContent = safeValue(record.studentName);
+                document.getElementById("visitorStudentCardMeta").textContent = "শ্রেণি: " + safeValue(record.className) + "  •  রোল: " + safeValue(record.studentRoll);
+                studentCard.style.display = "block";
+            }
             function openIdentity() {
                 content.replaceChildren();
                 const record = getRecord();
@@ -4774,10 +4818,39 @@
                     empty.textContent = "এই ব্রাউজারে আপনার পরিচয়ের তথ্য পাওয়া যায়নি।"; content.appendChild(empty);
                 } else {
                     addRow("আপনার নাম", safeValue(record.visitorName));
-                    addRow("শিক্ষার্থীর সঙ্গে সম্পর্ক", record.relation === "অন্যান্য" ? "অন্যান্য — " + safeValue(record.relationDetail) : safeValue(record.relation));
+                    addRow("শিক্ষার্থীর সঙ্গে সম্পর্ক", record.relation === "অন্যান্য" ? " " + safeValue(record.relationDetail) : safeValue(record.relation));
                     addRow("শিক্ষার্থীর শ্রেণি", safeValue(record.className));
                     addRow("শিক্ষার্থীর নাম", safeValue(record.studentName));
                     addRow("শিক্ষার্থীর রোল", safeValue(record.studentRoll));
+
+                    // নিবন্ধিত মোবাইল নম্বর যাচাই করেই বিদ্যমান বেতন খাতা দেখানো হবে।
+                    const ledgerBtn = document.createElement("button");
+                    ledgerBtn.type = "button";
+                    ledgerBtn.className = "identity-action";
+                    ledgerBtn.textContent = "💳 বেতন খাতা দেখুন (মোবাইল নম্বর যাচাই)";
+                    ledgerBtn.addEventListener("click", async () => {
+                        const selected = findStudent(record.studentRoll, record.className);
+                        if (!selected) {
+                            alert("এই শিক্ষার্থীর বর্তমান তথ্য পাওয়া যায়নি। পৃষ্ঠা রিফ্রেশ করে আবার চেষ্টা করুন।");
+                            return;
+                        }
+                        closeIdentity();
+                        const index = students.indexOf(selected);
+                        window.openStudent(index, selected.roll, selected.className);
+                    });
+                    content.appendChild(ledgerBtn);
+
+                    const resultLink = document.createElement("a");
+                    resultLink.className = "identity-action secondary";
+                    resultLink.href = "results.html";
+                    resultLink.textContent = "📊 শিক্ষার্থীর পরীক্ষার ফলাফল দেখুন";
+                    content.appendChild(resultLink);
+
+                    const studyHelp = document.createElement("div");
+                    studyHelp.className = "identity-help";
+                    studyHelp.innerHTML = "<strong>📚 পড়াশোনার পরামর্শ</strong><br>ফলাফলে যে বিষয়ে নম্বর কম হবে, সে বিষয়টি প্রতিদিন আলাদা সময় দিয়ে পড়তে হবে। প্রতিদিনের পড়া সেদিনই পুনরায় অনুশীলন করবে, ভুলগুলো খাতায় লিখে শিক্ষকের কাছে বুঝে নেবে এবং সপ্তাহে অন্তত একদিন আগের পড়া পরীক্ষা দেবে। ভালো নম্বর পাওয়া বিষয়গুলোর চর্চাও চালিয়ে যাবে।";
+                    content.appendChild(studyHelp);
+
                     const logoutBtn = document.createElement("button");
                     logoutBtn.type = "button";
                     logoutBtn.textContent = "↪ লগআউট করে নতুন পরিচয়ে প্রবেশ করুন";
@@ -4802,6 +4875,8 @@
             }
             function closeIdentity() { modal.classList.remove("show"); modal.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; }
             link.addEventListener("click", e => { e.preventDefault(); openIdentity(); });
+            studentCard?.addEventListener("click", openIdentity);
+            updateStudentCard();
             modal.querySelectorAll("[data-identity-close]").forEach(el => el.addEventListener("click", closeIdentity));
             document.addEventListener("keydown", e => { if (e.key === "Escape") closeIdentity(); });
         })();
@@ -4946,13 +5021,21 @@
             if (e.target.id === "servicePopup") window.closeServicePopup();
         });
 
-        // দ্রুত সেবা কার্ডে ক্লিক করলে অন্য পেজে না গিয়ে পপআপ দেখাবে
-        document.querySelectorAll("#links .linkCard").forEach(function (card) {
-            card.addEventListener("click", function (e) {
-                e.preventDefault();
-                document.getElementById("servicePopup").classList.add("show");
-            });
-        });
+        // ফলাফল ছাড়া অন্য দ্রুত সেবা কার্ডে ক্লিক করলে পপআপ দেখাবে
+document.querySelectorAll("#links .linkCard").forEach(function (card) {
+    card.addEventListener("click", function (e) {
+
+        // ফলাফল বাটন হলে স্বাভাবিকভাবে results.html পেজে যাবে
+        if (card.getAttribute("href") === "results.html") {
+            return;
+        }
+
+        // অন্য বাটনগুলোর জন্য আগের পপআপ দেখাবে
+        e.preventDefault();
+        document.getElementById("servicePopup").classList.add("show");
+
+    });
+});
 
         // একই ব্রাউজার সেশনে একবার ভিজিট গণনা
         // Firebase-এ siteStats/totalVisits নামে মোট সংখ্যা রাখা হবে
