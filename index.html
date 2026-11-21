@@ -4842,7 +4842,7 @@
                         visit.firebaseKey = savedRef.key;
                     } catch (e) {
                         console.error("Visitor entry Firebase save failed:", e);
-                        error.textContent = "আপনার তথ্য Firebase-এ জমা হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
+                        error.textContent = "আপনার তথ্য জমা হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।";
                         next.disabled = false;
                         next.textContent = "প্রবেশ করুন";
                         return;
@@ -4912,7 +4912,7 @@
                     empty.textContent = "এই ব্রাউজারে আপনার পরিচয়ের তথ্য পাওয়া যায়নি।"; content.appendChild(empty);
                 } else {
                     addRow("আপনার নাম", safeValue(record.visitorName));
-                    addRow("শিক্ষার্থীর সঙ্গে সম্পর্ক", record.relation === "অন্যান্য" ? "অন্যান্য — " + safeValue(record.relationDetail) : safeValue(record.relation));
+                    addRow("শিক্ষার্থীর সঙ্গে সম্পর্ক", record.relation === "অন্যান্য" ? "" + safeValue(record.relationDetail) : safeValue(record.relation));
                     addRow("শিক্ষার্থীর শ্রেণি", safeValue(record.className));
                     addRow("শিক্ষার্থীর নাম", safeValue(record.studentName));
                     addRow("শিক্ষার্থীর রোল", safeValue(record.studentRoll));
