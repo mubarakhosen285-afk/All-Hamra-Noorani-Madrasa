@@ -1,0 +1,28 @@
+{
+  "id": "./",
+  "name": "আল হামরা মাদ্রাসা",
+  "short_name": "আল হামরা মাদ্রাসা",
+  "description": "আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী — শিক্ষার্থী তথ্য, বেতন খাতা, পরীক্ষার ফলাফল ও নোটিশ।",
+  "lang": "bn",
+  "dir": "ltr",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbf7ee",
+  "theme_color": "#0f3d2e",
+  "categories": ["education"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "পরীক্ষার ফলাফল",
+      "short_name": "ফলাফল",
+      "url": "./results.html?source=shortcut",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

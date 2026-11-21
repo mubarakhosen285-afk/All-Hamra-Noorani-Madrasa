@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f3d2e">
+<title>ইন্টারনেট নেই — আল হামরা মাদ্রাসা</title>
+<style>
+  :root{--deep:#0f3d2e;--green:#1b5e42;--gold:#c9a227;--cream:#fbf7ee;--ink:#202820;--muted:#657067;--line:#ded8c8}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
+    background:var(--cream);color:var(--ink);font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif}
+  .box{width:min(420px,100%);background:#fff;border:1px solid var(--line);border-top:5px solid var(--gold);
+    border-radius:20px;padding:30px 22px;text-align:center;box-shadow:0 12px 35px rgba(15,61,46,.10)}
+  img{width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid var(--gold)}
+  h1{margin:16px 0 8px;color:var(--deep);font-size:1.45rem;line-height:1.4}
+  p{margin:0 0 8px;color:var(--muted);line-height:1.7}
+  .icon{font-size:2.2rem;margin-top:10px}
+  .btns{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+  button,a{font:inherit;font-weight:600;border-radius:12px;padding:13px 16px;cursor:pointer;text-decoration:none;display:block}
+  button{background:var(--green);color:#fff;border:0}
+  a{background:#fff;color:var(--green);border:2px solid var(--green)}
+  .note{font-size:.85rem;margin-top:16px}
+</style>
+</head>
+<body>
+  <main class="box">
+    <img src="madrasa.jpeg" alt="মাদ্রাসার লোগো">
+    <div class="icon">📡</div>
+    <h1>ইন্টারনেট সংযোগ নেই</h1>
+    <p>আপনার মোবাইলে এখন ইন্টারনেট চালু নেই।</p>
+    <p>শিক্ষার্থীর তথ্য, বেতন ও ফলাফল দেখতে ইন্টারনেট প্রয়োজন।</p>
+    <div class="btns">
+      <button type="button" onclick="location.reload()">🔄 আবার চেষ্টা করুন</button>
+      <a href="index.html">🏠 হোম পেজে যান</a>
+    </div>
+    <p class="note">ইন্টারনেট ফিরে এলে অ্যাপ নিজে থেকেই স্বাভাবিকভাবে কাজ করবে।<br>নিরাপত্তার কারণে ব্যক্তিগত তথ্য ফোনে জমা রাখা হয় না।</p>
+  </main>
+  <script>
+    window.addEventListener('online', function () { location.reload(); });
+  </script>
+</body>
+</html>

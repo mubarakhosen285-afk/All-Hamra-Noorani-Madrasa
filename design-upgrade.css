@@ -1,0 +1,205 @@
+/* =====================================================================
+   design-upgrade.css  —  আল হামরা নূরানী মাদ্রাসা (Public Page)
+   ধাপ ১: শুধু ডিজাইন। কোনো JavaScript, Firebase, ডেটা বা ফিচার পরিবর্তন করা হয়নি।
+   এই ফাইল সবার শেষে লোড হয়। মুছে দিলে আগের ডিজাইন ফিরে আসবে।
+   ===================================================================== */
+
+:root{
+  --hd-focus: 0 0 0 3px rgba(201,162,39,.40);
+  --hd-radius: 14px;
+}
+
+body{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; line-height:1.6; }
+button, input, select, textarea{ font-family:"Hind Siliguri", system-ui, sans-serif; }
+img{ max-width:100%; }
+
+/* ---------- ফোকাস (কিবোর্ড/অ্যাক্সেসিবিলিটি) ---------- */
+a:focus-visible, button:focus-visible, .btn:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible{
+  outline:none; box-shadow:var(--hd-focus);
+}
+
+/* ---------- বাটন ---------- */
+.btn{
+  min-height:44px; border-radius:12px;
+  transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn:hover{ box-shadow:0 8px 20px rgba(15,61,46,.18); transform:translateY(-1px); }
+.btn:active{ transform:translateY(1px); box-shadow:none; }
+.primary:hover{ background:var(--green); }
+.gold:hover{ background:#d8b232; }
+
+/* ---------- কার্ড ---------- */
+.card, .classBox, .stat, .heroCard{
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.classBox:hover, .card:hover{ transform:translateY(-3px); box-shadow:0 14px 32px rgba(15,61,46,.14); }
+
+/* ---------- ফর্ম ---------- */
+input[type="text"], input[type="search"], input[type="tel"], input[type="number"],
+select, textarea{
+  border-radius:12px; transition:border-color .2s, box-shadow .2s;
+}
+input:focus, select:focus, textarea:focus{ border-color:var(--green); }
+
+/* ---------- সেকশন শিরোনামে সোনালি রেখা (সব পেজে এক রকম) ---------- */
+.sectionTitle h2{ position:relative; display:inline-block; }
+.sectionTitle h2::after{
+  content:""; display:block; width:55px; height:3px; margin:8px auto 0;
+  border-radius:99px; background:linear-gradient(90deg,var(--green),var(--gold));
+}
+
+/* ---------- মোবাইল ---------- */
+@media (max-width:600px){
+  .btn{ min-height:46px; }
+  input[type="text"], input[type="search"], input[type="tel"], input[type="number"],
+  select, textarea{ font-size:16px; }          /* iOS-এ ইনপুটে জুম বন্ধ */
+  section{ padding:40px 0; }
+}
+
+/* ---------- সিলেবাস পেজ (Coming soon) ---------- */
+.container-silebas{
+  box-sizing:border-box;
+  width:min(92%, 380px); border:1px solid #dce7df; border-top:5px solid var(--gold,#c9a227);
+  background:linear-gradient(145deg,#fff,#f4f9f5); border-radius:22px;
+  box-shadow:0 14px 38px rgba(15,61,46,.12); padding:44px 28px; margin:14vh auto 0;
+  font-family:"Hind Siliguri", system-ui, sans-serif;
+}
+.container-silebas > h1{
+  font-family:"Noto Serif Bengali", serif; color:#0f3d2e; font-size:1.9rem;
+  letter-spacing:0; margin:0 0 10px;
+}
+.container-silebas > p{ margin:0; color:#657067; font-size:1rem; }
+body:has(.container-silebas){ background:linear-gradient(180deg,#eaf3ed,#fbf7ee); min-height:100vh; }
+
+@media (prefers-reduced-motion:reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+
+/* =====================================================================
+   পরীক্ষার রুটিন (নতুন)
+   ===================================================================== */
+
+/* ---------- দ্রুত সেবা কার্ড (বাটন) ---------- */
+.routineCard{
+  font:inherit; text-align:center; cursor:pointer; width:100%;
+  background:linear-gradient(135deg,#0f3d2e,#1b5e42); color:#fff;
+  border:2px solid rgba(201,162,39,.75); border-radius:15px; padding:20px;
+  position:relative; overflow:hidden;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.routineCard::before{
+  content:""; position:absolute; right:-30px; top:-30px; width:90px; height:90px; border-radius:50%;
+  background:rgba(201,162,39,.18);
+}
+.routineCard h3{ margin:0 0 5px; position:relative; font-size:1.17rem; }
+.routineCard p{ margin:0; color:#dbe8df; font-size:.82rem; position:relative; }
+.routineCard:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(15,61,46,.25); }
+.routineCard:focus-visible{ outline:none; box-shadow:0 0 0 3px rgba(201,162,39,.55); }
+.routineCard.has-routine::after{
+  content:"চালু"; position:absolute; top:10px; right:12px; padding:1px 9px; border-radius:999px;
+  background:#c9a227; color:#0f3d2e; font-size:.7rem; font-weight:800;
+}
+
+/* ---------- মডাল ---------- */
+.rtModal{ display:none; position:fixed; inset:0; z-index:5000; align-items:center; justify-content:center; padding:16px; }
+.rtModal.show{ display:flex; }
+.rtBackdrop{ position:absolute; inset:0; background:rgba(8,22,15,.66); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); }
+.rtBox{
+  position:relative; width:min(1000px,100%); max-height:92vh; display:flex; flex-direction:column;
+  background:#fffdf8; border-radius:24px; overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.4); animation:rtPop .28s ease;
+}
+@keyframes rtPop{ from{ opacity:0; transform:translateY(14px) scale(.98); } to{ opacity:1; transform:none; } }
+.rtHead{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:22px 24px 20px;
+  color:#fff; border-bottom:4px solid #c9a227;
+  background:radial-gradient(circle at 92% 0,rgba(201,162,39,.30),transparent 34%),linear-gradient(135deg,#0f3d2e,#1b5e42);
+}
+.rtKicker{ display:inline-block; padding:3px 12px; border-radius:999px; background:rgba(244,233,200,.18); color:#f4e9c8; font-size:.78rem; font-weight:700; }
+.rtHead h2{ margin:8px 0 2px; font:800 clamp(1.15rem,3.2vw,1.55rem)/1.35 "Noto Serif Bengali",serif; color:#fff; }
+.rtHead p{ margin:0; color:#f4e9c8; font-size:.9rem; }
+.rtClose{
+  flex:0 0 40px; width:40px; height:40px; border:0; border-radius:12px; cursor:pointer;
+  background:rgba(255,255,255,.16); color:#fff; font-size:1.7rem; line-height:1;
+}
+.rtClose:hover{ background:rgba(255,255,255,.28); }
+
+.rtTools{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 18px; background:#f4f8f4; border-bottom:1px solid #e1e9e2; flex-wrap:wrap; }
+.rtTools:empty{ display:none; }
+.rtChips{ display:flex; gap:8px; overflow-x:auto; padding-bottom:2px; max-width:100%; scrollbar-width:none; }
+.rtChips::-webkit-scrollbar{ display:none; }
+.rtChip{
+  flex:0 0 auto; padding:8px 16px; border-radius:999px; border:1px solid #cfdcd1; background:#fff;
+  color:#0f3d2e; font:700 .86rem "Hind Siliguri",sans-serif; cursor:pointer; transition:background .2s,color .2s;
+}
+.rtChip.on{ background:#0f3d2e; border-color:#0f3d2e; color:#fff; box-shadow:0 4px 12px rgba(15,61,46,.25); }
+.rtPrint{ padding:8px 14px; border-radius:10px; border:1px solid #cfdcd1; background:#fff; color:#0f3d2e; font:700 .84rem "Hind Siliguri",sans-serif; cursor:pointer; }
+.rtPrint:hover{ background:#eef5ef; }
+
+.rtBody{ overflow:auto; padding:18px; -webkit-overflow-scrolling:touch; }
+
+/* টেবিল (ডেস্কটপ) */
+.rtTableWrap{ border:1px solid #e3ddc9; border-radius:16px; overflow:hidden; overflow-x:auto; }
+.rtTable{ width:100%; border-collapse:collapse; font-size:.95rem; min-width:560px; }
+.rtTable th{
+  background:#0f3d2e; color:#fff; padding:12px 12px; text-align:left; font-weight:700; white-space:nowrap; font-size:.88rem;
+}
+.rtTable td{ padding:13px 12px; border-top:1px solid #eee8d6; vertical-align:middle; }
+.rtTable tbody tr:nth-child(even){ background:#fbf8ee; }
+.rtTable tr.today{ background:#fff3cc !important; }
+.rtTable tr.past{ opacity:.6; }
+.rtDate{ font-weight:800; color:#0f3d2e; white-space:nowrap; }
+.rtTime{ white-space:nowrap; color:#5b6459; }
+.rtSub{ font-weight:700; color:#1d2b22; }
+.rtNone{ color:#b5b09f; }
+.rtBadge{ display:inline-block; margin-left:8px; padding:1px 10px; border-radius:999px; background:#c9a227; color:#0f3d2e; font-size:.72rem; font-weight:800; }
+
+/* কার্ড (মোবাইল) */
+.rtCards{ display:none; gap:12px; }
+.rtCard{ display:flex; gap:0; border:1px solid #e3ddc9; border-radius:18px; background:#fff; overflow:hidden; box-shadow:0 4px 14px rgba(15,61,46,.06); }
+.rtCard.past{ opacity:.6; }
+.rtCard.today{ border-color:#c9a227; box-shadow:0 6px 18px rgba(201,162,39,.30); }
+.rtCardDate{
+  flex:0 0 68px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px 4px;
+  background:linear-gradient(160deg,#0f3d2e,#1b5e42); color:#fff;
+}
+.rtCardDate b{ font-size:1.7rem; line-height:1.1; font-family:"Noto Serif Bengali",serif; }
+.rtCardDate span{ font-size:.74rem; color:#f4e9c8; margin-top:2px; }
+.rtCardMain{ flex:1; min-width:0; padding:12px 14px; }
+.rtCardHead{ display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
+.rtCardHead strong{ color:#0f3d2e; font-size:1rem; }
+.rtCardHead .rtBadge{ margin:0; }
+.rtTimeChip{ padding:2px 10px; border-radius:999px; background:#eef5ef; color:#14573a; font-size:.76rem; font-weight:700; }
+.rtSubjects{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.rtSubjects li{ display:flex; align-items:center; gap:10px; padding:7px 10px; border-radius:10px; background:#faf7ec; }
+.rtCls{ flex:0 0 auto; min-width:52px; text-align:center; padding:2px 8px; border-radius:8px; background:#e7efe8; color:#0f3d2e; font-size:.74rem; font-weight:800; }
+.rtSubj{ font-weight:700; color:#1d2b22; font-size:.93rem; }
+
+.rtEmpty{ text-align:center; padding:40px 16px; color:#657067; }
+.rtEmptyIcon{ font-size:3rem; margin-bottom:6px; }
+.rtEmpty h3{ margin:0 0 6px; font-family:"Noto Serif Bengali",serif; color:#0f3d2e; }
+.rtEmpty p{ margin:0 auto; max-width:360px; line-height:1.8; }
+.rtFoot{ padding:14px 22px 18px; background:#fff7dc; border-top:1px solid #ecd98e; color:#5e4a0b; font-size:.92rem; line-height:1.8; }
+.rtFoot[hidden]{ display:none; }
+
+@media (max-width:719px){
+  .rtModal{ padding:0; align-items:flex-end; }
+  .rtBox{ width:100%; max-height:94vh; border-radius:24px 24px 0 0; }
+  .rtHead{ padding:18px 16px 16px; }
+  .rtBody{ padding:14px 12px 18px; }
+  .rtTableWrap{ display:none; }
+  .rtCards{ display:grid; }
+  .rtTools{ padding:10px 12px; }
+}
+
+/* ---------- প্রিন্ট ---------- */
+@media print{
+  body.rtPrinting > *:not(#examRoutineModal){ display:none !important; }
+  body.rtPrinting #examRoutineModal{ position:static; display:block; padding:0; }
+  body.rtPrinting .rtBackdrop, body.rtPrinting .rtTools, body.rtPrinting .rtClose{ display:none !important; }
+  body.rtPrinting .rtBox{ max-height:none; box-shadow:none; border-radius:0; animation:none; }
+  body.rtPrinting .rtBody{ overflow:visible; }
+  body.rtPrinting .rtTableWrap{ display:block !important; }
+  body.rtPrinting .rtCards{ display:none !important; }
+  body.rtPrinting .rtHead{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body.rtPrinting .rtTable th{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
