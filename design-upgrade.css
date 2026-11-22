@@ -78,50 +78,44 @@ body:has(.container-silebas){ background:linear-gradient(180deg,#eaf3ed,#fbf7ee)
    পরীক্ষার রুটিন (নতুন)
    ===================================================================== */
 
-/* ---------- দ্রুত সেবা কার্ড (বাটন) ---------- */
-.routineCard{
-  font:inherit; text-align:center; cursor:pointer; width:100%;
-  background:linear-gradient(135deg,#0f3d2e,#1b5e42); color:#fff;
-  border:2px solid rgba(201,162,39,.75); border-radius:15px; padding:20px;
-  position:relative; overflow:hidden;
-  transition:transform .2s ease, box-shadow .2s ease;
-}
-.routineCard::before{
-  content:""; position:absolute; right:-30px; top:-30px; width:90px; height:90px; border-radius:50%;
-  background:rgba(201,162,39,.18);
-}
-.routineCard h3{ margin:0 0 5px; position:relative; font-size:1.17rem; }
-.routineCard p{ margin:0; color:#dbe8df; font-size:.82rem; position:relative; }
-.routineCard:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(15,61,46,.25); }
-.routineCard:focus-visible{ outline:none; box-shadow:0 0 0 3px rgba(201,162,39,.55); }
-.routineCard.has-routine::after{
-  content:"চালু"; position:absolute; top:10px; right:12px; padding:1px 9px; border-radius:999px;
-  background:#c9a227; color:#0f3d2e; font-size:.7rem; font-weight:800;
+/* ---------- হেডার মেনুর বাটন ---------- */
+#examRoutineBtn{ position:relative; cursor:pointer; }
+#examRoutineBtn.has-routine::after{
+  content:""; position:absolute; top:6px; right:4px; width:8px; height:8px; border-radius:50%;
+  background:#c9a227; box-shadow:0 0 0 2px rgba(255,255,255,.35);
 }
 
-/* ---------- মডাল ---------- */
+/* ---------- মডাল: সবসময় মাঝখানে ---------- */
 .rtModal{ display:none; position:fixed; inset:0; z-index:5000; align-items:center; justify-content:center; padding:16px; }
 .rtModal.show{ display:flex; }
 .rtBackdrop{ position:absolute; inset:0; background:rgba(8,22,15,.66); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); }
 .rtBox{
-  position:relative; width:min(1000px,100%); max-height:92vh; display:flex; flex-direction:column;
-  background:#fffdf8; border-radius:24px; overflow:hidden;
+  position:relative; width:min(1000px,100%); max-height:90vh; display:flex; flex-direction:column;
+  background:#fffdf8; border-radius:24px; overflow:hidden; border:2px solid #c9a227;
   box-shadow:0 30px 80px rgba(0,0,0,.4); animation:rtPop .28s ease;
 }
-@keyframes rtPop{ from{ opacity:0; transform:translateY(14px) scale(.98); } to{ opacity:1; transform:none; } }
+@keyframes rtPop{ from{ opacity:0; transform:translateY(12px) scale(.98); } to{ opacity:1; transform:none; } }
+
+/* মাথা: লোগো + মাদ্রাসার নাম (ফলাফল পেজের মতো) */
 .rtHead{
-  display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:22px 24px 20px;
-  color:#fff; border-bottom:4px solid #c9a227;
-  background:radial-gradient(circle at 92% 0,rgba(201,162,39,.30),transparent 34%),linear-gradient(135deg,#0f3d2e,#1b5e42);
+  display:flex; align-items:center; gap:14px; padding:16px 18px; color:#fff;
+  background:radial-gradient(circle at 92% 0,rgba(201,162,39,.28),transparent 36%),linear-gradient(135deg,#0f3d2e,#1b5e42);
 }
-.rtKicker{ display:inline-block; padding:3px 12px; border-radius:999px; background:rgba(244,233,200,.18); color:#f4e9c8; font-size:.78rem; font-weight:700; }
-.rtHead h2{ margin:8px 0 2px; font:800 clamp(1.15rem,3.2vw,1.55rem)/1.35 "Noto Serif Bengali",serif; color:#fff; }
-.rtHead p{ margin:0; color:#f4e9c8; font-size:.9rem; }
+.rtLogo{ width:56px; height:56px; flex:0 0 56px; object-fit:contain; border-radius:50%; background:#fff; padding:2px; border:2px solid rgba(201,162,39,.8); }
+.rtHeadText{ flex:1; min-width:0; text-align:center; }
+.rtSchool{ display:block; font:800 clamp(1.02rem,3.2vw,1.45rem)/1.35 "Noto Serif Bengali",serif; }
+.rtAddr{ display:block; margin-top:2px; font-size:.84rem; color:#f4e9c8; }
 .rtClose{
   flex:0 0 40px; width:40px; height:40px; border:0; border-radius:12px; cursor:pointer;
   background:rgba(255,255,255,.16); color:#fff; font-size:1.7rem; line-height:1;
 }
 .rtClose:hover{ background:rgba(255,255,255,.28); }
+
+/* পরীক্ষার নাম */
+.rtTitleBand{ text-align:center; padding:14px 18px 12px; background:#fffdf8; border-bottom:2px double #c9a227; }
+.rtTitleBand h2{ margin:0; font:800 clamp(1.05rem,3.4vw,1.4rem)/1.4 "Noto Serif Bengali",serif; color:#856817; }
+.rtTitleBand p{ margin:3px 0 0; color:#617166; font-size:.9rem; }
+.rtTitleBand p:empty{ display:none; }
 
 .rtTools{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 18px; background:#f4f8f4; border-bottom:1px solid #e1e9e2; flex-wrap:wrap; }
 .rtTools:empty{ display:none; }
@@ -132,17 +126,18 @@ body:has(.container-silebas){ background:linear-gradient(180deg,#eaf3ed,#fbf7ee)
   color:#0f3d2e; font:700 .86rem "Hind Siliguri",sans-serif; cursor:pointer; transition:background .2s,color .2s;
 }
 .rtChip.on{ background:#0f3d2e; border-color:#0f3d2e; color:#fff; box-shadow:0 4px 12px rgba(15,61,46,.25); }
-.rtPrint{ padding:8px 14px; border-radius:10px; border:1px solid #cfdcd1; background:#fff; color:#0f3d2e; font:700 .84rem "Hind Siliguri",sans-serif; cursor:pointer; }
-.rtPrint:hover{ background:#eef5ef; }
+.rtPrint{
+  padding:9px 16px; border-radius:10px; border:0; background:#9b7412; color:#fff;
+  font:700 .86rem "Hind Siliguri",sans-serif; cursor:pointer; box-shadow:0 4px 12px rgba(155,116,18,.3);
+}
+.rtPrint:hover{ background:#85630f; }
 
 .rtBody{ overflow:auto; padding:18px; -webkit-overflow-scrolling:touch; }
 
 /* টেবিল (ডেস্কটপ) */
 .rtTableWrap{ border:1px solid #e3ddc9; border-radius:16px; overflow:hidden; overflow-x:auto; }
 .rtTable{ width:100%; border-collapse:collapse; font-size:.95rem; min-width:560px; }
-.rtTable th{
-  background:#0f3d2e; color:#fff; padding:12px 12px; text-align:left; font-weight:700; white-space:nowrap; font-size:.88rem;
-}
+.rtTable th{ background:#0f3d2e; color:#fff; padding:12px; text-align:left; font-weight:700; white-space:nowrap; font-size:.88rem; }
 .rtTable td{ padding:13px 12px; border-top:1px solid #eee8d6; vertical-align:middle; }
 .rtTable tbody tr:nth-child(even){ background:#fbf8ee; }
 .rtTable tr.today{ background:#fff3cc !important; }
@@ -155,13 +150,10 @@ body:has(.container-silebas){ background:linear-gradient(180deg,#eaf3ed,#fbf7ee)
 
 /* কার্ড (মোবাইল) */
 .rtCards{ display:none; gap:12px; }
-.rtCard{ display:flex; gap:0; border:1px solid #e3ddc9; border-radius:18px; background:#fff; overflow:hidden; box-shadow:0 4px 14px rgba(15,61,46,.06); }
+.rtCard{ display:flex; border:1px solid #e3ddc9; border-radius:18px; background:#fff; overflow:hidden; box-shadow:0 4px 14px rgba(15,61,46,.06); }
 .rtCard.past{ opacity:.6; }
 .rtCard.today{ border-color:#c9a227; box-shadow:0 6px 18px rgba(201,162,39,.30); }
-.rtCardDate{
-  flex:0 0 68px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px 4px;
-  background:linear-gradient(160deg,#0f3d2e,#1b5e42); color:#fff;
-}
+.rtCardDate{ flex:0 0 68px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px 4px; background:linear-gradient(160deg,#0f3d2e,#1b5e42); color:#fff; }
 .rtCardDate b{ font-size:1.7rem; line-height:1.1; font-family:"Noto Serif Bengali",serif; }
 .rtCardDate span{ font-size:.74rem; color:#f4e9c8; margin-top:2px; }
 .rtCardMain{ flex:1; min-width:0; padding:12px 14px; }
@@ -182,24 +174,210 @@ body:has(.container-silebas){ background:linear-gradient(180deg,#eaf3ed,#fbf7ee)
 .rtFoot[hidden]{ display:none; }
 
 @media (max-width:719px){
-  .rtModal{ padding:0; align-items:flex-end; }
-  .rtBox{ width:100%; max-height:94vh; border-radius:24px 24px 0 0; }
-  .rtHead{ padding:18px 16px 16px; }
-  .rtBody{ padding:14px 12px 18px; }
+  .rtModal{ padding:12px; }                      /* মোবাইলেও মাঝখানে */
+  .rtBox{ border-radius:20px; max-height:88vh; }
+  .rtHead{ padding:12px; gap:10px; }
+  .rtLogo{ width:44px; height:44px; flex-basis:44px; }
+  .rtClose{ width:36px; height:36px; flex-basis:36px; }
+  .rtTitleBand{ padding:10px 12px; }
+  .rtBody{ padding:14px 12px 16px; }
   .rtTableWrap{ display:none; }
   .rtCards{ display:grid; }
   .rtTools{ padding:10px 12px; }
 }
 
-/* ---------- প্রিন্ট ---------- */
+/* ---------- PDF / প্রিন্ট (ফলাফল পেজের মতো সাদা মার্কশিট-ধাঁচ) ---------- */
 @media print{
+  @page{ size:A4; margin:12mm; }
   body.rtPrinting > *:not(#examRoutineModal){ display:none !important; }
+  body.rtPrinting{ background:#fff !important; }
   body.rtPrinting #examRoutineModal{ position:static; display:block; padding:0; }
   body.rtPrinting .rtBackdrop, body.rtPrinting .rtTools, body.rtPrinting .rtClose{ display:none !important; }
-  body.rtPrinting .rtBox{ max-height:none; box-shadow:none; border-radius:0; animation:none; }
-  body.rtPrinting .rtBody{ overflow:visible; }
-  body.rtPrinting .rtTableWrap{ display:block !important; }
+  body.rtPrinting .rtBox{ max-height:none; width:100%; box-shadow:none; border:2px solid #b99a38; border-radius:0; animation:none; background:#fff; overflow:visible; }
+  body.rtPrinting .rtHead{ background:#fff !important; color:#0f3d2e; justify-content:center; padding:16px 12px 8px; }
+  body.rtPrinting .rtLogo{ border-color:#c9a227; }
+  body.rtPrinting .rtHeadText{ flex:0 1 auto; }
+  body.rtPrinting .rtSchool{ color:#0f3d2e; }
+  body.rtPrinting .rtAddr{ color:#617166; }
+  body.rtPrinting .rtTitleBand{ padding-top:6px; }
+  body.rtPrinting .rtBody{ overflow:visible; padding:14px 16px; }
+  body.rtPrinting .rtTableWrap{ display:block !important; border-radius:0; overflow:visible; }
   body.rtPrinting .rtCards{ display:none !important; }
-  body.rtPrinting .rtHead{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  body.rtPrinting .rtTable th{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body.rtPrinting .rtTable{ min-width:0; }
+  body.rtPrinting .rtTable th, body.rtPrinting .rtTable tr.today, body.rtPrinting .rtTable tbody tr:nth-child(even){ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body.rtPrinting .rtTable tr.past{ opacity:1; }
+  body.rtPrinting .rtTable tr.today{ background:transparent !important; }
+  body.rtPrinting .rtBadge{ display:none; }
+  body.rtPrinting .rtFoot{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 }
+
+/* ---------- বেতন যাচাই: পিতার নাম + আংশিক ঢাকা মোবাইল ---------- */
+.verifyHint{ margin:0 0 12px; padding:11px 14px; border-radius:12px; background:#fff8e1; border:1px solid #ecd98e; display:grid; gap:6px; }
+.verifyHint[hidden]{ display:none; }
+.vhRow{ display:flex; align-items:center; flex-wrap:wrap; gap:8px; color:#3d3216; }
+.vhLabel{ font-size:.82rem; font-weight:700; color:#7a5d0c; }
+.vhRow b{ font-size:1rem; color:#0f3d2e; }
+.vhMobile{ font-family:ui-monospace,Menlo,Consolas,monospace; letter-spacing:1.5px; }
+.vhNote{ font-size:.78rem; color:#7a6a3a; }
+
+/* =====================================================================
+   অতিরিক্ত সেকশন (নতুন): পরিচিতি • শিক্ষক • ভর্তি • গ্যালারি • FAQ • ভাসমান বাটন
+   ===================================================================== */
+.siteSec[hidden], .lbModal:not(.show){ display:none !important; }
+.siteSec{ scroll-margin-top:84px; }
+.siteSec.alt{ background:linear-gradient(180deg,#f3f8f4,#fbf7ee); }
+
+/* ---- পরিচিতি ---- */
+.aboutGrid{ display:grid; grid-template-columns:1.5fr 1fr; gap:24px; align-items:start; }
+.aboutGrid.noText{ grid-template-columns:1fr; max-width:520px; margin:0 auto; }
+.aboutText{ background:#fff; border:1px solid #e4dfcf; border-left:5px solid var(--gold,#c9a227); border-radius:18px; padding:22px 24px; box-shadow:0 8px 24px rgba(15,61,46,.07); }
+.aboutText p{ margin:0 0 12px; line-height:2; color:#2a3a31; font-size:1.02rem; text-align:justify; }
+.aboutText p:last-child{ margin-bottom:0; }
+.statGrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:14px; }
+.statCard{ background:linear-gradient(135deg,#0f3d2e,#1b5e42); color:#fff; border-radius:16px; padding:18px 10px; text-align:center; box-shadow:0 8px 20px rgba(15,61,46,.18); }
+.statCard b{ display:block; font:800 1.7rem/1.2 "Noto Serif Bengali",serif; color:#f4e9c8; }
+.statCard span{ display:block; margin-top:4px; font-size:.86rem; color:#dbe8df; }
+.aboutAddr{ background:#fff; border:1px solid #e4dfcf; border-radius:16px; padding:16px; display:grid; gap:12px; }
+.addrLine{ color:#2a3a31; line-height:1.7; font-weight:600; }
+.mapBtn{ display:inline-block; text-align:center; padding:11px 16px; border-radius:12px; background:#9b7412; color:#fff; text-decoration:none; font-weight:700; }
+.mapBtn:hover{ background:#85630f; }
+
+/* ---- শিক্ষক ---- */
+.teachersGrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; }
+.teacherCard{ background:#fff; border:1px solid #e4dfcf; border-radius:20px; padding:24px 16px 20px; text-align:center; box-shadow:0 6px 18px rgba(15,61,46,.07); transition:transform .2s, box-shadow .2s; }
+.teacherCard:hover{ transform:translateY(-4px); box-shadow:0 16px 34px rgba(15,61,46,.15); }
+.teacherAvatar{ width:96px; height:96px; margin:0 auto 12px; border-radius:50%; overflow:hidden; border:3px solid #c9a227; background:#e7efe8; display:grid; place-items:center; }
+.teacherAvatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+.teacherAvatar.noPhoto{ font:800 2.2rem "Noto Serif Bengali",serif; color:#0f3d2e; background:linear-gradient(135deg,#e7efe8,#f4e9c8); }
+.teacherCard h3{ margin:0 0 4px; font-size:1.06rem; color:#0f3d2e; }
+.teacherRole{ color:#856817; font-weight:700; font-size:.9rem; }
+.teacherQual{ margin-top:4px; color:#657067; font-size:.82rem; line-height:1.5; }
+
+/* ---- ভর্তি ---- */
+.admCard{ max-width:820px; margin:0 auto; background:#fff; border:2px solid #c9a227; border-radius:22px; padding:24px; box-shadow:0 12px 32px rgba(15,61,46,.1); }
+.admBadge{ display:inline-block; padding:6px 18px; border-radius:999px; font-weight:800; margin-bottom:16px; }
+.admBadge.open{ background:#e1f4e8; color:#14573a; border:1px solid #b6dfc6; }
+.admBadge.closed{ background:#f1efe6; color:#6b6757; border:1px solid #ddd8c4; }
+.admRows{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:16px; }
+.admRow{ display:flex; gap:12px; align-items:center; padding:12px 14px; background:#f6faf6; border:1px solid #dde8de; border-radius:14px; }
+.admIcon{ font-size:1.5rem; }
+.admRow small{ display:block; color:#657067; font-size:.78rem; }
+.admRow b{ color:#0f3d2e; line-height:1.5; }
+.admDocs h3{ margin:0 0 8px; font-size:1.02rem; color:#0f3d2e; }
+.admDocs ul{ margin:0 0 14px; padding-left:0; list-style:none; display:grid; gap:6px; }
+.admDocs li{ padding:8px 12px 8px 34px; position:relative; background:#faf7ec; border-radius:10px; line-height:1.6; }
+.admDocs li::before{ content:"✔"; position:absolute; left:12px; color:#14573a; font-weight:800; }
+.admNote{ padding:12px 14px; background:#fff7dc; border:1px solid #ecd98e; border-radius:12px; color:#5e4a0b; line-height:1.8; margin-bottom:16px; }
+.admCta{ display:flex; gap:10px; flex-wrap:wrap; }
+.ctaBtn{ flex:1 1 180px; text-align:center; padding:13px 18px; border-radius:12px; text-decoration:none; font-weight:800; color:#fff; transition:transform .15s, box-shadow .2s; }
+.ctaBtn:hover{ transform:translateY(-2px); box-shadow:0 10px 22px rgba(15,61,46,.2); }
+.ctaBtn.call{ background:#0f3d2e; } .ctaBtn.wa{ background:#1fa855; }
+
+/* ---- গ্যালারি ---- */
+.galleryGrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; }
+.galItem{ position:relative; padding:0; border:0; border-radius:16px; overflow:hidden; cursor:pointer; aspect-ratio:4/3; background:#e7efe8; box-shadow:0 6px 18px rgba(15,61,46,.1); }
+.galItem img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s; }
+.galItem:hover img{ transform:scale(1.06); }
+.galCap{ position:absolute; left:0; right:0; bottom:0; padding:22px 12px 10px; color:#fff; font:600 .85rem "Hind Siliguri",sans-serif; text-align:left; background:linear-gradient(transparent,rgba(8,22,15,.8)); }
+.lbModal{ position:fixed; inset:0; z-index:6000; display:flex; align-items:center; justify-content:center; padding:16px; }
+.lbBackdrop{ position:absolute; inset:0; background:rgba(5,12,9,.9); }
+.lbBox{ position:relative; margin:0; max-width:min(1000px,100%); max-height:100%; display:flex; flex-direction:column; align-items:center; }
+.lbBox img{ max-width:100%; max-height:78vh; border-radius:12px; object-fit:contain; background:#000; }
+.lbBox figcaption{ margin-top:10px; color:#fff; text-align:center; display:grid; gap:2px; }
+.lbBox figcaption small{ color:#c9d6cd; }
+.lbClose, .lbNav{ position:absolute; border:0; cursor:pointer; color:#fff; background:rgba(255,255,255,.18); border-radius:50%; width:44px; height:44px; font-size:1.8rem; line-height:1; }
+.lbClose{ top:-10px; right:-6px; z-index:2; }
+.lbNav{ top:50%; transform:translateY(-50%); } .lbNav.prev{ left:8px; } .lbNav.next{ right:8px; }
+.lbClose:hover, .lbNav:hover{ background:rgba(255,255,255,.32); }
+
+/* ---- FAQ ---- */
+.faqList{ max-width:820px; margin:0 auto; display:grid; gap:10px; }
+.faqItem{ background:#fff; border:1px solid #e4dfcf; border-radius:16px; overflow:hidden; transition:box-shadow .2s; }
+.faqItem[open]{ border-color:#c9a227; box-shadow:0 8px 22px rgba(15,61,46,.1); }
+.faqItem summary{ cursor:pointer; list-style:none; padding:16px 48px 16px 18px; font-weight:700; color:#0f3d2e; position:relative; line-height:1.6; }
+.faqItem summary::-webkit-details-marker{ display:none; }
+.faqItem summary::after{ content:"+"; position:absolute; right:18px; top:50%; transform:translateY(-50%); font-size:1.5rem; color:#9b7412; transition:transform .2s; }
+.faqItem[open] summary::after{ content:"−"; }
+.faqItem p{ margin:0; padding:0 18px 18px; color:#3a4a41; line-height:1.9; white-space:pre-line; }
+
+/* ---- ভাসমান বাটন ---- */
+.fabWrap{ position:fixed; right:14px; bottom:16px; z-index:900; display:flex; flex-direction:column; gap:10px; align-items:center; }
+.fab{ width:50px; height:50px; border-radius:50%; border:0; display:grid; place-items:center; color:#fff; text-decoration:none; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.28); transition:transform .15s, opacity .25s; }
+.fab:hover{ transform:scale(1.08); }
+.fab svg{ width:26px; height:26px; fill:#fff; }
+.fab.call{ background:#0f3d2e; border:2px solid #c9a227; }
+.fab.wa{ background:#1fa855; }
+.fab.top{ background:#9b7412; font-size:1.5rem; font-weight:800; width:44px; height:44px; opacity:0; pointer-events:none; transform:translateY(8px); }
+.fab.top.show{ opacity:1; pointer-events:auto; transform:none; }
+@media print{ .fabWrap, .lbModal{ display:none !important; } }
+
+@media (max-width:719px){
+  .aboutGrid{ grid-template-columns:1fr; }
+  .aboutText{ padding:18px; }
+  .aboutText p{ text-align:left; font-size:.98rem; }
+  .admRows{ grid-template-columns:1fr; }
+  .admCard{ padding:18px; }
+  .teachersGrid{ grid-template-columns:repeat(2,1fr); gap:12px; }
+  .teacherCard{ padding:18px 10px 16px; }
+  .teacherAvatar{ width:80px; height:80px; }
+  .galleryGrid{ grid-template-columns:repeat(2,1fr); gap:10px; }
+  .fab{ width:46px; height:46px; } .fabWrap{ right:10px; bottom:12px; }
+  .lbNav{ width:38px; height:38px; }
+}
+
+@media (prefers-reduced-motion:reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+
+
+/* =====================================================================
+   আপডেট: হিরো সেকশনের রুটিন বাটন • রুটিনের সময় • শ্রেণিভিত্তিক ফি
+   ===================================================================== */
+.rt-hero-btn{
+  display:flex; align-items:center; gap:12px; width:min(520px,100%); margin:18px 0 0;
+  padding:13px 16px; border:0; border-radius:18px; cursor:pointer; text-align:left;
+  font-family:"Hind Siliguri",sans-serif; color:#fff;
+  background:linear-gradient(135deg,#0f3d2e 0%,#1b6848 62%,#c9a227 140%);
+  box-shadow:0 12px 28px rgba(15,61,46,.28); position:relative; overflow:hidden;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.rt-hero-btn[hidden]{ display:none !important; }
+.rt-hero-btn:hover{ transform:translateY(-2px); box-shadow:0 16px 34px rgba(15,61,46,.34); }
+.rt-hero-btn:focus-visible{ outline:3px solid #c9a227; outline-offset:3px; }
+.rt-hero-btn::after{ display:none !important; }
+.rt-hero-btn .rhb-icon{
+  flex:0 0 46px; width:46px; height:46px; display:grid; place-items:center; font-size:1.5rem;
+  border-radius:14px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28);
+  animation:rhbPulse 2.2s ease-in-out infinite;
+}
+.rt-hero-btn .rhb-copy{ min-width:0; flex:1; display:flex; flex-direction:column; gap:2px; }
+.rt-hero-btn .rhb-copy strong{ font-size:1.04rem; font-weight:800; line-height:1.3; color:#fff; }
+.rt-hero-btn .rhb-copy small{ font-size:.82rem; color:#f0e6b8; font-weight:600; }
+.rt-hero-btn .rhb-go{
+  flex:0 0 auto; padding:7px 13px; border-radius:999px; font-weight:800; font-size:.84rem;
+  background:#c9a227; color:#0f3d2e; white-space:nowrap;
+}
+@keyframes rhbPulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(201,162,39,.5);} 50%{ box-shadow:0 0 0 9px rgba(201,162,39,0);} }
+@media(max-width:560px){
+  .rt-hero-btn{ margin-top:14px; padding:11px 12px; gap:10px; }
+  .rt-hero-btn .rhb-icon{ flex-basis:40px; width:40px; height:40px; font-size:1.3rem; }
+  .rt-hero-btn .rhb-copy strong{ font-size:.96rem; }
+  .rt-hero-btn .rhb-go{ padding:6px 10px; font-size:.78rem; }
+}
+@media(prefers-reduced-motion:reduce){ .rt-hero-btn .rhb-icon{ animation:none; } }
+
+.rtTitleBand .rtTimeLine{
+  display:inline-block; margin:8px 0 2px; padding:6px 18px; border-radius:999px;
+  background:#0f3d2e; border:1px solid #c9a227;
+  color:#fff; font-weight:800; font-size:.98rem;
+}
+.rtTitleBand .rtTimeLine[hidden]{ display:none; }
+@media print{ .rtTitleBand .rtTimeLine{ color:#000; border-color:#000; background:none; } }
+
+.admFees{ margin-bottom:16px; }
+.admFees[hidden]{ display:none; }
+.admFees h3{ margin:0 0 8px; font-size:1.02rem; color:#0f3d2e; }
+.feeTableWrap{ overflow-x:auto; border:1px solid #dde8de; border-radius:14px; }
+.feeTable{ width:100%; border-collapse:collapse; min-width:300px; background:#fff; }
+.feeTable th{ background:#0f3d2e; color:#fff; padding:10px 12px; text-align:left; font-size:.88rem; }
+.feeTable td{ padding:10px 12px; border-top:1px solid #e8efe9; color:#1f2b24; }
+.feeTable td.feeCls{ font-weight:800; color:#0f3d2e; }
+.feeTable tbody tr:nth-child(even){ background:#f6faf6; }

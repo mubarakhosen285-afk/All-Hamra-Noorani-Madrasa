@@ -14,6 +14,35 @@
         content="আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী — শিক্ষার্থী তথ্য ও বেতন খাতা।"
     >
 
+    <!-- ===== SEO ও শেয়ার প্রিভিউ (নতুন) ===== -->
+    <meta name="keywords" content="আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী, জামালগঞ্জ, সুনামগঞ্জ, নূরানী মাদ্রাসা, কুরআন শিক্ষা">
+    <meta name="author" content="আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="bn_BD">
+    <meta property="og:site_name" content="আল হামরা নূরানী মাদ্রাসা">
+    <meta property="og:title" content="আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী">
+    <meta property="og:description" content="শিক্ষা, আদব ও কুরআনের আলোয় সুন্দর ভবিষ্যৎ — শিক্ষার্থী তথ্য, ফলাফল, পরীক্ষার রুটিন ও বেতন খাতা।">
+    <meta property="og:image" content="madrasa.jpeg">
+    <meta name="twitter:card" content="summary">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "আল হামরা নূরানী মাদ্রাসা",
+      "alternateName": "আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী",
+      "description": "শিক্ষা, আদব ও কুরআনের আলোয় সুন্দর ভবিষ্যৎ",
+      "logo": "madrasa.jpeg",
+      "telephone": "+8801883109096",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ধানুয়াখালী",
+        "addressLocality": "জামালগঞ্জ",
+        "addressRegion": "সুনামগঞ্জ, সিলেট",
+        "addressCountry": "BD"
+      }
+    }
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -2266,7 +2295,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
-    <script src="pwa-config.js" defer></script>
+    <script src="nav-restore.js"></script>
+<script src="pwa-config.js" defer></script>
     <script src="pwa.js" defer></script>
 </head>
 
@@ -2439,11 +2469,6 @@
                         </div>
 
                     </div>
-                     <!-- EXAM ROUTINE (নতুন) -->
-                    <button type="button" class="routineCard" id="examRoutineBtn" aria-haspopup="dialog" onclick="if(!window.__examRoutineReady){alert('রুটিন লোড হচ্ছে বা ফাইল পাওয়া যায়নি। পেজটি রিফ্রেশ করে আবার চেষ্টা করুন।');}">
-                        <h3 id="examRoutineBtnLabel">📅 পরীক্ষার রুটিন দেখুন</h3>
-                        <p id="examRoutineBtnSub">রুটিন প্রকাশ হলে এখানে দেখা যাবে</p>
-                    </button>
 
                     <span class="badge">
                         🌿 আল হামরা নূরানী মাদ্রাসা
@@ -2452,6 +2477,15 @@
                     <h2>
                         শিক্ষা, আদব ও কুরআনের আলোয় সুন্দর ভবিষ্যৎ
                     </h2>
+
+                    <button type="button" class="rt-hero-btn" id="examRoutineBtn" hidden aria-haspopup="dialog">
+                        <span class="rhb-icon">📅</span>
+                        <span class="rhb-copy">
+                            <strong id="rhbTitle">পরীক্ষার রুটিন</strong>
+                            <small id="rhbSub">দেখতে ট্যাপ করুন</small>
+                        </span>
+                        <span class="rhb-go">দেখুন ›</span>
+                    </button>
 
                     <button type="button" class="visitor-student-card" id="visitorStudentCard" aria-label="আপনার নির্বাচিত শিক্ষার্থীর পরিচয় ও বিস্তারিত দেখুন">
                         <span class="vsc-top">
@@ -2470,9 +2504,7 @@
             </div>
 
         </section>
-         
 
-                    <!-- PUBLIC INCOME EXPENSE -->
 
         <!-- PUBLIC NOTICE BOX -->
 
@@ -2501,6 +2533,23 @@
         <!-- =====================================================
              CLASSES
         ====================================================== -->
+
+        <!-- ===== পরিচিতি (নতুন) ===== -->
+        <section id="about" class="siteSec" hidden>
+            <div class="container">
+                <div class="sectionTitle">
+                    <h2>আমাদের পরিচিতি</h2>
+                    <p>আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী</p>
+                </div>
+                <div class="aboutGrid" id="aboutGrid">
+                    <div class="aboutText" id="aboutText"></div>
+                    <div class="aboutSide">
+                        <div class="statGrid" id="aboutStats" hidden></div>
+                        <div class="aboutAddr" id="aboutAddr" hidden></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="classes">
 
@@ -2538,6 +2587,57 @@
         <!-- =====================================================
              QUICK LINKS
         ====================================================== -->
+
+        <!-- ===== শিক্ষক পরিষদ (নতুন) ===== -->
+        <section id="teachers" class="siteSec alt" hidden>
+            <div class="container">
+                <div class="sectionTitle">
+                    <h2>শিক্ষক পরিষদ</h2>
+                    <p>আমাদের অভিজ্ঞ ও যত্নশীল শিক্ষকগণ</p>
+                </div>
+                <div class="teachersGrid" id="teachersGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===== ভর্তি তথ্য (নতুন) ===== -->
+        <section id="admission" class="siteSec" hidden>
+            <div class="container">
+                <div class="sectionTitle">
+                    <h2>ভর্তি তথ্য</h2>
+                    <p>ভর্তি সংক্রান্ত প্রয়োজনীয় তথ্য</p>
+                </div>
+                <div class="admCard">
+                    <div class="admBadge" id="admBadge"></div>
+                    <div class="admRows" id="admRows"></div>
+                    <div class="admFees" id="admFees" hidden></div>
+                    <div class="admDocs" id="admDocs"></div>
+                    <div class="admNote" id="admNote" hidden></div>
+                    <div class="admCta" id="admCta"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ছবি গ্যালারি (নতুন) ===== -->
+        <section id="gallery" class="siteSec alt" hidden>
+            <div class="container">
+                <div class="sectionTitle">
+                    <h2>ছবি গ্যালারি</h2>
+                    <p>মাদ্রাসার কিছু মুহূর্ত</p>
+                </div>
+                <div class="galleryGrid" id="galleryGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===== সাধারণ জিজ্ঞাসা (নতুন) ===== -->
+        <section id="faq" class="siteSec" hidden>
+            <div class="container">
+                <div class="sectionTitle">
+                    <h2>সাধারণ জিজ্ঞাসা</h2>
+                    <p>অভিভাবকদের সচরাচর প্রশ্ন ও উত্তর</p>
+                </div>
+                <div class="faqList" id="faqList"></div>
+            </div>
+        </section>
 
         <section id="links">
 
@@ -2592,8 +2692,7 @@
                         </p>
 
                     </a>
-
-                  
+                    <!-- PUBLIC INCOME EXPENSE -->
 
                   
 
@@ -2840,6 +2939,9 @@
                     🔐 বেতন খাতা দেখতে পরিচয় যাচাই করুন
                 </div>
 
+                <!-- যাচাইয়ের ইঙ্গিত: পিতার নাম + আংশিক ঢাকা মোবাইল নম্বর -->
+                <div class="verifyHint" id="verifyHint" hidden></div>
+
                 <div class="verifyGrid">
 
                     <input
@@ -2998,18 +3100,44 @@
 
 
     <!-- =====================================================
+         GALLERY LIGHTBOX + FLOATING BUTTONS (নতুন)
+    ====================================================== -->
+    <div class="lbModal" id="galleryLightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="ছবি দেখুন">
+        <div class="lbBackdrop" data-lb-close></div>
+        <figure class="lbBox">
+            <button type="button" class="lbClose" id="lbClose" data-lb-close aria-label="বন্ধ করুন">×</button>
+            <button type="button" class="lbNav prev" id="lbPrev" aria-label="আগের ছবি">‹</button>
+            <img id="lbImg" alt="">
+            <button type="button" class="lbNav next" id="lbNext" aria-label="পরের ছবি">›</button>
+            <figcaption><span id="lbCap"></span><small id="lbCount"></small></figcaption>
+        </figure>
+    </div>
+
+    <div class="fabWrap">
+        <button type="button" class="fab top" id="toTopBtn" aria-label="উপরে যান">↑</button>
+        <a class="fab wa" id="fabWa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp-এ মেসেজ করুন"><svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.5A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 14.96l-.3-.19-3.05.88.9-2.97-.2-.31A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.6c-.2 0-.5.07-.75.35-.25.27-.97.95-.97 2.3s1 2.7 1.13 2.88c.14.18 1.94 3.08 4.8 4.2 2.37.93 2.85.75 3.37.7.52-.05 1.67-.68 1.9-1.34.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.54-.33-.28-.14-1.67-.82-1.93-.92-.26-.1-.45-.14-.64.14-.19.28-.73.92-.9 1.1-.16.19-.33.21-.61.07-.28-.14-1.2-.44-2.28-1.4-.84-.75-1.41-1.68-1.58-1.96-.16-.28-.02-.43.12-.57.13-.13.28-.33.42-.5.14-.16.19-.28.28-.47.1-.19.05-.35-.02-.5-.07-.14-.62-1.5-.86-2.06-.22-.54-.45-.47-.62-.48z"/> </svg></a>
+        <a class="fab call" id="fabCall" href="#" aria-label="কল করুন"><svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/> </svg></a>
+    </div>
+
+
+    <!-- =====================================================
          EXAM ROUTINE MODAL (নতুন)
     ====================================================== -->
     <div class="rtModal" id="examRoutineModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rtTitle">
         <div class="rtBackdrop" data-rt-close></div>
         <div class="rtBox">
             <div class="rtHead">
+                <img class="rtLogo" src="madrasa.jpeg" alt="মাদ্রাসার লোগো">
                 <div class="rtHeadText">
-                    <span class="rtKicker">📅 পরীক্ষার রুটিন</span>
-                    <h2 id="rtTitle">পরীক্ষার রুটিন</h2>
-                    <p id="rtMeta"></p>
+                    <span class="rtSchool">আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী</span>
+                    <span class="rtAddr">জামালগঞ্জ, সুনামগঞ্জ, সিলেট।</span>
                 </div>
                 <button type="button" class="rtClose" data-rt-close aria-label="বন্ধ করুন">×</button>
+            </div>
+            <div class="rtTitleBand">
+                <h2 id="rtTitle">পরীক্ষার রুটিন</h2>
+                <p class="rtTimeLine" id="rtTime" hidden></p>
+                <p id="rtMeta"></p>
             </div>
             <div class="rtTools" id="rtTools"></div>
             <div class="rtBody" id="rtBody">লোড হচ্ছে...</div>
@@ -3532,187 +3660,80 @@
         async function loadPublicNotices() {
 
             const scrollingCacheKey = "ahnm_public_scrolling_notice_v1";
+            const boxCacheKey = "ahnm_public_box_notice_v1";
             const scrollingWrap = document.getElementById("publicScrollingNotice");
             const scrollingTrack = document.getElementById("scrollingNoticeTrack");
+            const noticeBox = document.getElementById("publicNoticeBox");
+            const noticeList = document.getElementById("publicNoticeList");
 
-            // আগের শিরোনাম ব্রাউজারে সংরক্ষিত থাকলে Firebase লোড হওয়ার আগেই দেখাও।
-            // এতে Refresh দিলেও শিরোনাম খালি হয়ে থাকার অপেক্ষা তৈরি হবে না।
-            try {
-                const cachedText = localStorage.getItem(scrollingCacheKey);
-                if (cachedText && cachedText.trim()) {
-                    scrollingTrack.textContent = cachedText;
+            const readTexts = (key) => {
+                try {
+                    const v = JSON.parse(localStorage.getItem(key) || "null");
+                    return Array.isArray(v) ? v.filter(t => String(t || "").trim()) : [];
+                } catch (_) { return []; }
+            };
+            const saveTexts = (key, arr) => {
+                try {
+                    if (arr.length) localStorage.setItem(key, JSON.stringify(arr));
+                    else localStorage.removeItem(key);
+                } catch (_) {}
+            };
+
+            const showScrolling = (texts) => {
+                if (texts.length) {
+                    const line = texts.join("   •   ");
+                    if (scrollingTrack.textContent !== line) scrollingTrack.textContent = line;
                     scrollingWrap.style.display = "flex";
-                }
-            } catch (cacheError) {
-                console.warn("Scrolling notice cache unavailable:", cacheError);
-            }
-
-            try {
-
-                const [scrollSnap, boxSnap] =
-                    await Promise.all([
-
-                        firebaseWithTimeout(
-                            get(
-                                ref(
-                                    db,
-                                    "publicNotices/scrolling"
-                                )
-                            ),
-                            10000
-                        ),
-
-                        firebaseWithTimeout(
-                            get(
-                                ref(
-                                    db,
-                                    "publicNotices/box"
-                                )
-                            ),
-                            10000
-                        )
-
-                    ]);
-
-
-                /* SCROLLING NOTICE */
-
-                const scrollingData =
-                    scrollSnap.exists()
-                        ? scrollSnap.val()
-                        : {};
-
-                const scrollingItems =
-                    Object.values(
-                        scrollingData || {}
-                    )
-                    .filter(
-                        n =>
-                            n &&
-                            String(n.text || "").trim()
-                    )
-                    .sort(
-                        (a, b) =>
-                            Number(b.createdAt || 0) -
-                            Number(a.createdAt || 0)
-                    );
-
-
-                if (scrollingItems.length) {
-
-                    const texts =
-                        scrollingItems
-                            .map(
-                                n =>
-                                    String(n.text || "").trim()
-                            )
-                            .join("   •   ");
-
-                    // টেক্সট বদলালেই কেবল animation track আপডেট হবে।
-                    if (scrollingTrack.textContent !== texts) {
-                        scrollingTrack.textContent = texts;
-                    }
-
-                    scrollingWrap.style.display = "flex";
-
-                    try {
-                        localStorage.setItem(scrollingCacheKey, texts);
-                    } catch (cacheError) {
-                        console.warn("Scrolling notice cache save failed:", cacheError);
-                    }
-
                 } else {
-
                     scrollingWrap.style.display = "none";
-
-                    try {
-                        localStorage.removeItem(scrollingCacheKey);
-                    } catch (cacheError) {
-                        console.warn("Scrolling notice cache clear failed:", cacheError);
-                    }
-
                 }
-
-
-                /* NOTICE BOX */
-
-                const boxData =
-                    boxSnap.exists()
-                        ? boxSnap.val()
-                        : {};
-
-                const boxItems =
-                    Object.values(
-                        boxData || {}
-                    )
-                    .filter(
-                        n =>
-                            n &&
-                            String(n.text || "").trim()
-                    )
-                    .sort(
-                        (a, b) =>
-                            Number(b.createdAt || 0) -
-                            Number(a.createdAt || 0)
-                    );
-
-
-                const noticeBox =
-                    document.getElementById(
-                        "publicNoticeBox"
-                    );
-
-                const noticeList =
-                    document.getElementById(
-                        "publicNoticeList"
-                    );
-
-
-                if (boxItems.length) {
-
-                    noticeList.innerHTML =
-                        boxItems
-                            .map(
-                                (n, i) => `
-                                    <div class="publicNoticeItem">
-                                        <strong>
-                                            ${bn(i + 1)}.
-                                        </strong>
-                                        ${esc(n.text)}
-                                    </div>
-                                `
-                            )
-                            .join("");
-
-                    noticeBox.style.display =
-                        "block";
-
+            };
+            const showBox = (texts) => {
+                if (texts.length) {
+                    noticeList.innerHTML = texts.map((t, i) => `
+                        <div class="publicNoticeItem">
+                            <strong>${bn(i + 1)}.</strong>
+                            ${esc(t)}
+                        </div>
+                    `).join("");
+                    noticeBox.style.display = "block";
                 } else {
-
-                    noticeBox.style.display =
-                        "none";
-
+                    noticeBox.style.display = "none";
                 }
+            };
 
+            // নেট না থাকলেও যেন দেখা যায় — আগে ব্রাউজারে রাখা নোটিস দেখাই।
+            let oldScrolling = [];
+            try {
+                const raw = localStorage.getItem(scrollingCacheKey);   // আগের সংস্করণে এটি সাধারণ লেখা ছিল
+                if (raw) {
+                    try { const p = JSON.parse(raw); oldScrolling = Array.isArray(p) ? p : [String(raw)]; }
+                    catch (_) { oldScrolling = [String(raw)]; }
+                }
+            } catch (_) {}
+            showScrolling(oldScrolling.filter(t => String(t || "").trim()));
+            showBox(readTexts(boxCacheKey));
+
+            // শুধু "পাবলিক" করা নোটিস (আগের নোটিসে চিহ্ন নেই — সেগুলো পাবলিক ধরা হয়)
+            const pick = (snap) => Object.values(snap.exists() ? (snap.val() || {}) : {})
+                .filter(n => n && String(n.text || "").trim() && n.published !== false)
+                .sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0))
+                .map(n => String(n.text).trim());
+
+            try {
+                const [scrollSnap, boxSnap] = await Promise.all([
+                    firebaseWithTimeout(get(ref(db, "publicNotices/scrolling")), 10000),
+                    firebaseWithTimeout(get(ref(db, "publicNotices/box")), 10000)
+                ]);
+                const sc = pick(scrollSnap), bx = pick(boxSnap);
+                showScrolling(sc);
+                showBox(bx);
+                saveTexts(scrollingCacheKey, sc);
+                saveTexts(boxCacheKey, bx);
             } catch (e) {
-
-                console.warn(
-                    "Public notices loading failed:",
-                    e
-                );
-
-                // Firebase সাময়িকভাবে কাজ না করলেও cache-এ থাকা শিরোনাম লুকাবে না।
-                // শিরোনামের cache না থাকলে আগের মতোই এটি লুকানো থাকবে।
-                if (!scrollingTrack.textContent.trim()) {
-                    scrollingWrap.style.display = "none";
-                }
-
-                document.getElementById(
-                    "publicNoticeBox"
-                ).style.display = "none";
-
+                // নেট/Firebase না থাকলে ব্রাউজারে রাখা নোটিস যেমন আছে তেমনই থাকবে
+                console.warn("Public notices loading failed:", e);
             }
-
         }
 
         /* =====================================================
@@ -4065,6 +4086,47 @@
             document.getElementById(
                 "verifyMessage"
             ).innerHTML = "";
+
+
+            /* VERIFY HINT — পিতার নাম ও আংশিক ঢাকা মোবাইল নম্বর (শুধু দেখানো) */
+            (function () {
+
+                const box =
+                    document.getElementById("verifyHint");
+
+                if (!box) return;
+
+                const digits =
+                    norm(s.mobile);
+
+                let masked = "";
+
+                if (digits.length >= 7) {
+                    masked =
+                        digits.slice(0, 3) +
+                        "*".repeat(digits.length - 5) +
+                        digits.slice(-2);
+                }
+
+                const parts = [];
+
+                if (s.father) {
+                    parts.push(
+                        ``
+                    );
+                }
+
+                if (masked) {
+                    parts.push(
+                        `<div class="vhRow"><span class="vhLabel">📱 নিবন্ধিত মোবাইল</span><b class="vhMobile">${esc(bn(masked))}</b></div>` +
+                        `<div class="vhNote">এই নম্বরটি পুরো লিখে যাচাই করুন।</div>`
+                    );
+                }
+
+                box.innerHTML = parts.join("");
+                box.hidden = !parts.length;
+
+            })();
 
 
             document.getElementById(
@@ -5198,6 +5260,7 @@ document.querySelectorAll("#links .linkCard").forEach(function (card) {
 
     <!-- পরীক্ষার রুটিন (নতুন) — অবশ্যই মূল Firebase স্ক্রিপ্টের পরে -->
     <script src="exam-routine.js" defer></script>
+    <script src="site-extras.js" defer></script>
 
 
 </body>

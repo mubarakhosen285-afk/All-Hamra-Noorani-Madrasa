@@ -19,9 +19,17 @@ const bn = (n) => String(n ?? "").replace(/[0-9]/g, (d) => "০১২৩৪৫�
 
 const $ = (id) => document.getElementById(id);
 const btn = $("examRoutineBtn");
+const CACHE_KEY = "alhamra_exam_routine_v1";   // অফলাইনে দেখার জন্য ব্রাউজারে সংরক্ষণ
 const modal = $("examRoutineModal");
 if (btn && modal) {
   let routine = null;      // বর্তমান পাবলিক রুটিন
+  try { const c = JSON.parse(localStorage.getItem(CACHE_KEY) || "null"); if (c && c.routine) routine = c.routine; } catch (e) {}
+  const saveCache = () => {
+    try {
+      if (routine) localStorage.setItem(CACHE_KEY, JSON.stringify({ routine: routine, savedAt: Date.now() }));
+      else localStorage.removeItem(CACHE_KEY);
+    } catch (e) {}
+  };
   let filter = "all";
   let lastFocus = null;
   let prevOverflow = "";
@@ -50,6 +58,7 @@ if (btn && modal) {
   };
 
   async function fetchRoutine() {
+    if (navigator.onLine === false) return false;   // নেট নেই — ব্রাউজারে রাখা রুটিনই দেখাবে
     try {
       const appMod = await import("https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js");
       const dbMod = await import("https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js");
@@ -58,6 +67,7 @@ if (btn && modal) {
       catch (e) { await new Promise((r) => setTimeout(r, 1500)); app = appMod.getApp(); }   // মূল স্ক্রিপ্ট একটু দেরিতে হলে
       const snap = await dbMod.get(dbMod.ref(dbMod.getDatabase(app), "publicExamRoutine"));
       routine = snap.exists() ? snap.val() : null;
+      saveCache();
     } catch (e) {
       console.warn("Exam routine load failed:", e);
       return false;
@@ -66,15 +76,13 @@ if (btn && modal) {
   }
 
   function updateButton() {
-    const label = $("examRoutineBtnLabel"), sub = $("examRoutineBtnSub");
-    if (routine && Array.isArray(routine.rows) && routine.rows.length) {
-      if (label) label.textContent = "📅 " + examTitle(routine.examName).replace(" রুটিন", " রুটিন দেখুন");
-      if (sub) sub.textContent = bn(routine.year || "") + " সালের পরীক্ষার সময়সূচি";
-      btn.classList.add("has-routine");
-    } else {
-      if (label) label.textContent = "📅 পরীক্ষার রুটিন দেখুন";
-      if (sub) sub.textContent = "রুটিন প্রকাশ হলে এখানে দেখা যাবে";
-      btn.classList.remove("has-routine");
+    const on = routine && Array.isArray(routine.rows) && routine.rows.length;
+    btn.hidden = !on;                    // রুটিন পাবলিক না থাকলে বাটনও থাকবে না
+    btn.classList.toggle("has-routine", !!on);
+    if (on) {
+      const t = $("rhbTitle"), s = $("rhbSub");
+      if (t) t.textContent = routine.title || examTitle(routine.examName);
+      if (s) s.textContent = routine.examTime ? "⏰ " + routine.examTime : "দেখতে ট্যাপ করুন";
     }
   }
 
@@ -88,15 +96,18 @@ if (btn && modal) {
     if (!routine || !Array.isArray(routine.rows) || !routine.rows.length) {
       $("rtTitle").textContent = "পরীক্ষার রুটিন";
       $("rtMeta").textContent = "";
+      if ($("rtTime")) $("rtTime").hidden = true;
       const empty = el("div", "rtEmpty");
       empty.appendChild(el("div", "rtEmptyIcon", "🗓️"));
       empty.appendChild(el("h3", null, "এখনো কোনো রুটিন প্রকাশ হয়নি"));
-      empty.appendChild(el("p", null, "পরীক্ষার রুটিন প্রকাশ হলে এখানেই দেখতে পাবেন। অনুগ্রহ করে একটু পরে আবার দেখুন।"));
+      empty.appendChild(el("p", null, "পরীক্ষার রুটিন প্রকাশ হলে এখানেই দেখতে পাবেন। অনুগ্রহ করে অপেক্ষা করুন।"));
       body.appendChild(empty);
       return;
     }
 
     $("rtTitle").textContent = routine.title || examTitle(routine.examName);
+    const tl = $("rtTime");
+    if (tl) { tl.textContent = routine.examTime ? "⏰ পরীক্ষার সময়: " + routine.examTime : ""; tl.hidden = !routine.examTime; }
     $("rtMeta").textContent = [routine.examName, routine.year ? bn(routine.year) + " সাল" : ""].filter(Boolean).join(" • ");
 
     // শ্রেণি ফিল্টার
@@ -111,7 +122,7 @@ if (btn && modal) {
       chips.appendChild(b);
     });
     tools.appendChild(chips);
-    const pr = el("button", "rtPrint", "🖨️ প্রিন্ট");
+    const pr = el("button", "rtPrint", "⬇ PDF");
     pr.type = "button";
     pr.addEventListener("click", () => window.print());
     tools.appendChild(pr);
@@ -119,6 +130,7 @@ if (btn && modal) {
     const shown = filter === "all" ? CLASSES : CLASSES.filter((c) => c.key === filter);
     const rows = routine.rows.filter((r) => filter === "all" || subjectText(r, filter));
 
+    const showTimeCol = !routine.examTime && routine.rows.some((r) => r.time);
     if (!rows.length) {
       body.appendChild(el("div", "rtEmpty", "এই শ্রেণির জন্য কোনো পরীক্ষা নেই।"));
     } else {
@@ -126,7 +138,7 @@ if (btn && modal) {
       const wrap = el("div", "rtTableWrap");
       const table = el("table", "rtTable");
       const thead = el("thead"); const hr = el("tr");
-      ["তারিখ", "বার", "সময়"].concat(shown.map((c) => c.name)).forEach((h) => hr.appendChild(el("th", null, h)));
+      ["তারিখ", "বার"].concat(showTimeCol ? ["সময়"] : []).concat(shown.map((c) => c.name)).forEach((h) => hr.appendChild(el("th", null, h)));
       thead.appendChild(hr); table.appendChild(thead);
       const tbody = el("tbody");
       rows.forEach((r) => {
@@ -138,7 +150,7 @@ if (btn && modal) {
         const tdDay = el("td", null, d ? DAYS[d.getDay()] : "");
         const bd = d && badgeFor(d);
         if (bd) tdDay.appendChild(el("span", "rtBadge", bd));
-        tr.appendChild(tdDate); tr.appendChild(tdDay); tr.appendChild(el("td", "rtTime", r.time || "—"));
+        tr.appendChild(tdDate); tr.appendChild(tdDay); if (showTimeCol) tr.appendChild(el("td", "rtTime", r.time || "—"));
         shown.forEach((c) => {
           const v = subjectText(r, c.key);
           tr.appendChild(el("td", v ? "rtSub" : "rtNone", v || "—"));
@@ -160,7 +172,7 @@ if (btn && modal) {
         head.appendChild(el("strong", null, d ? DAYS[d.getDay()] : r.date));
         const bd = d && badgeFor(d);
         if (bd) head.appendChild(el("span", "rtBadge", bd));
-        if (r.time) head.appendChild(el("span", "rtTimeChip", "⏰ " + r.time));
+        if (showTimeCol && r.time) head.appendChild(el("span", "rtTimeChip", "⏰ " + r.time));
         main.appendChild(head);
         const ul = el("ul", "rtSubjects");
         shown.forEach((c) => {
@@ -199,12 +211,13 @@ if (btn && modal) {
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
-  btn.addEventListener("click", open);
+  btn.addEventListener("click", (e) => { e.preventDefault(); open(); });
   modal.querySelectorAll("[data-rt-close]").forEach((e) => e.addEventListener("click", close));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("show")) close(); });
   window.addEventListener("beforeprint", () => document.body.classList.add("rtPrinting"));
   window.addEventListener("afterprint", () => document.body.classList.remove("rtPrinting"));
 
+  updateButton();                       // আগে ব্রাউজারে রাখা রুটিন দিয়ে বাটন দেখাই (নেট না থাকলেও)
   fetchRoutine().then(updateButton);
 }
 })();

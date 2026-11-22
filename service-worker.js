@@ -6,7 +6,7 @@
    - শুধু অ্যাপের কাঠামো (HTML, CSS, লোগো, আইকন, ফন্ট, Firebase SDK কোড) ক্যাশ হয়।
    - নতুন সংস্করণ দিলে নিচের VERSION বদলান।
    ===================================================================== */
-const VERSION = 'v1.2.0';
+const VERSION = 'v1.5.0';
 const SHELL_CACHE = 'alhamra-shell-' + VERSION;
 const RUNTIME_CACHE = 'alhamra-runtime-' + VERSION;
 
@@ -26,6 +26,8 @@ const SHELL_FILES = [
   'manifest.json',
   'pwa.js',
   'exam-routine.js',
+  'site-extras.js',
+  'nav-restore.js',
   'pwa-config.js',
   'icons/icon-192.png',
   'icons/icon-512.png',
