@@ -2287,6 +2287,7 @@
 
     <!-- ===== PWA (অ্যাপ হিসেবে ইনস্টল) ===== -->
     <link rel="stylesheet" href="design-upgrade.css">
+    <link rel="stylesheet" href="mobile-fit.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f3d2e">
     <meta name="mobile-web-app-capable" content="yes">
@@ -2478,7 +2479,7 @@
                         শিক্ষা, আদব ও কুরআনের আলোয় সুন্দর ভবিষ্যৎ
                     </h2>
 
-                    <button type="button" class="rt-hero-btn" id="examRoutineBtn" hidden aria-haspopup="dialog">
+                    <button type="button" class="rt-hero-btn" id="examRoutineBtn" hidden >
                         <span class="rhb-icon">📅</span>
                         <span class="rhb-copy">
                             <strong id="rhbTitle">পরীক্ষার রুটিন</strong>
@@ -3119,31 +3120,6 @@
         <a class="fab call" id="fabCall" href="#" aria-label="কল করুন"><svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/> </svg></a>
     </div>
 
-
-    <!-- =====================================================
-         EXAM ROUTINE MODAL (নতুন)
-    ====================================================== -->
-    <div class="rtModal" id="examRoutineModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rtTitle">
-        <div class="rtBackdrop" data-rt-close></div>
-        <div class="rtBox">
-            <div class="rtHead">
-                <img class="rtLogo" src="madrasa.jpeg" alt="মাদ্রাসার লোগো">
-                <div class="rtHeadText">
-                    <span class="rtSchool">আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী</span>
-                    <span class="rtAddr">জামালগঞ্জ, সুনামগঞ্জ, সিলেট।</span>
-                </div>
-                <button type="button" class="rtClose" data-rt-close aria-label="বন্ধ করুন">×</button>
-            </div>
-            <div class="rtTitleBand">
-                <h2 id="rtTitle">পরীক্ষার রুটিন</h2>
-                <p class="rtTimeLine" id="rtTime" hidden></p>
-                <p id="rtMeta"></p>
-            </div>
-            <div class="rtTools" id="rtTools"></div>
-            <div class="rtBody" id="rtBody">লোড হচ্ছে...</div>
-            <div class="rtFoot" id="rtFoot" hidden></div>
-        </div>
-    </div>
 
     <script type="module">
 
@@ -4112,7 +4088,7 @@
 
                 if (s.father) {
                     parts.push(
-                        ``
+                        `<div class="vhRow"><span class="vhLabel">👤 পিতা</span><b>${esc(s.father)}</b></div>`
                     );
                 }
 

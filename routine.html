@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>পরীক্ষার রুটিন — আল হামরা নূরানী মাদ্রাসা</title>
+<meta name="description" content="আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী — পরীক্ষার রুটিন।">
+<link rel="icon" type="image/svg+xml" href="madrasa.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700;800&display=swap" rel="stylesheet">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f3d2e">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="আল হামরা মাদ্রাসা">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<script src="pwa-config.js" defer></script>
+<script src="pwa.js" defer></script>
+
+<style>
+:root{
+  --deep:#0f3d2e; --green:#1b5e42; --gold:#c9a227; --cream:#fbf7ee; --soft:#e7efe8;
+  --ink:#202820; --muted:#657067; --line:#ded8c8; --red:#a6402f;
+}
+*{ box-sizing:border-box; }
+html,body{ margin:0; max-width:100%; overflow-x:hidden; }
+body{
+  background:var(--cream); color:var(--ink);
+  font-family:"Hind Siliguri",system-ui,sans-serif; line-height:1.45;
+  min-height:100vh; min-height:100dvh; display:flex; flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- মাথা ---------- */
+.rpHead{
+  background:linear-gradient(135deg,var(--deep),var(--green)); color:#fff;
+  border-bottom:3px solid var(--gold); padding:8px 10px; display:flex; align-items:center; gap:10px;
+  padding-top:max(8px, env(safe-area-inset-top));
+}
+.rpBack{
+  flex:0 0 auto; width:36px; height:36px; border-radius:10px; border:1px solid #ffffff40; background:#ffffff18;
+  color:#fff; font-size:20px; line-height:1; cursor:pointer; display:grid; place-items:center; text-decoration:none;
+}
+.rpLogo{ flex:0 0 auto; width:38px; height:38px; border-radius:10px; object-fit:cover; border:2px solid #c9a227a6; background:#fff2; }
+.rpName{ min-width:0; flex:1; }
+.rpName b{ display:block; font-family:"Noto Serif Bengali",serif; font-size:clamp(.8rem,3.8vw,1.05rem); line-height:1.25; }
+.rpName span{ display:block; color:#f4e9c8; font-size:.68rem; }
+
+/* ---------- শিরোনাম ---------- */
+.rpTitle{ text-align:center; padding:10px 10px 4px; }
+.rpTitle h1{ margin:0; font-family:"Noto Serif Bengali",serif; color:var(--deep); font-size:clamp(1.05rem,5vw,1.5rem); line-height:1.3; }
+.rpTitle .rpTime{
+  display:inline-block; margin:5px 0 0; padding:2px 12px; border-radius:99px;
+  background:#f5efdb; border:1px solid #e5d59b; color:#7a5d0c; font-weight:700; font-size:.82rem;
+}
+.rpTitle .rpTime[hidden]{ display:none; }
+.rpTitle .rpMeta{ margin:3px 0 0; color:var(--muted); font-size:.76rem; }
+
+/* ---------- টুল ---------- */
+.rpTools{ display:flex; align-items:center; justify-content:space-between; gap:8px; padding:6px 10px; }
+.rpChips{ display:flex; gap:5px; flex-wrap:wrap; min-width:0; }
+.rpChip{
+  border:1px solid #cfd9d0; background:#fff; color:var(--deep); border-radius:99px; padding:3px 10px;
+  font:600 .76rem "Hind Siliguri",sans-serif; cursor:pointer;
+}
+.rpChip.on{ background:var(--green); border-color:var(--green); color:#fff; }
+.rpPrint{
+  flex:0 0 auto; border:0; border-radius:9px; padding:5px 10px; background:#9b7412; color:#fff;
+  font:600 .76rem "Hind Siliguri",sans-serif; cursor:pointer; white-space:nowrap;
+}
+
+/* ---------- টেবিল (স্ক্রল ছাড়াই স্ক্রিনে ফিট) ---------- */
+.rpMain{ flex:1 1 auto; padding:2px 8px 8px; width:100%; max-width:1000px; margin:0 auto; }
+.rpTable{
+  width:100%; border-collapse:collapse; table-layout:fixed; background:#fff;
+  border:1px solid #cfdacf; border-radius:12px; overflow:hidden;
+}
+.rpTable thead th{
+  background:var(--deep); color:#fff; font-weight:700; text-align:center;
+  padding:6px 2px; font-size:clamp(.58rem,2.9vw,.9rem); line-height:1.2; border-left:1px solid #ffffff22;
+}
+.rpTable thead th:first-child{ border-left:0; }
+.rpTable td{
+  border-top:1px solid #dfe6df; border-left:1px solid #e8eee8; text-align:center; vertical-align:middle;
+  padding:clamp(4px,1.1vh,10px) 3px; font-size:clamp(.6rem,3vw,.95rem); line-height:1.3; overflow-wrap:anywhere;
+}
+.rpTable td:first-child{ border-left:0; }
+.rpTable tbody tr:nth-child(even){ background:#f8fbf7; }
+.rpTable td.rpDate{ background:#f4efdd; font-weight:700; color:var(--deep); }
+.rpTable td.rpDate small{ display:block; font-weight:500; color:#6d715e; font-size:.9em; }
+.rpTable td.rpNone{ color:#aab3aa; }
+.rpTable td.rpSub{ font-weight:600; }
+.rpTable tr.past{ opacity:.55; }
+.rpTable tr.today td{ background:#fff4d6; }
+.rpBadge{
+  display:inline-block; margin-top:2px; padding:0 6px; border-radius:99px; background:var(--gold); color:#fff;
+  font-size:.82em; font-weight:700;
+}
+.rpTimeCell{ display:block; font-weight:500; color:#6d715e; font-size:.85em; }
+
+.rpNote{
+  margin:8px 2px 0; padding:7px 10px; background:#fff8e1; border:1px solid #ead9a0; border-radius:10px;
+  color:#6a540c; font-size:.76rem; line-height:1.4;
+}
+.rpEmpty{ text-align:center; padding:40px 16px; color:var(--muted); }
+.rpEmpty .ic{ font-size:2.4rem; }
+.rpEmpty h3{ margin:6px 0 2px; color:var(--deep); font-size:1.05rem; }
+.rpEmpty p{ margin:0; font-size:.82rem; }
+
+footer{ text-align:center; color:#657266; font-size:.68rem; padding:8px 10px 10px; }
+
+/* বড় স্ক্রিন */
+@media (min-width:700px){
+  .rpHead{ padding:10px 22px; }
+  .rpTitle{ padding-top:20px; }
+  .rpMain{ padding:6px 16px 20px; }
+  .rpTable thead th{ padding:11px 6px; }
+  .rpTable td{ padding:12px 8px; }
+  .rpNote{ font-size:.9rem; }
+}
+
+/* ছোট উচ্চতার ফোন — যাতে পুরো রুটিন এক স্ক্রিনে ধরে */
+@media (max-width:699px) and (max-height:760px){
+  .rpHead{ padding:5px 8px; gap:8px; }
+  .rpBack{ width:30px; height:30px; font-size:17px; border-radius:8px; }
+  .rpLogo{ width:30px; height:30px; border-radius:8px; }
+  .rpName span{ display:none; }
+  .rpTitle{ padding:4px 8px 0; }
+  .rpTitle h1{ font-size:1rem; }
+  .rpTitle .rpTime{ font-size:.7rem; margin-top:2px; padding:0 10px; }
+  .rpTitle .rpMeta{ font-size:.66rem; margin-top:1px; }
+  .rpTools{ padding:4px 8px; }
+  .rpChip{ padding:1px 8px; font-size:.7rem; }
+  .rpPrint{ padding:3px 9px; font-size:.7rem; }
+  .rpMain{ padding:0 6px 4px; }
+  .rpTable thead th{ padding:4px 2px; }
+  .rpTable td{ padding:3px 2px; line-height:1.2; }
+  .rpTable td.rpDate small{ font-size:.82em; }
+  .rpBadge{ padding:0 5px; font-size:.7em; }
+  .rpNote{ margin-top:5px; padding:4px 8px; font-size:.66rem; }
+  footer{ padding:3px 8px 5px; font-size:.62rem; }
+}
+
+/* ---------- প্রিন্ট / PDF ---------- */
+@media print{
+  @page{ size:A4 portrait; margin:12mm; }
+  body{ background:#fff; min-height:0; }
+  .rpBack,.rpTools,footer{ display:none !important; }
+  .rpHead{ background:#fff !important; color:#000; border-bottom:2px solid #000; }
+  .rpName span{ color:#333; }
+  .rpTable{ border:1px solid #000; }
+  .rpTable thead th{ background:#e6ece6 !important; color:#000; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .rpTable td, .rpTable thead th{ font-size:11pt; border-color:#444; }
+  .rpTable tr.past{ opacity:1; }
+  .rpTable tr.today td{ background:none; }
+  .rpBadge{ display:none; }
+}
+</style>
+</head>
+<body>
+
+<header class="rpHead">
+  <a class="rpBack" id="rpBack" href="index.html" aria-label="ফিরে যান">←</a>
+  <img class="rpLogo" src="madrasa.jpeg" alt="মাদ্রাসার লোগো">
+  <div class="rpName">
+    <b>আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী</b>
+    <span>জামালগঞ্জ, সুনামগঞ্জ, সিলেট।</span>
+  </div>
+</header>
+
+<div class="rpTitle">
+  <h1 id="rpTitle">পরীক্ষার রুটিন</h1>
+  <div class="rpTime" id="rpTime" hidden></div>
+  <p class="rpMeta" id="rpMeta"></p>
+</div>
+
+<div class="rpTools" id="rpTools"></div>
+
+<main class="rpMain" id="rpMain">
+  <div class="rpEmpty"><div class="ic">⏳</div><p>লোড হচ্ছে...</p></div>
+</main>
+
+<footer>© <span id="rpYear"></span> আল হামরা নূরানী মাদ্রাসা, ধানুয়াখালী</footer>
+
+<script type="module">
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+/* index.html এর মতো একই Firebase প্রজেক্ট — শুধু পড়ে: publicExamRoutine */
+const firebaseConfig = {
+  apiKey: "AIzaSyCIoSIq3Ci9wODl_OMk5XDMrAK7mVLQvzs",
+  authDomain: "madrasa-admission-system.firebaseapp.com",
+  databaseURL: "https://madrasa-admission-system-default-rtdb.firebaseio.com",
+  projectId: "madrasa-admission-system",
+  storageBucket: "madrasa-admission-system.firebasestorage.app",
+  messagingSenderId: "722552487890",
+  appId: "1:722552487890:web:7a8f6d8deb5da44c11520b"
+};
+
+const CLASSES = [
+  { key: "c0", name: "শিশু শ্রেণি", short: "শিশু" },
+  { key: "c1", name: "প্রথম শ্রেণি", short: "প্রথম" },
+  { key: "c2", name: "দ্বিতীয় শ্রেণি", short: "দ্বিতীয়" },
+  { key: "c3", name: "তৃতীয় শ্রেণি", short: "তৃতীয়" }
+];
+const DAYS = ["রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", "বৃহস্পতিবার", "শুক্রবার", "শনিবার"];
+const MONTHS = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+const CACHE_KEY = "alhamra_exam_routine_v1";   /* আগের সংস্করণের সাথে একই — অফলাইনে দেখা যাবে */
+
+const $ = (id) => document.getElementById(id);
+const bn = (n) => String(n ?? "").replace(/[0-9]/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const parseDate = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ""); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
+const dayDiff = (d) => { const t = new Date(); t.setHours(0, 0, 0, 0); return Math.round((d - t) / 86400000); };
+const examTitle = (name) => !name ? "পরীক্ষার রুটিন" : name + (/[া-ৌ]$/.test(name) ? "র" : " এর") + " রুটিন";
+
+let routine = null;
+let filter = "all";
+try { const c = JSON.parse(localStorage.getItem(CACHE_KEY) || "null"); if (c && c.routine) routine = c.routine; } catch (e) {}
+
+function saveCache() {
+  try { if (routine) localStorage.setItem(CACHE_KEY, JSON.stringify({ routine, savedAt: Date.now() })); else localStorage.removeItem(CACHE_KEY); } catch (e) {}
+}
+
+async function fetchRoutine() {
+  if (navigator.onLine === false) return false;
+  try {
+    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    const snap = await get(ref(getDatabase(app), "publicExamRoutine"));
+    routine = snap.exists() ? snap.val() : null;
+    saveCache();
+    return true;
+  } catch (e) { console.warn("Exam routine load failed:", e); return false; }
+}
+
+const sub = (row, key) => (row.subjects && row.subjects[key]) || "";
+
+function render(loading) {
+  const main = $("rpMain"), tools = $("rpTools");
+  main.textContent = ""; tools.textContent = "";
+  const ok = routine && Array.isArray(routine.rows) && routine.rows.length;
+
+  if (!ok) {
+    $("rpTitle").textContent = "পরীক্ষার রুটিন"; $("rpMeta").textContent = ""; $("rpTime").hidden = true;
+    const e = el("div", "rpEmpty");
+    e.appendChild(el("div", "ic", loading ? "⏳" : "🗓️"));
+    e.appendChild(el("h3", null, loading ? "লোড হচ্ছে..." : "এখনো কোনো রুটিন প্রকাশ হয়নি"));
+    if (!loading) e.appendChild(el("p", null, "পরীক্ষার রুটিন প্রকাশ হলে এখানেই দেখতে পাবেন। অনুগ্রহ করে একটু পরে আবার দেখুন।"));
+    main.appendChild(e);
+    return;
+  }
+
+  const title = routine.title || examTitle(routine.examName);
+  $("rpTitle").textContent = title;
+  document.title = title + " — আল হামরা নূরানী মাদ্রাসা";
+  const tl = $("rpTime");
+  tl.textContent = routine.examTime ? "⏰ পরীক্ষার সময়: " + routine.examTime : "";
+  tl.hidden = !routine.examTime;
+  $("rpMeta").textContent = [routine.examName, routine.year ? bn(routine.year) + " সাল" : ""].filter(Boolean).join(" • ");
+
+  /* শ্রেণি ফিল্টার + PDF */
+  const chips = el("div", "rpChips");
+  chips.setAttribute("role", "group");
+  chips.setAttribute("aria-label", "শ্রেণি অনুযায়ী দেখুন");
+  [{ key: "all", short: "সব শ্রেণি" }].concat(CLASSES).forEach((c) => {
+    const b = el("button", "rpChip" + (filter === c.key ? " on" : ""), c.short);
+    b.type = "button"; b.setAttribute("aria-pressed", filter === c.key ? "true" : "false");
+    b.addEventListener("click", () => { filter = c.key; render(); });
+    chips.appendChild(b);
+  });
+  const pr = el("button", "rpPrint", "⬇ PDF");
+  pr.type = "button"; pr.addEventListener("click", () => window.print());
+  tools.appendChild(chips); tools.appendChild(pr);
+
+  const shown = filter === "all" ? CLASSES : CLASSES.filter((c) => c.key === filter);
+  const rows = routine.rows.filter((r) => filter === "all" || sub(r, filter));
+  if (!rows.length) { main.appendChild(el("div", "rpEmpty", "এই শ্রেণির জন্য কোনো পরীক্ষা নেই।")); return; }
+
+  const showTime = !routine.examTime && routine.rows.some((r) => r.time);
+  const table = el("table", "rpTable");
+  const thead = el("thead"), hr = el("tr");
+  hr.appendChild(el("th", null, "তারিখ ও বার"));
+  shown.forEach((c) => hr.appendChild(el("th", null, filter === "all" ? c.short : c.name)));
+  thead.appendChild(hr); table.appendChild(thead);
+
+  const tbody = el("tbody");
+  rows.forEach((r) => {
+    const d = parseDate(r.date), n = d ? dayDiff(d) : null;
+    const tr = el("tr", n !== null && n < 0 ? "past" : n === 0 ? "today" : "");
+    const td = el("td", "rpDate");
+    td.appendChild(document.createTextNode(d ? bn(d.getDate()) + " " + MONTHS[d.getMonth()] : (r.date || "")));
+    if (d) td.appendChild(el("small", null, DAYS[d.getDay()]));
+    const bd = n === 0 ? "আজ" : n === 1 ? "আগামীকাল" : null;
+    if (bd) td.appendChild(el("span", "rpBadge", bd));
+    if (showTime && r.time) td.appendChild(el("span", "rpTimeCell", "⏰ " + r.time));
+    tr.appendChild(td);
+    shown.forEach((c) => { const v = sub(r, c.key); tr.appendChild(el("td", v ? "rpSub" : "rpNone", v || "—")); });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  main.appendChild(table);
+
+  if (routine.note) {
+    const note = el("div", "rpNote");
+    note.appendChild(el("b", null, "📌 নির্দেশনা: "));
+    note.appendChild(document.createTextNode(routine.note));
+    main.appendChild(note);
+  }
+}
+
+$("rpYear").textContent = new Date().getFullYear();
+$("rpBack").addEventListener("click", (e) => {
+  if (document.referrer && history.length > 1) { e.preventDefault(); history.back(); }
+});
+
+render(true);                                   /* আগে ব্রাউজারে রাখা রুটিন (থাকলে) */
+fetchRoutine().then(() => render(false));
+</script>
+</body>
+</html>
