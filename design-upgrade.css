@@ -306,6 +306,7 @@ body:has(.container-silebas){ background:linear-gradient(180deg,#eaf3ed,#fbf7ee)
 .fab:hover{ transform:scale(1.08); }
 .fab svg{ width:26px; height:26px; fill:#fff; }
 .fab.call{ background:#0f3d2e; border:2px solid #c9a227; }
+.fab.chat{ background:#0f3d2e; border:2px solid #c9a227; }
 .fab.wa{ background:#1fa855; }
 .fab.top{ background:#9b7412; font-size:1.5rem; font-weight:800; width:44px; height:44px; opacity:0; pointer-events:none; transform:translateY(8px); }
 .fab.top.show{ opacity:1; pointer-events:auto; transform:none; }
