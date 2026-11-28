@@ -15,16 +15,17 @@
 <style>
 :root{--deep:#0f3d2e;--green:#1b5e42;--gold:#c9a227;--cream:#f4f8f5;--soft:#e7efe8;--ink:#202820;--muted:#657067;--line:#dbe5de;--red:#a6402f}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{font-family:"Hind Siliguri",system-ui,sans-serif;background:var(--cream);color:var(--ink);display:flex;flex-direction:column;height:100vh;height:100dvh;-webkit-font-smoothing:antialiased}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
+body{position:fixed;top:0;left:0;right:0;height:var(--app-h,100dvh);font-family:"Hind Siliguri",system-ui,sans-serif;background:var(--cream);color:var(--ink);display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
 .head{background:linear-gradient(135deg,var(--deep),var(--green));color:#fff;border-bottom:3px solid var(--gold);padding:8px 10px;padding-top:max(8px,env(safe-area-inset-top));display:flex;align-items:center;gap:10px;flex:none}
 .head a.back{color:#fff;text-decoration:none;font-size:1.5rem;width:36px;height:36px;display:grid;place-items:center;border-radius:50%}
 .head a.back:active{background:rgba(255,255,255,.18)}
 .head img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);background:#fff}
 .head .t{flex:1;min-width:0;line-height:1.25}
-.head .t b{display:block;font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.head .t b{display:block;font-size:1rem;line-height:1.2}
 .head .t small{opacity:.85;font-size:.78rem}
-.hb{border:0;background:rgba(255,255,255,.14);color:#fff;font:inherit;font-size:.82rem;padding:7px 11px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.hb .ic{font-size:1.05rem;line-height:1}
+.hb{display:inline-flex;align-items:center;gap:5px;border:0;background:rgba(255,255,255,.14);color:#fff;font:inherit;font-size:.82rem;padding:7px 11px;border-radius:999px;cursor:pointer;white-space:nowrap}
 .hb:hover{background:rgba(255,255,255,.26)}
 #chat{flex:1;overflow-y:auto;padding:14px 12px 8px;scroll-behavior:smooth}
 .wrap{max-width:780px;margin:0 auto}
@@ -52,7 +53,7 @@ body{font-family:"Hind Siliguri",system-ui,sans-serif;background:var(--cream);co
 @keyframes b{0%,60%,100%{transform:translateY(0);opacity:.35}30%{transform:translateY(-6px);opacity:1}}
 .composer{flex:none;background:#fff;border-top:1px solid var(--line);padding:10px 10px;padding-bottom:max(10px,env(safe-area-inset-bottom))}
 .cin{max-width:780px;margin:0 auto;display:flex;gap:8px;align-items:flex-end}
-textarea{flex:1;font:inherit;font-size:1rem;resize:none;border:1.5px solid var(--line);border-radius:22px;padding:11px 16px;max-height:140px;line-height:1.5;outline:none;background:var(--cream)}
+textarea{flex:1;min-width:0;font:inherit;font-size:16px;resize:none;border:1.5px solid var(--line);border-radius:22px;padding:11px 16px;max-height:140px;line-height:1.5;outline:none;background:var(--cream)}
 textarea:focus{border-color:var(--green);background:#fff}
 #send{width:46px;height:46px;border-radius:50%;border:0;background:var(--green);color:#fff;cursor:pointer;display:grid;place-items:center;flex:none;transition:.15s}
 #send:disabled{background:#a9b7ae;cursor:not-allowed}
@@ -78,6 +79,31 @@ th{background:var(--soft);color:var(--deep)}td:first-child,th:first-child{text-a
 .ok{color:var(--green);font-weight:600}.bad{color:var(--red);font-weight:600}
 .scroll{overflow-x:auto}
 .offline{display:none;background:var(--red);color:#fff;text-align:center;padding:5px;font-size:.85rem;flex:none}
+@media (max-width:560px){
+  .head{gap:6px;padding:6px 8px;padding-top:max(6px,env(safe-area-inset-top))}
+  .head img{width:34px;height:34px}
+  .head a.back{width:32px;height:32px;font-size:1.3rem}
+  .head .t b{font-size:.92rem}
+  .head .t small{font-size:.72rem}
+  .hb{width:36px;height:36px;padding:0;justify-content:center;flex:none}
+  .hb .lb{display:none}
+  #chat{padding:10px 8px 6px}
+  .row{margin:9px 0;gap:6px}
+  .av{width:28px;height:28px}
+  .bub{max-width:calc(100% - 40px);font-size:.97rem;line-height:1.6;padding:9px 12px}
+  .welcome{padding:6px 2px 4px}
+  .welcome img{width:62px;height:62px}
+  .welcome h1{font-size:1.15rem;margin:8px 0 2px}
+  .welcome p{font-size:.9rem;margin-bottom:10px}
+  .sugs{gap:7px}
+  .sug{padding:9px 12px;font-size:.93rem;border-radius:12px}
+  .card{max-width:100%}
+  .composer{padding:7px 8px;padding-bottom:max(7px,env(safe-area-inset-bottom))}
+  #send{width:42px;height:42px}
+  textarea{padding:9px 14px}
+  .note{font-size:.66rem;margin-top:4px}
+}
+@media (max-height:560px){.note{display:none}.welcome img{display:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -86,8 +112,8 @@ th{background:var(--soft);color:var(--deep)}td:first-child,th:first-child{text-a
   <a class="back" id="back" href="index.html" aria-label="ফিরে যান">←</a>
   <img src="madrasa.jpeg" alt="লোগো">
   <div class="t"><b>আল হামরা নূরানী মাদ্রাসা</b><small>AI সহকারী</small></div>
-  <button class="hb" id="newBtn" type="button">＋ নতুন চ্যাট</button>
-  <button class="hb" id="clearBtn" type="button">🗑 মুছুন</button>
+  <button class="hb" id="newBtn" type="button" aria-label="নতুন চ্যাট" title="নতুন চ্যাট"><span class="ic">＋</span><span class="lb">নতুন চ্যাট</span></button>
+  <button class="hb" id="clearBtn" type="button" aria-label="চ্যাট মুছুন" title="চ্যাট মুছুন"><span class="ic">🗑</span><span class="lb">মুছুন</span></button>
 </header>
 <div class="offline" id="offline">📡 ইন্টারনেট সংযোগ নেই</div>
 
@@ -267,6 +293,15 @@ q.addEventListener("input",resize);
 $("back").addEventListener("click",function(e){if(document.referrer&&history.length>1&&document.referrer.indexOf(location.origin)===0){e.preventDefault();window.history.back()}});
 function net(){$("offline").style.display=navigator.onLine===false?"block":"none"}
 window.addEventListener("online",net);window.addEventListener("offline",net);net();
+/* মোবাইলে ঠিকানা-বার/কিবোর্ডের কারণে উচ্চতা বদলালে পুরো লেআউট দৃশ্যমান জায়গায় আটকে রাখা */
+function fit(){
+  var h=(window.visualViewport&&window.visualViewport.height)||window.innerHeight;
+  document.documentElement.style.setProperty("--app-h",Math.round(h)+"px");
+  window.scrollTo(0,0);scrollDown();
+}
+if(window.visualViewport){window.visualViewport.addEventListener("resize",fit)}
+window.addEventListener("resize",fit);window.addEventListener("orientationchange",fit);
+fit();
 welcome();
 })();
 </script>
